@@ -1,223 +1,272 @@
 {% extends 'base.html.twig' %}
-
-{% block title %}Morent | Checkout{% endblock %}
-
+{% block title %}Morent | Checkout
+{% endblock %}
 {% block body %}
-{% include 'navbar.html.twig' %}
-
-<div class="checkout">
-
-
-	<div class="container">
-		<div class="row">
-			<div class="col-lg-8">
-				<div class="form-billing">
-					<h3>Billing Info</h3>
-					<p>Please enter your billing info</p>
-					<div class="row">
-						<div class="col-lg-6">
-							<div class="mb-3">
-								<label for="">Name</label>
-								<input type="text" class="form-control" placeholder="Your name"/>
-							</div>
-						</div>
-						<div class="col-lg-6">
-							<div class="mb-3">
-								<label for="">Phone Number</label>
-								<input type="text" class="form-control" placeholder="Phone number"/>
-							</div>
-						</div>
-						<div class="col-lg-6">
-							<div class="mb-3">
-								<label for="">Address</label>
-								<input type="text" class="form-control" placeholder="Address"/>
-							</div>
-						</div>
-						<div class="col-lg-6">
-							<div class="mb-3">
-								<label for="">Town / City</label>
-								<input type="text" class="form-control" placeholder="Town or city"/>
-							</div>
-						</div>
-					</div>
-				</div>
-				<div class="rental-info">
-					<h3>Rental Info</h3>
-					<p>Please enter your rental date</p>
-					<div class="row">
-						<div class="col-lg-6">
-							<div class="mb-3">
-								<label for="">Locations</label>
-								<select name="" id="" class="form-select">
-									<option value="">Select your city</option>
-								</select>
-							</div>
-						</div>
-						<div class="col-lg-6">
-							<div class="mb-3">
-								<label for="">Date</label>
-								<select name="" id="" class="form-select">
-									<option value="">Select your date</option>
-								</select>
-							</div>
-						</div>
-						<div class="col-lg-6">
-							<div class="mb-3">
-								<label for="">Time</label>
-								<select name="" id="" class="form-select">
-									<option value="">Select your time</option>
-								</select>
-							</div>
-						</div>
-					</div>
-					<div class="row">
-						<div class="col-lg-6">
-							<div class="mb-3">
-								<label for="">Locations</label>
-								<select name="" id="" class="form-select">
-									<option value="">Select your city</option>
-								</select>
-							</div>
-						</div>
-						<div class="col-lg-6">
-							<div class="mb-3">
-								<label for="">Date</label>
-								<select name="" id="" class="form-select">
-									<option value="">Select your date</option>
-								</select>
-							</div>
-						</div>
-						<div class="col-lg-6">
-							<div class="mb-3">
-								<label for="">Time</label>
-								<select name="" id="" class="form-select">
-									<option value="">Select your time</option>
-								</select>
-							</div>
-						</div>
-					</div>
-				</div>
-				<div class="payment-method">
-					<h3>Payment Method</h3>
-					<p>Please enter your payment method</p>
-					<div class="payment-form">
+	{% include 'navbar.html.twig' %}
+	<div class="checkout">
+		<div class="container-fluid">
+			<div class="row">
+				<div class="col-lg-8">
+					<div class="form-billing">
 						
-                        <div class="card-info">
-    						<h3>Credit Card</h3>
-                            <div class="row">
-                                <div class="col-lg-6">
-                                    <div class="mb-3">
-                                        <label for="">Card Number</label>
-                                        <input type="text" id="" placeholder="Card number" class="form-control"/>
-                                    </div>
-                                </div>
-                                <div class="col-lg-6">
-                                    <div class="mb-3">
-                                        <label for="">Expiration Date</label>
-                                        <input type="text" id="" placeholder="DD / MM / YYYY" class="form-control"/>
-                                    </div>
-                                </div>
-                                <div class="col-lg-6">
-                                    <div class="mb-3">
-                                        <label for="">Card Holder</label>
-                                        <input type="text" id="" placeholder="Card holder" class="form-control"/>
-                                    </div>
-                                </div>
-                                <div class="col-lg-6">
-                                    <div class="mb-3">
-                                        <label for="">CVC</label>
-                                        <input type="text" id="" placeholder="CVC" class="form-control"/>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
+						<div class="title d-flex justify-content-between">
+							<div class="title-content">
+								<h3>Billing Info</h3>
+								<p>Please enter your billing info</p>
+							</div>
+							<div class="step">
+								<p>Step 1 of 4</p>
+							</div>
+						</div>
+						
+						<div class="row">
+							<div class="col-lg-6">
+								<div class="mb-3">
+									<label for="">Name</label>
+									<input type="text" class="form-control" placeholder="Your name"/>
+								</div>
+							</div>
+							<div class="col-lg-6">
+								<div class="mb-3">
+									<label for="">Phone Number</label>
+									<input type="text" class="form-control" placeholder="Phone number"/>
+								</div>
+							</div>
+							<div class="col-lg-6">
+								<div class="mb-3">
+									<label for="">Address</label>
+									<input type="text" class="form-control" placeholder="Address"/>
+								</div>
+							</div>
+							<div class="col-lg-6">
+								<div class="mb-3">
+									<label for="">Town / City</label>
+									<input type="text" class="form-control" placeholder="Town or city"/>
+								</div>
+							</div>
+						</div>
+					</div>
+					<div class="rental-info">
+						<div class="title d-flex justify-content-between">
+							<div class="title-content">
+									<h3>Rental Info</h3>
+									<p>Please enter your rental date</p>
+							</div>
+							<div class="step">
+								<p>Step 2 of 4</p>
+							</div>
+						</div>
 
+						<div class="row">
+							<div class="col-lg-6">
+								<div class="mb-3">
+									<label for="">Locations</label>
+									<select name="" id="" class="form-select">
+										<option value="">Select your city</option>
+									</select>
+								</div>
+							</div>
+							<div class="col-lg-6">
+								<div class="mb-3">
+									<label for="">Date</label>
+									<select name="" id="" class="form-select">
+										<option value="">Select your date</option>
+									</select>
+								</div>
+							</div>
+							<div class="col-lg-6">
+								<div class="mb-3">
+									<label for="">Time</label>
+									<select name="" id="" class="form-select">
+										<option value="">Select your time</option>
+									</select>
+								</div>
+							</div>
+						</div>
+						<div class="row">
+							<div class="col-lg-6">
+								<div class="mb-3">
+									<label for="">Locations</label>
+									<select name="" id="" class="form-select">
+										<option value="">Select your city</option>
+									</select>
+								</div>
+							</div>
+							<div class="col-lg-6">
+								<div class="mb-3">
+									<label for="">Date</label>
+									<select name="" id="" class="form-select">
+										<option value="">Select your date</option>
+									</select>
+								</div>
+							</div>
+							<div class="col-lg-6">
+								<div class="mb-3">
+									<label for="">Time</label>
+									<select name="" id="" class="form-select">
+										<option value="">Select your time</option>
+									</select>
+								</div>
+							</div>
+						</div>
+					</div>
+					<div class="payment-method">
+						<div class="title d-flex justify-content-between">
+							<div class="title-content">
+									<h3>Payment Method</h3>
+									<p>Please enter your payment method</p>
+							</div>
+							<div class="step">
+								<p>Step 3 of 4</p>
+							</div>
+						</div>
 
-                        <div class="mb-3">
-								<div class="method">
-									<input type="radio" name="" id=""/>
-									<label for="">Paypal</label>
+						<div class="payment-form">
+							<div class="card-info">
+								<div class="title d-flex justify-content-between">
+									<h3>Credit Card</h3>
+									<div class="logos">
+										<img src="/images/visa.png" alt="">
+										<img src="/images/mastercard.png" alt="">
+									</div>
+								</div>
+								<div class="row">
+									<div class="col-lg-6">
+										<div class="mb-3">
+											<label for="">Card Number</label>
+											<input type="text" id="" placeholder="Card number" class="form-control"/>
+										</div>
+									</div>
+									<div class="col-lg-6">
+										<div class="mb-3">
+											<label for="">Expiration Date</label>
+											<input type="text" id="" placeholder="DD / MM / YYYY" class="form-control"/>
+										</div>
+									</div>
+									<div class="col-lg-6">
+										<div class="mb-3">
+											<label for="">Card Holder</label>
+											<input type="text" id="" placeholder="Card holder" class="form-control"/>
+										</div>
+									</div>
+									<div class="col-lg-6">
+										<div class="mb-3">
+											<label for="">CVC</label>
+											<input type="text" id="" placeholder="CVC" class="form-control"/>
+										</div>
+									</div>
 								</div>
 							</div>
 							<div class="mb-3">
-								<div class="method">
-									<input type="radio" name="" id=""/>
-									<label for="">Bitcoin</label>
+								<div class="method d-flex justify-content-between">
+									<div class="p-method">
+										<input type="radio" name="paymentradio" id="paypal"/>
+										<label for="paypal">Paypal</label>
+									</div>
+									<div class="logo">
+										<img src="/images/paypal.png" alt="">
+									</div>
 								</div>
 							</div>
-					</div>
-				</div>
-				<div class="confirmation">
-					<h3>Confirmation</h3>
-					<p>We are getting to the end. Just few clicks and your rental is ready!</p>
-					<div class="mb-3">
-						<input type="checkbox" name="" id="">
-						<label for="">I agree with sending an Marketing and newsletter emails. No spam, promissed!</label>
-					</div>
-					<div class="mb-3">
-						<input type="checkbox" name="" id="">
-						<label for="">I agree with our terms and conditions and privacy policy.</label>
-					</div>
-					<button>Rent now</button>
-					<h5>All your data are safe</h5>
-					<p>We are using the most advanced security to provide you the best experience ever.</p>
-				</div>
-			</div>
-			<div class="col-lg-4">
-				<div class="rental-summary">
-					<h3>Rental Summary</h3>
-					<p>Prices may changes depending on the length of the rental and the price of your rental car.</p>
-					
-                    <div class="rent-info d-flex align-items-center">
-						<div class="col-lg-6">
-							<div class="car-img">
-								<img src="/images/Look.png" alt="">
-							</div>
-                        </div>
-                        <div class="col-lg-6">
-                            <div class="car-desc">
-								<div class="car-name">
-									{{car.name}}
-									<p>440+ Reviewer</p>
+							<div class="mb-3">
+								<div class="method d-flex justify-content-between">
+									<div class="p-method">
+										<input type="radio" name="paymentradio" id="bitcoin"/>
+										<label for="bitcoin">Bitcoin</label>
+									</div>
+									<div class="logo">
+										<img src="/images/bitcoin.png" alt="">
+									</div>
 								</div>
 							</div>
-                        </div>
-                    </div>
+						</div>
+					</div>
+					<div class="confirmation">
+						
+						<div class="title d-flex justify-content-between">
+							<div class="title-content">
+								<h3>Confirmation</h3>
+								<p>We are getting to the end. Just few clicks and your rental is ready!</p>
+							</div>
+							<div class="step">
+								<p>Step 4 of 4</p>
+							</div>
+						</div>
 
-                    <div class="total">
-                        <div class="d-flex justify-content-between">
-                            <p>Sub Total</p>
-                            <p class="price">$80.00</p>
-                        </div>
-                        <div class="d-flex justify-content-between">
-                            <p>Tax</p>
-                            <p class="price">$0</p>
-                        </div>
-                        <div class="promo-code mb-3">
-                            <input type="text" name="" id="" placeholder="Apply promo code">
-                            <a href="#">Apply Now</a>
-                        </div>
-                        <div class="total-rent-price">
-                            <div class="d-flex">
-                                <div class="text">
-                                    <h3>Total Rental Price</h3>
-                                    <p>Overall price and includes rental discount</p>
-                                </div>
-                                <div class="price">
-                                    <span>$80.00</span>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-
-
+						<div class="confirm mb-3">
+							<input type="checkbox" id="confirmcheckbox1">
+							<label for="confirmcheckbox1">I agree with sending an Marketing and newsletter emails. No spam, promissed!</label>
+						</div>
+						<div class="confirm mb-3">
+							<input type="checkbox" name="" id="confirmcheckbox2">
+							<label for="confirmcheckbox2">I agree with our terms and conditions and privacy policy.</label>
+						</div>
+						<button class="mb-3">Rent now</button>
+						<div class="safe-payment">
+							<h3>All your data are safe</h3>
+							<p>We are using the most advanced security to provide you the best experience ever.</p>
+						</div>
+					</div>
+				</div>
+				<div class="col-lg-4">
+					<div class="rental-summary">
+						<h3>Rental Summary</h3>
+						<p>Prices may changes depending on the length of the rental and the price of your rental car.</p>
+						<div class="rent-info d-flex align-items-center">
+							<div class="col-lg-6">
+								<div class="car-img">
+									<img src="/images/Look.png" alt="">
+								</div>
+							</div>
+							<div class="col-lg-6">
+								<div class="car-desc">
+									<div class="car-name">
+										{{car.name}}
+										<div class="reviews d-flex justify-content-between">
+											<div class="stars">
+												<i class="fi fi-rs-star"></i>
+												<i class="fi fi-ss-star filled"></i>
+												<i class="fi fi-ss-star filled"></i>
+												<i class="fi fi-ss-star filled"></i>
+												<i class="fi fi-ss-star filled"></i>
+											</div>
+											<div class="reviews-count">
+												<p>440+ Reviewer</p>
+											</div>
+										</div>
+									</div>
+								</div>
+							</div>
+						</div>
+						<div class="total">
+							<div class="d-flex justify-content-between">
+								<p>Sub Total</p>
+								<p class="price">$80.00</p>
+							</div>
+							<div class="d-flex justify-content-between">
+								<p>Tax</p>
+								<p class="price">$0</p>
+							</div>
+							<div class="promo-code mb-3">
+								<input type="text" name="" id="" placeholder="Apply promo code">
+								<a href="#">Apply Now</a>
+							</div>
+							<div class="total-rent-price">
+								<div class="d-flex justify-content-between">
+									<div class="text">
+										<h3>Total Rental Price</h3>
+										<p>Overall price and includes rental discount</p>
+									</div>
+									<div class="price">
+										<span>$80.00</span>
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
 				</div>
 			</div>
 		</div>
 	</div>
-</div>
-
-
-
-{% include 'footer.html.twig' %}
+	{% include 'footer.html.twig' %}
 {% endblock %}
