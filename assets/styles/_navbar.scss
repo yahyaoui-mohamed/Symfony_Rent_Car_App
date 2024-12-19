@@ -19,23 +19,37 @@
   .settings {
     display: flex;
 
+    .notification {
+      position: relative;
+
+      a::after {
+        content: "";
+        position: absolute;
+        width: 10px;
+        height: 10px;
+        border-radius: 50%;
+        background-color: #FF4423;
+        top: 0;
+        right: 11px
+      }
+    }
+
     a {
       text-decoration: none;
       margin-right: 10px;
-      width: 30px;
-      height: 30px;
+      width: 35px;
+      height: 35px;
       border: 1px solid #E0E9F4;
       padding: 15px;
       border-radius: 50%;
       font-size: 16px;
-      display: inline-block;
       display: flex;
       align-items: center;
       justify-content: center;
 
       i {
         color: #596780;
-        font-size: 16px;
+        font-size: 14px;
       }
     }
   }

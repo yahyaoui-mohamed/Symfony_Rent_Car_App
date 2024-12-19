@@ -38,7 +38,14 @@
                                 <i class="fi fi-ss-heart"></i>
                             </div>
                         </div>
-                        <div class="review">
+                        <div class="review d-flex align-item-center">
+                            <div class="stars">
+                                <i class="fi fi-rs-star"></i>
+                                <i class="fi fi-ss-star filled"></i>
+                                <i class="fi fi-ss-star filled"></i>
+                                <i class="fi fi-ss-star filled"></i>
+                                <i class="fi fi-ss-star filled"></i>
+                            </div>
                             <span>440+ Reviewer</span>
                         </div>
                         <div class="desc">
@@ -84,20 +91,206 @@
                 </div>
 
             </div>
-        </div>
-        
-    </div>
 
-        
+            <div class="reviews">
+                <h3>Reviews
+                    <span>13</span>
+                </h3>
+                <div class="items">
+                    <div class="review-item">
+                        <div class="row">
+                            <div class="col-lg-1">
+                                <div class="reviewer-img">
+                                    <img src="images/Profill.png" alt="">
+                                </div>
+                            </div>
+                            <div class="col-lg-9">
+                                <div class="d-flex">
+                                    <div class="reviewer-name">
+                                        <h3>Alex Santon</h3>
+                                        <span>CEO at Bukalapak</span>
+                                    </div>
+                                </div>
+                                <div class="review-description">
+                                    <p>We are very happy with the service from the MORENT App. Morent has a low price and also a large variety of cars with good and comfortable facilities. In addition, the service provided by the officers is also very friendly and very polite.</p>
+                                </div>
+                            </div>
+                            <div class="col-lg-2">
+                                <div class="review-date">
+                                    <p>21 July 2022</p>
+                                    <div class="stars">
+                                        <i class="fi fi-rs-star"></i>
+                                        <i class="fi fi-ss-star filled"></i>
+                                        <i class="fi fi-ss-star filled"></i>
+                                        <i class="fi fi-ss-star filled"></i>
+                                        <i class="fi fi-ss-star filled"></i>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
 
-    <div class="reviews">
-        <h3>Reviews <span>13</span></h3>
-        <div class="items">
-            <div class="review-item">
-                
+                    <div class="review-item">
+                        <div class="row">
+                            <div class="col-lg-1">
+                                <div class="reviewer-img">
+                                    <img src="images/Profill2.png" alt="">
+                                </div>
+                            </div>
+                            <div class="col-lg-9">
+                                <div class="d-flex">
+                                    <div class="reviewer-name">
+                                        <h3>Skylar Dias</h3>
+                                        <span>CEO at Amazon</span>
+                                    </div>
+                                </div>
+                                <div class="review-description">
+                                    <p>We are greatly helped by the services of the MORENT Application. Morent has low prices and also a wide variety of cars with good and comfortable facilities. In addition, the service provided by the officers is also very friendly and very polite.</p>
+                                </div>
+                            </div>
+                            <div class="col-lg-2">
+                                <div class="review-date">
+                                    <p>20 July 2022</p>
+                                    <div class="stars">
+                                        <i class="fi fi-rs-star"></i>
+                                        <i class="fi fi-ss-star filled"></i>
+                                        <i class="fi fi-ss-star filled"></i>
+                                        <i class="fi fi-ss-star filled"></i>
+                                        <i class="fi fi-ss-star filled"></i>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
             </div>
         </div>
     </div>
+
+    <div class="recent-cars">
+        <div class="container">
+            <div class="title d-flex justify-content-between">
+                <h3>Recent Car</h3>
+                <a href="{{path("app_cars")}}">View All</a>
+            </div>
+            
+            <div class="cars">
+                
+                
+                <div class="row">
+                    {% 
+                        set items = [1, 2, 3, 4] 
+
+                    
+                    %}
+                    {% for item in items %}
+                    <div class="col-lg-3">
+                        <div class="car">
+                            <div class="car-name d-flex justify-content-between">
+                                <div class="name">
+                                    <h3>Koenigsegg</h3>
+                                    <span>Sport</span>
+                                </div>
+                                <div class="favorite">
+                                    <i class="fi fi-rs-heart"></i>
+                                </div>
+                            </div>
+                            <div class="car-img">
+                                <img src="images/car1.png" alt=""/>
+                            </div>
+                            <div class="options d-flex justify-content-between">
+                                <div class="litres"><i class="fi fi-tr-gas-pump"></i> 90L</div>
+                                <div class="gear"><i class="fi fi-ts-tire"></i> Manual</div>
+                                <div class="seats"><i class="fi fi-tr-seat-airline"></i>2 People</div>
+                            </div>
+                            <div class="rent-price d-flex align-items-center justify-content-between">
+                                <div class="price">$99.00/
+                                    <span>day</span>
+                                </div>
+                                <div class="rent-btn">
+                                    <button>Rent Now</button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    {% endfor %}
+            
+            
+                </div>
+            
+            </div>
+
+        </div>
+    </div>        
+
+
+
+<div class="recommandation-cars">
+	<div class="container">
+		<div class="title d-flex justify-content-between">
+			<h3>Recommandation Car</h3>
+			<a href="{{path("app_cars")}}">View All</a>
+		</div>
+
+		<div class="cars">
+
+
+			<div class="row">
+				{% 
+                        set items = [1, 2, 3, 4] 
+
+                    
+                    %}
+				{% for item in items %}
+					<div class="col-lg-3">
+						<div class="car">
+							<div class="car-name d-flex justify-content-between">
+								<div class="name">
+									<h3>Koenigsegg</h3>
+									<span>Sport</span>
+								</div>
+								<div class="favorite">
+									<i class="fi fi-rs-heart"></i>
+								</div>
+							</div>
+							<div class="car-img">
+								<img src="images/car1.png" alt=""/>
+							</div>
+							<div class="options d-flex justify-content-between">
+								<div class="litres">
+									<i class="fi fi-tr-gas-pump"></i>
+									90L</div>
+								<div class="gear">
+									<i class="fi fi-ts-tire"></i>
+									Manual</div>
+								<div class="seats">
+									<i class="fi fi-tr-seat-airline"></i>2 People</div>
+							</div>
+							<div class="rent-price d-flex align-items-center justify-content-between">
+								<div class="price">$99.00/
+									<span>day</span>
+								</div>
+								<div class="rent-btn">
+									<button>Rent Now</button>
+								</div>
+							</div>
+						</div>
+					</div>
+
+				{% endfor %}
+
+
+			</div>
+
+		</div>
+
+	</div>
+</div>
+
+
+
 
 
     {% include 'footer.html.twig' %}

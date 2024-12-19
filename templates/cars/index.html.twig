@@ -3,6 +3,7 @@
 {% endblock %}
 {% block body %}
 	{% include "navbar.html.twig" %}
+	<div class="all-cars">
 	<div class="row">
 		<div class="col-lg-3">
 			<div class="filter">
@@ -70,8 +71,7 @@
 		<div class="col-lg-9">
 			<div class="reservation d-flex">
 				<div class="container">
-					<div
-						class="d-flex justify-content-between">
+					<div class="d-flex justify-content-between">
 						{# 
 						            <div class="col-lg-5">
 						               #}
@@ -114,19 +114,19 @@
 							<div class="info">
 								<div class="locations">
 									<h5>Locations</h5>
-									<select name="" id="">
+									<select name="" id="" class="form-select">
 										<option value="">Select your city</option>
 									</select>
 								</div>
 								<div class="date">
 									<h5>Date</h5>
-									<select name="" id="">
+									<select name="" id="" class="form-select">
 										<option value="">Select your date</option>
 									</select>
 								</div>
 								<div class="time">
 									<h5>Time</h5>
-									<select name="" id="">
+									<select name="" id="" class="form-select">
 										<option value="">Select your time</option>
 									</select>
 								</div>
@@ -181,6 +181,7 @@
 				<button class="mt-5">Show more car</button>
 			</div>
 		
+		</div>
 		</div>
 		{% include "footer.html.twig" %}
 	{% endblock %}

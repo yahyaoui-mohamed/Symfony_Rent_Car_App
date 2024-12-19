@@ -82,19 +82,19 @@
 					<div class="info">
 						<div class="locations">
 							<h5>Locations</h5>
-							<select name="" id="">
+							<select name="" id="" class="form-select">
 								<option value="">Select your city</option>
 							</select>
 						</div>
 						<div class="date">
 							<h5>Date</h5>
-							<select name="" id="">
+							<select name="" id="" class="form-select">
 								<option value="">Select your date</option>
 							</select>
 						</div>
 						<div class="time">
 							<h5>Time</h5>
-							<select name="" id="">
+							<select name="" id="" class="form-select">
 								<option value="">Select your time</option>
 							</select>
 						</div>
@@ -127,7 +127,11 @@
 			
 			
 			<div class="row">
-				{% set items = [1, 2, 3, 4] %}
+				{% 
+					set items = [1, 2, 3, 4] 
+
+				
+				%}
 				{% for item in items %}
 				<div class="col-lg-3">
 					<div class="car">
@@ -137,7 +141,7 @@
 								<span>Sport</span>
 							</div>
 							<div class="favorite">
-								<i class="fi fi-sr-heart"></i>
+								<i class="fi fi-rs-heart"></i>
 							</div>
 						</div>
 						<div class="car-img">
@@ -187,16 +191,16 @@
 								<span>Sport</span>
 							</div>
 							<div class="favorite">
-								<i class="fi fi-sr-heart"></i>
+								<i class="fi fi-rs-heart"></i>
 							</div>
 						</div>
 						<div class="car-img">
 							<img src="images/car1.png" alt=""/>
 						</div>
 						<div class="options d-flex justify-content-between">
-							<div class="litres">90L</div>
-							<div class="gear">Manual</div>
-							<div class="seats">2 People</div>
+							<div class="litres"><i class="fi fi-tr-gas-pump"></i> 90L</div>
+							<div class="gear"><i class="fi fi-ts-tire"></i> Manual</div>
+							<div class="seats"><i class="fi fi-tr-seat-airline"></i>2 People</div>
 						</div>
 						<div class="rent-price d-flex align-items-center justify-content-between">
 							<div class="price">$99.00/
