@@ -1,0 +1,75 @@
+.navbar {
+  display: flex;
+  justify-content: space-between;
+  padding: 30px 0;
+  align-items: center;
+  background-color: #fff;
+  border-bottom: 1px solid #E0E9F4;
+
+  .navbar-brand {
+    a {
+      color: #3563E9;
+      font-size: 24px;
+      font-weight: bold;
+      text-transform: uppercase;
+      text-decoration: none;
+    }
+  }
+
+  .settings {
+    display: flex;
+
+    a {
+      text-decoration: none;
+      margin-right: 10px;
+      width: 30px;
+      height: 30px;
+      border: 1px solid #E0E9F4;
+      padding: 15px;
+      border-radius: 50%;
+      font-size: 16px;
+      display: inline-block;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+
+      i {
+        color: #596780;
+        font-size: 16px;
+      }
+    }
+  }
+
+  .search-bar {
+    position: relative;
+
+    input {
+      outline: none;
+      padding: 10px 30px;
+      border-radius: 50px;
+      border: none;
+      border: 1px solid #E0E9F4;
+      width: 450px;
+      padding-left: 60px;
+    }
+
+    .fi-rs-search {
+      position: absolute;
+      top: 50%;
+      transform: translateY(-50%);
+      left: 20px;
+      font-size: 18px;
+      color: #596780;
+    }
+
+    .fi-rs-settings-sliders {
+      position: absolute;
+      top: 50%;
+      transform: translateY(-50%);
+      right: 20px;
+      font-size: 18px;
+      color: #596780;
+      cursor: pointer;
+    }
+  }
+}

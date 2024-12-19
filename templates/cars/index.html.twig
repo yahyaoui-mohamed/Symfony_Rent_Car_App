@@ -1,0 +1,186 @@
+{% extends 'base.html.twig' %}
+{% block title %}Morent | All cars
+{% endblock %}
+{% block body %}
+	{% include "navbar.html.twig" %}
+	<div class="row">
+		<div class="col-lg-3">
+			<div class="filter">
+				<div class="filter-title">Type</div>
+				<ul>
+					<li><input type="checkbox" class="form-check-input" id="sport">
+						<label for="sport">Sport
+							<span>(10)</span>
+						</label>
+					</li>
+					<li><input type="checkbox" class="form-check-input" id="suv">
+						<label for="suv">SUV
+							<span>(12)</span>
+						</label>
+					</li>
+					<li><input type="checkbox" class="form-check-input" id="mpv">
+						<label for="mpv">MPV
+							<span>(16)</span>
+						</label>
+					</li>
+					<li><input type="checkbox" class="form-check-input" id="sedan">
+						<label for="sedan">Sedan
+							<span>(20)</span>
+						</label>
+					</li>
+					<li><input type="checkbox" class="form-check-input" id="couple">
+						<label for="couple">Couple
+							<span>(14)</span>
+						</label>
+					</li>
+					<li><input type="checkbox" class="form-check-input" id="hatchback">
+						<label for="hatchback">Hatchback
+							<span>(14)</span>
+						</label>
+					</li>
+				</ul>
+				<div class="filter-title">Capacity</div>
+				<ul>
+					<li><input type="checkbox" class="form-check-input" id="person2">
+						<label for="person2">2 Person
+							<span>(10)</span>
+						</label>
+					</li>
+					<li><input type="checkbox" class="form-check-input" id="person4">
+						<label for="person4">4 Person
+							<span>(14)</span>
+						</label>
+					</li>
+					<li><input type="checkbox" class="form-check-input" id="person5">
+						<label for="person5">5 Person
+							<span>(12)</span>
+						</label>
+					</li>
+					<li><input type="checkbox" class="form-check-input" id="person8">
+						<label for="person8">8 or more
+							<span>(16)</span>
+						</label>
+					</li>
+				</ul>
+				<div class="filter-title">Price</div>
+				<input type="range" name="" id="" step="10">
+				<p>Max. $100.00</p>
+			</div>
+		</div>
+		<div class="col-lg-9">
+			<div class="reservation d-flex">
+				<div class="container">
+					<div
+						class="d-flex justify-content-between">
+						{# 
+						            <div class="col-lg-5">
+						               #}
+						<div class="pick-up">
+							<div class="title">Pick - Up</div>
+							<div class="info">
+								<div class="locations">
+									<h5>Locations</h5>
+									<select name="" id="" class="form-select">
+										<option value="">Select your city</option>
+									</select>
+								</div>
+								<div class="date">
+									<h5>Date</h5>
+									<select name="" id="" class="form-select">
+										<option value="">Select your date</option>
+									</select>
+								</div>
+								<div class="time">
+									<h5>Time</h5>
+									<select name="" id="" class="form-select">
+										<option value="">Select your time</option>
+									</select>
+								</div>
+							</div>
+						</div>
+						{# 
+						            </div>
+						            #}
+						<div class="col-lg-1 d-flex align-items-center justify-content-center">
+							<button class="change-btn d-flex">
+								<i class="fi fi-sr-exchange"></i>
+							</button>
+						</div>
+						{# 
+						            <div class="col-lg-5">
+						               #}
+						<div class="drop-off">
+							<div class="title">Drop - Off</div>
+							<div class="info">
+								<div class="locations">
+									<h5>Locations</h5>
+									<select name="" id="">
+										<option value="">Select your city</option>
+									</select>
+								</div>
+								<div class="date">
+									<h5>Date</h5>
+									<select name="" id="">
+										<option value="">Select your date</option>
+									</select>
+								</div>
+								<div class="time">
+									<h5>Time</h5>
+									<select name="" id="">
+										<option value="">Select your time</option>
+									</select>
+								</div>
+							</div>
+						</div>
+						{# 
+						            </div>
+						            #}
+					</div>
+				</div>
+			</div>
+			
+			<div class="cars text-center">
+				
+				<div class="row">
+
+					{% set items = [1, 2, 3, 4, 5, 6, 7, 8, 9] %}
+					{% for item in items %}
+						<div class="col-lg-4">
+							<div class="car">
+								<div class="car-name d-flex justify-content-between">
+									<div class="name">
+										<h3>Koenigsegg</h3>
+										<span>Sport</span>
+									</div>
+									<div class="favorite">
+										<i class="fi fi-sr-heart"></i>
+									</div>
+								</div>
+								<div class="car-img">
+									<img src="images/car1.png" alt=""/>
+								</div>
+								<div class="options d-flex justify-content-between">
+									<div class="litres">90L</div>
+									<div class="gear">Manual</div>
+									<div class="seats">2 People</div>
+								</div>
+								<div class="rent-price d-flex align-items-center justify-content-between">
+									<div class="price">$99.00/
+										<span>day</span>
+									</div>
+									<div class="rent-btn">
+										<button>Rent Now</button>
+									</div>
+								</div>
+							</div>
+						</div>
+					{% endfor %}
+
+
+				</div>
+				<button class="mt-5">Show more car</button>
+			</div>
+		
+		</div>
+		{% include "footer.html.twig" %}
+	{% endblock %}

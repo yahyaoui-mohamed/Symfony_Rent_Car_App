@@ -1,0 +1,100 @@
+.car-details {
+  margin: 20px 0;
+
+  .car-images {
+    .main-img {
+      margin-bottom: 10px;
+
+      img {
+        width: 100%;
+      }
+
+    }
+
+    .thumbnails {
+      img {
+        width: 100%;
+        padding: 5px;
+        border-radius: 10px;
+        cursor: pointer;
+
+        &.active {
+          border: 2px solid #2A60B7;
+          border-radius: 10px;
+        }
+      }
+    }
+  }
+
+  .car-description {
+    background-color: #fff;
+    padding: 20px;
+    border-radius: 5px;
+
+    .car-name {
+      h3 {
+        font-weight: 700;
+        font-size: 20px;
+      }
+
+      i {
+        color: #FF4423;
+      }
+    }
+
+    .reviews {
+      span {
+        font-size: 10px;
+        font-weight: 600;
+        color: #596780;
+      }
+    }
+
+    .desc {
+      p {
+        margin: 20px 0;
+        color: #596780;
+      }
+    }
+
+    .options {
+      margin-bottom: 20px;
+
+      .option {
+
+        h3 {
+          font-size: 14px;
+          color: #90A3BF;
+        }
+
+        span {
+          font-size: 14px;
+        }
+      }
+    }
+
+    .price {
+      .price-day {
+        h3 {
+          font-weight: 700;
+          font-size: 24px;
+          margin-bottom: 0;
+        }
+
+        .old-price {
+          font-size: 12px;
+          margin-bottom: 0;
+          font-weight: 500;
+          color: #C3D4E9;
+          text-decoration: line-through;
+        }
+
+        span {
+          font-size: 14px;
+          font-weight: 500;
+          color: #C3D4E9;
+        }
+      }
+    }
+  }
+}

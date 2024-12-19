@@ -1,0 +1,120 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Morent | Car details{% endblock %}
+
+{% block body %}
+    {% include 'navbar.html.twig' %}
+
+    <div class="car-details">
+        <div class="container">
+            <div class="row">
+
+                <div class="col-lg-6">
+                    <div class="car-images">
+                        <div class="main-img">
+                            <img src="/images/View.png" alt=""/>
+                        </div>
+                        <div class="thumbnails">
+                            <div class="row">
+                                <div class="col-lg-4">
+                                    <img src="/images/View 1.png" class="active" alt="">
+                                </div>
+                                <div class="col-lg-4">
+                                    <img src="/images/View 2.png" alt="">
+                                </div>
+                                <div class="col-lg-4">
+                                    <img src="/images/View 3.png" alt="">
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-lg-6">
+                    <div class="car-description">
+                        <div class="car-name d-flex justify-content-between">
+                            <h3>Nissan GT- R </h3>
+                            <div class="favorite">
+                                <i class="fi fi-ss-heart"></i>
+                            </div>
+                        </div>
+                        <div class="review">
+                            <span>440+ Reviewer</span>
+                        </div>
+                        <div class="desc">
+                            <p>NISMO has become the embodiment of Nissan's outstanding performance, inspired by the most unforgiving proving 
+                            ground, the "race track".</p>
+                        </div>
+                        <div class="options">
+                            <div class="row">
+                                <div class="col-lg-6">
+                                    <div class="option d-flex justify-content-between">
+                                        <h3>Type Car</h3>
+                                        <span>Sport</span>
+                                    </div>
+                                </div>
+                                <div class="col-lg-6">
+                                    <div class="option d-flex justify-content-between">
+                                        <h3>Capacity</h3>
+                                        <span>2 Person</span>
+                                    </div>
+                                </div>
+                                <div class="col-lg-6">
+                                    <div class="option d-flex justify-content-between">
+                                        <h3>Steering</h3>
+                                        <span>Manual</span>
+                                    </div>
+                                </div>
+                                <div class="col-lg-6">
+                                    <div class="option d-flex justify-content-between">
+                                        <h3>Gasoline</h3>
+                                        <span>70L</span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="price d-flex justify-content-between">
+                            <div class="price-day">
+                                <h3>$80.00/<span>day</span></h3>
+                                <p class="old-price">$100.00</p>
+                            </div>
+                            <button>Rent Now</button>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+        
+    </div>
+
+        
+
+    <div class="reviews">
+        <h3>Reviews <span>13</span></h3>
+        <div class="items">
+            <div class="review-item">
+                
+            </div>
+        </div>
+    </div>
+
+
+    {% include 'footer.html.twig' %}
+
+<script>
+    let activeImg = document.querySelector(".thumbnails img.active");
+    let mainImg = document.querySelector(".main-img img");
+    let images = document.querySelectorAll(".thumbnails img").forEach(function(img){
+        img.addEventListener("click", function(){
+            if(!this.classList.contains("active")){
+                activeImg.classList.remove("active");
+                this.classList.add("active");
+                activeImg = this;
+                // mainImg.setAttribute("src", activeImg.src);
+            }
+        });
+    });
+
+</script>
+{% endblock %}

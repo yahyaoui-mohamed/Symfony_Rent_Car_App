@@ -1,0 +1,221 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Morent | Home{% endblock %}
+
+{% block body %}
+
+{% include "navbar.html.twig" %}
+
+<div class="hero">
+	<div class="container">
+	
+		<div class="row">
+
+			<div class="col-lg-6">
+				<div class="hero-card left">
+					<h5>The best platform <br/> for Car Rental</h5>
+					<p>Ease of doing car rental safely and <br/> reliably. Of course at low price.</p>
+					<button>Rental Car</button>
+					<img src="/images/car1.png" alt="image1" width={406} height={116}/>
+				</div>
+			</div>
+
+			<div class="col-lg-6">
+				<div class="hero-card right">
+					<h5>Easy way to rent a <br/> car at a low price</h5>
+					<p>Providing cheap car rental services <br/> and safe and comfortable facilities.</p>
+					<button>Rental Car</button>
+					<img src="/images/car2.png" alt="image2" width={340} height={108}/>
+				</div>
+			</div>
+
+		</div>
+
+	</div>
+
+</div>
+
+
+
+
+<div class="reservation d-flex">
+	<div class="container">
+		<div class="d-flex justify-content-between">
+
+			{# <div class="col-lg-5"> #}
+				<div class="pick-up">
+					<div class="title">Pick - Up</div>
+					<div class="info">
+						<div class="locations">
+							<h5>Locations</h5>
+							<select name="" id="" class="form-select">
+								<option value="">Select your city</option>
+							</select>
+						</div>
+						<div class="date">
+							<h5>Date</h5>
+							<select name="" id="" class="form-select">
+								<option value="">Select your date</option>
+							</select>
+						</div>
+						<div class="time">
+							<h5>Time</h5>
+							<select name="" id="" class="form-select">
+								<option value="">Select your time</option>
+							</select>
+						</div>
+					</div>
+				</div>
+			{# </div> #}
+
+
+			<div class="col-lg-1 d-flex align-items-center justify-content-center">
+				<button class="change-btn d-flex">
+					<i class="fi fi-sr-exchange"></i>
+				</button>
+			</div>
+
+
+			{# <div class="col-lg-5"> #}
+				<div class="drop-off">
+					<div class="title">Drop - Off</div>
+					<div class="info">
+						<div class="locations">
+							<h5>Locations</h5>
+							<select name="" id="">
+								<option value="">Select your city</option>
+							</select>
+						</div>
+						<div class="date">
+							<h5>Date</h5>
+							<select name="" id="">
+								<option value="">Select your date</option>
+							</select>
+						</div>
+						<div class="time">
+							<h5>Time</h5>
+							<select name="" id="">
+								<option value="">Select your time</option>
+							</select>
+						</div>
+					</div>
+				</div>
+			{# </div> #}
+			
+		</div>		
+		
+
+
+
+
+	</div>
+
+</div>
+
+
+
+
+
+<div class="popular-cars">
+	<div class="container">
+		<div class="title d-flex justify-content-between">
+			<h3>Popular Car</h3>
+			<a href="{{path("app_cars")}}">View All</a>
+		</div>
+		
+		<div class="cars">
+			
+			
+			<div class="row">
+				{% set items = [1, 2, 3, 4] %}
+				{% for item in items %}
+				<div class="col-lg-3">
+					<div class="car">
+						<div class="car-name d-flex justify-content-between">
+							<div class="name">
+								<h3>Koenigsegg</h3>
+								<span>Sport</span>
+							</div>
+							<div class="favorite">
+								<i class="fi fi-sr-heart"></i>
+							</div>
+						</div>
+						<div class="car-img">
+							<img src="images/car1.png" alt=""/>
+						</div>
+						<div class="options d-flex justify-content-between">
+							<div class="litres"><i class="fi fi-tr-gas-pump"></i> 90L</div>
+							<div class="gear"><i class="fi fi-ts-tire"></i> Manual</div>
+							<div class="seats"><i class="fi fi-tr-seat-airline"></i>2 People</div>
+						</div>
+						<div class="rent-price d-flex align-items-center justify-content-between">
+							<div class="price">$99.00/
+								<span>day</span>
+							</div>
+							<div class="rent-btn">
+								<button>Rent Now</button>
+							</div>
+						</div>
+					</div>
+				</div>
+
+				{% endfor %}
+		
+		
+			</div>
+		
+		</div>
+
+	</div>
+</div>
+
+
+<div class="recommandation-car">
+	{% set cars = [1, 2, 3, 4, 5, 6, 7, 8] %}
+	<div class="container">
+	<div class="title">
+		<h3>Recommandation Car</h3>
+	</div>
+	<div class="cars">
+	<div class="row">
+	{% for car in cars %}
+			<div class="col-lg-3">
+					<div class="car">
+						<div class="car-name d-flex justify-content-between">
+							<div class="name">
+								<h3>Koenigsegg</h3>
+								<span>Sport</span>
+							</div>
+							<div class="favorite">
+								<i class="fi fi-sr-heart"></i>
+							</div>
+						</div>
+						<div class="car-img">
+							<img src="images/car1.png" alt=""/>
+						</div>
+						<div class="options d-flex justify-content-between">
+							<div class="litres">90L</div>
+							<div class="gear">Manual</div>
+							<div class="seats">2 People</div>
+						</div>
+						<div class="rent-price d-flex align-items-center justify-content-between">
+							<div class="price">$99.00/
+								<span>day</span>
+							</div>
+							<div class="rent-btn">
+								<button>Rent Now</button>
+							</div>
+						</div>
+					</div>
+				</div>
+	{% endfor %}
+	</div>
+</div>
+	<button class="d-flex show-more">Show more car</button>
+
+</div>
+</div>
+
+{% include 'footer.html.twig' %}
+{% endblock %}
+

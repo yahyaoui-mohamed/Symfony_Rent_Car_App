@@ -1,0 +1,62 @@
+.hero {
+  display: flex;
+  margin: 30px 0;
+  justify-content: space-evenly;
+
+  .hero-card {
+    border-radius: 8px;
+    color: #fff;
+    padding: 30px;
+
+    h5 {
+      font-size: 32px;
+      font-weight: 500;
+      margin-bottom: 20px;
+    }
+
+    p {
+      font-weight: 400;
+      font-size: 14px;
+      margin-bottom: 20px;
+    }
+
+    img {
+      display: block;
+      margin: auto;
+    }
+
+
+  }
+
+  .left {
+    background-color: #54A6FF;
+
+    button {
+      color: #fff;
+      background-color: #3563E9;
+      outline: none;
+      border: none;
+      border-radius: 5px;
+      padding: 10px 20px;
+      font-size: 18px;
+      cursor: pointer;
+      border: none;
+    }
+  }
+
+  .right {
+    background-color: #3563E9;
+
+    button {
+      border: none;
+      color: #fff;
+      background-color: #54A6FF;
+      outline: none;
+      border: none;
+      border-radius: 5px;
+      cursor: pointer;
+      font-size: 18px;
+      padding: 10px 20px;
+    }
+  }
+}
