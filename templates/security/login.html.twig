@@ -1,0 +1,48 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Morent | Login
+{% endblock %}
+
+{% block body %}
+	{% include 'navbar.html.twig' %}
+	<div class="login-form">
+		<form method="post">
+
+			<h1>Please sign in</h1>
+			<div class="mb-3">
+				<label for="username">Email</label>
+				<input type="email" name="_username" id="username" class="form-control" autocomplete="email" required autofocus placeholder="Enter your email">
+			</div>
+
+			<div class="mb-3">
+				<label for="password">Password</label>
+				<input type="password" name="_password" id="password" class="form-control" autocomplete="current-password" required placeholder="Enter your password">
+			</div>
+
+
+			<input type="hidden" name="_csrf_token" value="{{ csrf_token('authenticate') }}">
+
+			{# Uncomment this section and add a remember_me option below your firewall to activate remember me functionality.
+			                See https://symfony.com/doc/current/security/remember_me.html #}
+			<div class="mb-3">
+				<div class="checkbox mb-3">
+					<input type="checkbox" name="_remember_me" id="_remember_me" class="form-check-input">
+					<label for="_remember_me">Remember me</label>
+				</div>
+			</div>
+
+			<div class="mb-3">
+				<button type="submit">Sign in</button>
+			</div>
+
+			<div class="signin mb-3">
+				Didn't have an account ?
+				<a href="{{path("app_register")}}">Sign in</a>
+			</div>
+		</form>
+	</div>
+
+	{% include 'footer.html.twig' %}
+
+{% endblock %}
+
