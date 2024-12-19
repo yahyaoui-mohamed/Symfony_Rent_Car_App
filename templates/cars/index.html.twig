@@ -146,16 +146,16 @@
 									<img src={{car.img}} alt="{{car.name}} car image."/>
 								</div>
 								<div class="options d-flex justify-content-between">
-									<div class="litres">{{car.gasoline}}L</div>
-									<div class="gear">{{car.steering}}</div>
-									<div class="seats">{{car.capacity}} People</div>
+									<div class="litres"><i class="fi fi-tr-gas-pump"></i>{{car.gasoline}}L</div>
+									<div class="gear"><i class="fi fi-ts-tire"></i> {{car.steering}}</div>
+									<div class="seats"><i class="fi fi-tr-seat-airline"></i> {{car.capacity}} People</div>
 								</div>
 								<div class="rent-price d-flex align-items-center justify-content-between">
 									<div class="price">${{car.price}}.00/
 										<span>day</span>
 									</div>
 									<div class="rent-btn">
-										<button>Rent Now</button>
+										<a href="/car/{{car.id}}">Rent Now</a>
 									</div>
 								</div>
 							</div>

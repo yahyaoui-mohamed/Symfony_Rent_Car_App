@@ -57,9 +57,8 @@
       }
 
       .rent-btn {
-        button {
-          outline: none;
-          border: none;
+        a {
+          text-decoration: none;
           color: #fff;
           background-color: #3563E9;
           padding: 10px 20px;

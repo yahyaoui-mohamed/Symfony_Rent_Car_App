@@ -37,6 +37,9 @@ class Car
     #[ORM\Column(length: 255)]
     private ?string $img = null;
 
+    #[ORM\Column(nullable: true)]
+    private ?int $old_price = null;
+
     public function getId(): ?int
     {
         return $this->id;
@@ -134,6 +137,18 @@ class Car
     public function setImg(string $img): static
     {
         $this->img = $img;
+
+        return $this;
+    }
+
+    public function getOldPrice(): ?int
+    {
+        return $this->old_price;
+    }
+
+    public function setOldPrice(?int $old_price): static
+    {
+        $this->old_price = $old_price;
 
         return $this;
     }
