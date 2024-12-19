@@ -2,8 +2,9 @@
 {% block title %}Morent | All cars
 {% endblock %}
 {% block body %}
-	{% include "navbar.html.twig" %}
-	<div class="all-cars">
+
+{% include "navbar.html.twig" %}
+<div class="all-cars">
 	<div class="row">
 		<div class="col-lg-3">
 			<div class="filter">
@@ -72,9 +73,6 @@
 			<div class="reservation d-flex">
 				<div class="container">
 					<div class="d-flex justify-content-between">
-						{# 
-						            <div class="col-lg-5">
-						               #}
 						<div class="pick-up">
 							<div class="title">Pick - Up</div>
 							<div class="info">
@@ -98,17 +96,11 @@
 								</div>
 							</div>
 						</div>
-						{# 
-						            </div>
-						            #}
 						<div class="col-lg-1 d-flex align-items-center justify-content-center">
 							<button class="change-btn d-flex">
 								<i class="fi fi-sr-exchange"></i>
 							</button>
 						</div>
-						{# 
-						            <div class="col-lg-5">
-						               #}
 						<div class="drop-off">
 							<div class="title">Drop - Off</div>
 							<div class="info">
@@ -132,40 +124,34 @@
 								</div>
 							</div>
 						</div>
-						{# 
-						            </div>
-						            #}
 					</div>
 				</div>
 			</div>
-			
-			<div class="cars text-center">
-				
-				<div class="row">
 
-					{% set items = [1, 2, 3, 4, 5, 6, 7, 8, 9] %}
-					{% for item in items %}
+			<div class="cars">
+				<div class="row">
+					{% for car in cars %}
 						<div class="col-lg-4">
 							<div class="car">
 								<div class="car-name d-flex justify-content-between">
 									<div class="name">
-										<h3>Koenigsegg</h3>
-										<span>Sport</span>
+										<h3>{{car.name}}</h3>
+										<span>{{car.type}}</span>
 									</div>
 									<div class="favorite">
-										<i class="fi fi-sr-heart"></i>
+										<i class="fi fi-rr-heart"></i>
 									</div>
 								</div>
 								<div class="car-img">
-									<img src="images/car1.png" alt=""/>
+									<img src={{car.img}} alt="{{car.name}} car image."/>
 								</div>
 								<div class="options d-flex justify-content-between">
-									<div class="litres">90L</div>
-									<div class="gear">Manual</div>
-									<div class="seats">2 People</div>
+									<div class="litres">{{car.gasoline}}L</div>
+									<div class="gear">{{car.steering}}</div>
+									<div class="seats">{{car.capacity}} People</div>
 								</div>
 								<div class="rent-price d-flex align-items-center justify-content-between">
-									<div class="price">$99.00/
+									<div class="price">${{car.price}}.00/
 										<span>day</span>
 									</div>
 									<div class="rent-btn">
@@ -175,13 +161,12 @@
 							</div>
 						</div>
 					{% endfor %}
-
-
 				</div>
 				<button class="mt-5">Show more car</button>
 			</div>
-		
+
 		</div>
-		</div>
-		{% include "footer.html.twig" %}
-	{% endblock %}
+	</div>
+
+	{% include "footer.html.twig" %}
+{% endblock %}
