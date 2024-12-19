@@ -22,8 +22,8 @@ class IndexControllerTest extends WebTestCase
         $this->assertSelectorTextContains('h5', 'The best platform');
         $this->assertSelectorTextContains('a', 'Morent');
         $this->assertEquals(2, count($buttons));
-        $this->assertEquals(2, count($images));
-        $this->assertEquals(3, count($filterButtons));
-        $this->assertEquals(6, count($icons));
+        $this->assertEquals(14, count($images));
+        $this->assertEquals(16, count($filterButtons));
+        $this->assertEquals(55, count($icons));
     }
 }
