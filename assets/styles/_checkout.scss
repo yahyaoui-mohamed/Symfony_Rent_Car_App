@@ -21,9 +21,10 @@
   }
 
   input {
-    font-size: 14px;
+    font-size: 12px;
     color: #90A3B9;
     background-color: #E0E9F4;
+    padding: 13px 15px;
 
     &:focus {
       color: #90A3B9;
@@ -58,9 +59,10 @@
   }
 
   .form-select {
-    font-size: 14px;
+    font-size: 12px;
     color: #90A3B9;
     background-color: #E0E9F4;
+    padding: 13px 15px;
 
     &:focus {
       color: #90A3B9;
@@ -76,6 +78,13 @@
   padding: 25px;
   background-color: #fff;
   border-radius: 8px;
+
+  .card-info {
+    background-color: #E0E9F4;
+    margin-bottom: 20px;
+    padding: 20px;
+    border-radius: 8px;
+  }
 
   h3 {
     font-size: 18px;
@@ -96,7 +105,7 @@
   input {
     font-size: 14px;
     color: #90A3B9;
-    background-color: #E0E9F4;
+    background-color: #fff;
 
     &:focus {
       color: #90A3B9;
