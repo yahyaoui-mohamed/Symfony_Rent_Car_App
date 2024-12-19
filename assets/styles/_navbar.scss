@@ -6,6 +6,15 @@
   background-color: #fff;
   border-bottom: 1px solid #E0E9F4;
 
+  &.fixed {
+    position: fixed;
+    width: 100%;
+    left: 0;
+    top: 0;
+    padding: 10px 0;
+    z-index: 55;
+  }
+
   .navbar-brand {
     a {
       color: #3563E9;

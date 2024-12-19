@@ -178,33 +178,28 @@
                 
                 
                 <div class="row">
-                    {% 
-                        set items = [1, 2, 3, 4] 
-
-                    
-                    %}
-                    {% for item in items %}
+                    {% for car in recentCars %}
                     <div class="col-lg-3">
                         <div class="car">
                             <div class="car-name d-flex justify-content-between">
                                 <div class="name">
-                                    <h3>Koenigsegg</h3>
-                                    <span>Sport</span>
+                                    <h3>{{car.name}}</h3>
+                                    <span>{{car.type}}</span>
                                 </div>
                                 <div class="favorite">
                                     <i class="fi fi-rs-heart"></i>
                                 </div>
                             </div>
                             <div class="car-img">
-                                <img src="images/car1.png" alt=""/>
+                                <img src={{car.img}} alt=""/>
                             </div>
                             <div class="options d-flex justify-content-between">
-                                <div class="litres"><i class="fi fi-tr-gas-pump"></i> 90L</div>
-                                <div class="gear"><i class="fi fi-ts-tire"></i> Manual</div>
-                                <div class="seats"><i class="fi fi-tr-seat-airline"></i>2 People</div>
+                                <div class="litres"><i class="fi fi-tr-gas-pump"></i> {{car.gasoline}}L</div>
+                                <div class="gear"><i class="fi fi-ts-tire"></i> {{car.steering}}</div>
+                                <div class="seats"><i class="fi fi-tr-seat-airline"></i>{{car.capacity}}</div>
                             </div>
                             <div class="rent-price d-flex align-items-center justify-content-between">
-                                <div class="price">$99.00/
+                                <div class="price">${{car.price}}.00/
                                     <span>day</span>
                                 </div>
                                 <div class="rent-btn">
@@ -237,38 +232,31 @@
 
 
 			<div class="row">
-				{% 
-                        set items = [1, 2, 3, 4] 
-
-                    
-                    %}
-				{% for item in items %}
+				{% for car in recommandationCars %}
 					<div class="col-lg-3">
 						<div class="car">
 							<div class="car-name d-flex justify-content-between">
 								<div class="name">
-									<h3>Koenigsegg</h3>
-									<span>Sport</span>
+									<h3>{{car.name}}</h3>
+									<span>{{car.type}}</span>
 								</div>
 								<div class="favorite">
 									<i class="fi fi-rs-heart"></i>
 								</div>
 							</div>
 							<div class="car-img">
-								<img src="images/car1.png" alt=""/>
+								<img src={{car.img}} alt=""/>
 							</div>
 							<div class="options d-flex justify-content-between">
 								<div class="litres">
-									<i class="fi fi-tr-gas-pump"></i>
-									90L</div>
+									<i class="fi fi-tr-gas-pump"></i>{{car.gasoline}}L</div>
 								<div class="gear">
-									<i class="fi fi-ts-tire"></i>
-									Manual</div>
+									<i class="fi fi-ts-tire"></i>{{car.steering}}</div>
 								<div class="seats">
-									<i class="fi fi-tr-seat-airline"></i>2 People</div>
+									<i class="fi fi-tr-seat-airline"></i>{{car.capacity}}</div>
 							</div>
 							<div class="rent-price d-flex align-items-center justify-content-between">
-								<div class="price">$99.00/
+								<div class="price">${{car.price}}.00/
 									<span>day</span>
 								</div>
 								<div class="rent-btn">
