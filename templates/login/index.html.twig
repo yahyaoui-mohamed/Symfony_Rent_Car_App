@@ -8,23 +8,22 @@
 	<div class="login-form">
 		<form method="post">
 
-			<h1>Please sign in</h1>
+            <h1>Please sign in</h1>
+
 			<div class="mb-3">
 				<label for="username">Email</label>
-				<input type="email" name="_username" id="username" class="form-control" autocomplete="email" required autofocus placeholder="Enter your email">
+				<input type="email" name="email" id="inputEmail" class="form-control" autocomplete="email" required autofocus placeholder="Enter your email">
 			</div>
 
 			<div class="mb-3">
 				<label for="password">Password</label>
-				<input type="password" name="_password" id="password" class="form-control" autocomplete="current-password" required placeholder="Enter your password">
+                <input type="password" name="password" id="inputPassword" class="form-control" autocomplete="current-password" required placeholder="Enter your password">
 			</div>
 
 
 			<input type="hidden" name="_csrf_token" value="{{ csrf_token('authenticate') }}">
 
-			{# Uncomment this section and add a remember_me option below your firewall to activate remember me functionality.
-			                See https://symfony.com/doc/current/security/remember_me.html #}
-			<div class="mb-3">
+            <div class="mb-3">
 				<div class="checkbox mb-3">
 					<input type="checkbox" name="_remember_me" id="_remember_me" class="form-check-input">
 					<label for="_remember_me">Remember me</label>
@@ -39,6 +38,7 @@
 				Didn't have an account ?
 				<a href="{{path("app_register")}}">Sign in</a>
 			</div>
+
 		</form>
 	</div>
 

@@ -31,6 +31,7 @@ security:
                 path: /
                 #always_remember_me: true
             custom_authenticator: App\Security\LoginAuthenticator
+                #always_remember_me: true
                 # by default, the feature is enabled by checking a checkbox in the
                 # login form, uncomment the following line to always enable it.
                 #always_remember_me: true
@@ -48,7 +49,7 @@ security:
     access_control:
         # - { path: ^/admin, roles: ROLE_ADMIN }
         # - { path: ^/profile, roles: ROLE_USER }
-        - { path: ^/login, roles: IS_AUTHENTICATED_ANONYMOUSLY }
+        # - { path: ^/login, roles: IS_AUTHENTICATED_ANONYMOUSLY }
 
 when@test:
     security:

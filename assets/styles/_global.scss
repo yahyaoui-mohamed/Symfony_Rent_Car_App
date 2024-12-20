@@ -1,8 +1,13 @@
-$mainColor : #3563E9;
-$secondaryColor : #1A202C;
-$infoColor : #54A6FF;
-$warningColor : #FFC73A;
-$errorColor : #FF4423;
-$successColor : #9CD323;
+@import url('https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:ital,wght@0,200..800;1,200..800&display=swap');
 
-$fontFamily : "Plus Jakarta Sans";
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  text-decoration: none;
+  font-family: "Plus Jakarta Sans", sans-serif;
+}
+
+body {
+  background-color: #E0E9F4;
+}
