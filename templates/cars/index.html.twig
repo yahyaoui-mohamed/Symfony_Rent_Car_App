@@ -1,74 +1,79 @@
 {% extends 'base.html.twig' %}
-{% block title %}Morent | All cars
-{% endblock %}
+
+{% block title %} Morent | All cars {% endblock %}
+
 {% block body %}
 
 {% include "navbar.html.twig" %}
+
 <div class="all-cars">
 	<div class="row">
 		<div class="col-lg-3">
-			<div class="filter">
-				<div class="filter-title">Type</div>
-				<ul>
-					<li><input type="checkbox" class="form-check-input" id="sport">
-						<label for="sport">Sport
-							<span>(10)</span>
-						</label>
-					</li>
-					<li><input type="checkbox" class="form-check-input" id="suv">
-						<label for="suv">SUV
-							<span>(12)</span>
-						</label>
-					</li>
-					<li><input type="checkbox" class="form-check-input" id="mpv">
-						<label for="mpv">MPV
-							<span>(16)</span>
-						</label>
-					</li>
-					<li><input type="checkbox" class="form-check-input" id="sedan">
-						<label for="sedan">Sedan
-							<span>(20)</span>
-						</label>
-					</li>
-					<li><input type="checkbox" class="form-check-input" id="couple">
-						<label for="couple">Couple
-							<span>(14)</span>
-						</label>
-					</li>
-					<li><input type="checkbox" class="form-check-input" id="hatchback">
-						<label for="hatchback">Hatchback
-							<span>(14)</span>
-						</label>
-					</li>
-				</ul>
-				<div class="filter-title">Capacity</div>
-				<ul>
-					<li><input type="checkbox" class="form-check-input" id="person2">
-						<label for="person2">2 Person
-							<span>(10)</span>
-						</label>
-					</li>
-					<li><input type="checkbox" class="form-check-input" id="person4">
-						<label for="person4">4 Person
-							<span>(14)</span>
-						</label>
-					</li>
-					<li><input type="checkbox" class="form-check-input" id="person5">
-						<label for="person5">5 Person
-							<span>(12)</span>
-						</label>
-					</li>
-					<li><input type="checkbox" class="form-check-input" id="person8">
-						<label for="person8">8 or more
-							<span>(16)</span>
-						</label>
-					</li>
-				</ul>
-				<div class="filter-title">Price</div>
-				<input type="range" name="" id="" step="10">
-				<p>Max. $100.00</p>
-			</div>
+			<form id="filter-form">
+				<div class="filter">
+					<div class="filter-title">Type</div>
+					<ul>
+						<li><input type="checkbox" class="form-check-input" id="sport">
+							<label for="sport">Sport
+								<span>(10)</span>
+							</label>
+						</li>
+						<li><input type="checkbox" class="form-check-input" id="suv">
+							<label for="suv">SUV
+								<span>(12)</span>
+							</label>
+						</li>
+						<li><input type="checkbox" class="form-check-input" id="mpv">
+							<label for="mpv">MPV
+								<span>(16)</span>
+							</label>
+						</li>
+						<li><input type="checkbox" class="form-check-input" id="sedan">
+							<label for="sedan">Sedan
+								<span>(20)</span>
+							</label>
+						</li>
+						<li><input type="checkbox" class="form-check-input" id="couple">
+							<label for="couple">Couple
+								<span>(14)</span>
+							</label>
+						</li>
+						<li><input type="checkbox" class="form-check-input" id="hatchback">
+							<label for="hatchback">Hatchback
+								<span>(14)</span>
+							</label>
+						</li>
+					</ul>
+					<div class="filter-title">Capacity</div>
+					<ul>
+						<li><input type="checkbox" class="form-check-input" id="person2" value="2">
+							<label for="person2">2 Person
+								<span>(10)</span>
+							</label>
+						</li>
+						<li><input type="checkbox" class="form-check-input" id="person4" value="4">
+							<label for="person4">4 Person
+								<span>(14)</span>
+							</label>
+						</li>
+						<li><input type="checkbox" class="form-check-input" id="person5"value="5"> 
+							<label for="person5">5 Person
+								<span>(12)</span>
+							</label>
+						</li>
+						<li><input type="checkbox" class="form-check-input" id="person8"value="8">
+							<label for="person8">8 or more
+								<span>(16)</span>
+							</label>
+						</li>
+					</ul>
+					<div class="filter-title">Price</div>
+					<input type="range" name="" id="" step="10">
+					<p>Max. $100.00</p>
+				</div>
+			</form>
 		</div>
+
 		<div class="col-lg-9">
 			<div class="reservation d-flex">
 				<div class="container">
@@ -130,37 +135,8 @@
 
 			<div class="cars">
 				<div class="row">
-					{% for car in cars %}
-						<div class="col-lg-4">
-							<div class="car">
-								<div class="car-name d-flex justify-content-between">
-									<div class="name">
-										<h3>{{car.name}}</h3>
-										<span>{{car.type}}</span>
-									</div>
-									<div class="favorite">
-										<i class="fi fi-rr-heart"></i>
-									</div>
-								</div>
-								<div class="car-img">
-									<img src={{car.img}} alt="{{car.name}} car image."/>
-								</div>
-								<div class="options d-flex justify-content-between">
-									<div class="litres"><i class="fi fi-tr-gas-pump"></i>{{car.gasoline}}L</div>
-									<div class="gear"><i class="fi fi-ts-tire"></i> {{car.steering}}</div>
-									<div class="seats"><i class="fi fi-tr-seat-airline"></i> {{car.capacity}} People</div>
-								</div>
-								<div class="rent-price d-flex align-items-center justify-content-between">
-									<div class="price">${{car.price}}.00/
-										<span>day</span>
-									</div>
-									<div class="rent-btn">
-										<a href="/car/{{car.id}}">Rent Now</a>
-									</div>
-								</div>
-							</div>
-						</div>
-					{% endfor %}
+					{% include 'cars/_list.html.twig' with {'cars': cars} %}
+					
 				</div>
 				<button class="mt-5">Show more car</button>
 			</div>
@@ -169,4 +145,60 @@
 	</div>
 
 	{% include "footer.html.twig" %}
+<script>
+document.addEventListener("DOMContentLoaded", function () {
+    const filterForm = document.querySelector("#filter-form");
+    const carListContainer = document.querySelector(".cars .row");
+
+    filterForm.addEventListener("change", function () {
+        const filters = {};
+
+        const typeFilters = ['sport', 'suv', 'mpv', 'sedan', 'couple', 'hatchback'];
+        const capacityFilters = ['person2', 'person4', 'person5', 'person8'];
+
+        typeFilters.forEach(function (type) {
+            const checkbox = document.getElementById(type);
+            if (checkbox.checked) {
+                if (!filters.type) filters.type = [];
+                filters.type.push(type);
+            }
+        });
+
+        capacityFilters.forEach(function (capacity) {
+            const checkbox = document.getElementById(capacity);
+            if (checkbox.checked) {
+                if (!filters.capacity) filters.capacity = [];
+                filters.capacity.push(checkbox.value);
+            }
+        });
+
+        const priceRange = document.querySelector('input[type="range"]');
+					if(priceRange) {
+          	filters.price_min = 0;
+          	filters.price_max = priceRange.value;
+					}
+
+        fetch("/cars/filter", {
+            method: "POST",
+            headers: {
+                "Content-Type": "application/json",
+            },
+            body: JSON.stringify(filters),
+        })
+        .then((response) => {
+            if (!response.ok) {
+                throw new Error("Network response was not ok");
+            }
+            return response.text();
+        })
+        .then((html) => {
+            carListContainer.innerHTML = html;
+        })
+        .catch((error) => {
+            console.error("There was a problem with the fetch operation:", error);
+        });
+    });
+});
+
+</script>
 {% endblock %}

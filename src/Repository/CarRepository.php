@@ -16,6 +16,40 @@ class CarRepository extends ServiceEntityRepository
         parent::__construct($registry, Car::class);
     }
 
+    public function findByFilters(array $filters): array
+    {
+        $qb = $this->createQueryBuilder('c');
+
+        if (isset($filters['type'])) {
+            $qb->andWhere('c.type IN (:types)')
+                ->setParameter('types', $filters['type']);
+        }
+
+        if (isset($filters['capacity'])) {
+            $qb->andWhere('c.capacity IN (:capacities)')
+                ->setParameter('capacities', $filters['capacity']);
+        }
+
+        if (isset($filters['price_min']) && isset($filters['price_max'])) {
+            $qb->andWhere('c.price BETWEEN :minPrice AND :maxPrice')
+                ->setParameter('minPrice', $filters['price_min'])
+                ->setParameter('maxPrice', $filters['price_max']);
+        }
+
+        if (isset($filters['make'])) {
+            $qb->andWhere('c.make IN (:makes)')
+                ->setParameter('makes', $filters['make']);
+        }
+
+        if (isset($filters['year'])) {
+            $qb->andWhere('c.year IN (:years)')
+                ->setParameter('years', $filters['year']);
+        }
+
+        return $qb->getQuery()->getResult();
+    }
+
+
     //    /**
     //     * @return Car[] Returns an array of Car objects
     //     */
