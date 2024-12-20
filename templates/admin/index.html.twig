@@ -1,0 +1,27 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Morent | Admin{% endblock %}
+
+{% block body %}
+{% include 'navbar.html.twig' %}
+  <div class="admin">
+    {% include "admin_sidebar.html.twig" %}
+    <div class="app">
+        <div class="container">
+          <div class="row">
+            <div class="col-lg-6">
+              <div class="details-rent">
+                <h3>Details Rental</h3>
+              </div>
+            </div>
+            <div class="col-lg-6">
+              <div class="top-car-rental"></div>
+              <div class="recent-transaction"></div>
+            </div>
+          </div>
+        </div>
+    </div>
+
+  </div>
+
+{% endblock %}
