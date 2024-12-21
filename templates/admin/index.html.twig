@@ -6,18 +6,138 @@
 {% include 'navbar.html.twig' %}
   <div class="admin">
     {% include "admin_sidebar.html.twig" %}
+
     <div class="app">
         <div class="container">
           <div class="row">
+
             <div class="col-lg-6">
+
               <div class="details-rent">
                 <h3>Details Rental</h3>
+                <div class="maps">
+                  <img src="/images/Maps.png" alt="">
+                </div>
+                <div class="car-rent">
+                  <div class="row">
+                    <div class="col-lg-2">
+                      <img src="" alt="">
+                    </div>
+                    <div class="col-lg-9">
+                      <h3>Nissan GT - R</h3>
+                      <span>Sport Car</span>
+                    </div>
+                    <div class="col-lg-1">
+                      <span>
+                        #9761
+                      </span>
+                    </div>
+                  </div>
+                </div>
               </div>
+
             </div>
+
             <div class="col-lg-6">
-              <div class="top-car-rental"></div>
-              <div class="recent-transaction"></div>
+
+              <div class="top-car-rental">
+                <h3>Top 5 Car Rental</h3>
+                <div class="chart-container">
+                  {{ render_chart(chart) }}
+                </div>
+              </div>
+
+              <div class="recent-transaction">
+                <div class="title d-flex justify-content-between">
+                  <h3>Recent Transaction</h3>
+                  <a href="#">View all</a>
+                </div>
+                <div class="transactions">
+                  <div class="transaction-item">
+                    <div class="row">
+                      <div class="col-lg-2">
+                        <img src="/images/Car1.png" alt="">
+                      </div>
+                      <div class="col-lg-8">
+                        <div class="car-name">
+                          <h3>Nissan GT - R</h3>
+                          <span>Sport</span>
+                        </div>
+                      </div>
+                      <div class="col-lg-2">
+                        <div class="date-price">
+                          <span>20 July</span>
+                          <h3>$80.00</h3>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+
+                  <div class="transaction-item">
+                    <div class="row">
+                      <div class="col-lg-2">
+                        <img src="/images/Car1.png" alt="">
+                      </div>
+                      <div class="col-lg-8">
+                        <div class="car-name">
+                          <h3>Nissan GT - R</h3>
+                          <span>Sport</span>
+                        </div>
+                      </div>
+                      <div class="col-lg-2">
+                        <div class="date-price">
+                          <span>20 July</span>
+                          <h3>$80.00</h3>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+
+                  <div class="transaction-item">
+                    <div class="row">
+                      <div class="col-lg-2">
+                        <img src="/images/Car1.png" alt="">
+                      </div>
+                      <div class="col-lg-8">
+                        <div class="car-name">
+                          <h3>Nissan GT - R</h3>
+                          <span>Sport</span>
+                        </div>
+                      </div>
+                      <div class="col-lg-2">
+                        <div class="date-price">
+                          <span>20 July</span>
+                          <h3>$80.00</h3>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+
+                  <div class="transaction-item">
+                    <div class="row">
+                      <div class="col-lg-2">
+                        <img src="/images/Car1.png" alt="">
+                      </div>
+                      <div class="col-lg-8">
+                        <div class="car-name">
+                          <h3>Nissan GT - R</h3>
+                          <span>Sport</span>
+                        </div>
+                      </div>
+                      <div class="col-lg-2">
+                        <div class="date-price">
+                          <span>20 July</span>
+                          <h3>$80.00</h3>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                  
+                </div>
+              </div>
+
             </div>
+
           </div>
         </div>
     </div>

@@ -3,7 +3,72 @@
   justify-content: space-between;
 
   .app {
-    width: 80%;
+    width: 75%;
     margin-top: 20px;
+
+    .details-rent {
+      padding: 20px;
+      background-color: #fff;
+      border-radius: 8px;
+
+      h3 {
+        font-weight: 700;
+        font-size: 14px;
+        margin-bottom: 15px;
+      }
+
+      .maps {
+        img {
+          width: 100%;
+        }
+      }
+    }
+
+    .top-car-rental {
+      padding: 20px;
+      background-color: #fff;
+      border-radius: 8px;
+      margin-bottom: 10px;
+
+      h3 {
+        font-weight: 700;
+        font-size: 14px;
+      }
+
+      .chart-container {
+        width: 350px;
+        height: 350px;
+      }
+    }
+
+    .recent-transaction {
+      padding: 20px;
+      background-color: #fff;
+      border-radius: 8px;
+
+      h3 {
+        font-weight: 700;
+        font-size: 14px;
+      }
+
+      .transactions {
+        .transaction-item {
+          margin: 15px 0;
+          padding: 20px 0;
+
+          &:not(:last-child) {
+            border-bottom: 1px solid #e9e0f9;
+          }
+
+          &:last-child {
+            padding-bottom: 0;
+          }
+
+          img {
+            width: 100%;
+          }
+        }
+      }
+    }
   }
 }
