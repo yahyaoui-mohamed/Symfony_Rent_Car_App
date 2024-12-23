@@ -12,7 +12,7 @@
 			<form id="filter-form">
 				<div class="filter">
 					<div class="filter-title">Type</div>
-					<ul>
+					{# <ul>
 						<li><input type="checkbox" class="form-check-input" id="sport">
 							<label for="sport">Sport
 								<span>(10)</span>
@@ -43,21 +43,40 @@
 								<span>(14)</span>
 							</label>
 						</li>
-					</ul>
-					<div class="filter-title">Capacity</div>
+					</ul> #}
 					<ul>
+						{% for car in carDataType %}
+								{# <li><input type="checkbox" class="form-check-input" id="sport">
+									<label for="sport">Sport
+										<span>(10)</span>
+									</label>
+								</li> #}
+								
+								<li>
+										<input type="checkbox" class="form-check-input" id="{{ car.type|lower }}">
+										<label for="{{ car.type|lower }}">
+												{{ car.type }}
+												<span>({{ car.car_count }})</span>
+										</label>
+								</li>
+						{% endfor %}
+					</ul>
+
+					<div class="filter-title">Capacity</div>
+					{# <ul>
 						<li><input type="checkbox" class="form-check-input" id="person2" value="2">
 							<label for="person2">2 Person
 								<span>(10)</span>
 							</label>
 						</li>
+
 						<li><input type="checkbox" class="form-check-input" id="person4" value="4">
 							<label for="person4">4 Person
 								<span>(14)</span>
 							</label>
 						</li>
-						<li><input type="checkbox" class="form-check-input" id="person5"value="5"> 
-							<label for="person5">5 Person
+						<li><input type="checkbox" class="form-check-input" id="person6"value="6"> 
+							<label for="person6">6 Person
 								<span>(12)</span>
 							</label>
 						</li>
@@ -66,9 +85,21 @@
 								<span>(16)</span>
 							</label>
 						</li>
+					</ul> #}
+					<ul>
+						{% for car in carDataCapacity %}
+							<li><input type="checkbox" class="form-check-input" id="person{{car.capacity}}" value="{{car.capacity}}">
+								<label for="person{{car.capacity}}">{{car.capacity}} Person
+									<span>({{car.car_count}})</span>
+								</label>
+							</li>
+						{% endfor %}
 					</ul>
+
+					
+
 					<div class="filter-title">Price</div>
-					<input type="range" name="" id="" step="10">
+					<input type="range" id="price-filter" step="1">
 					<p>Max. $100.00</p>
 				</div>
 			</form>
@@ -199,6 +230,25 @@ document.addEventListener("DOMContentLoaded", function () {
         });
     });
 });
+
+let favoriteCar = document.querySelectorAll(".cars .car .favorite i");
+
+favoriteCar.forEach(function(car){
+	car.addEventListener("click", function(){
+		if(this.classList.contains("active")){
+			this.classList.add("fi-rr-heart");
+			this.classList.remove("fi-ss-heart");
+			this.classList.remove("active");
+		}
+		else{
+			this.classList.remove("fi-rr-heart");
+			this.classList.add("fi-ss-heart");
+			this.classList.add("active");
+		}
+		// Send to databse to add to favorites
+	});
+});
+
 
 </script>
 {% endblock %}

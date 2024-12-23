@@ -17,6 +17,17 @@
         color: #596780;
         font-size: 14px;
       }
+
+      .favorite {
+        i {
+          cursor: pointer;
+
+          &.active {
+            color: #FF4423;
+          }
+        }
+
+      }
     }
 
     .options {

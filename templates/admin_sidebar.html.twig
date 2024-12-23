@@ -1,37 +1,71 @@
 <div class="sidebar">
 	<div class="side-item">
 		<span>Main Menu</span>
-		<ul>
+		{# <ul>
 			<li class="active">
 				<a href="{{path("app_admin")}}">
 					<i class="fi fi-rr-house-blank"></i>Dashboard</a>
 			</li>
 			<li>
-				<a href="#">
+				<a href="{{path("app_rents")}}">
 					<i class="fi fi-rr-car-side"></i>Car Rent</a>
 			</li>
 			<li>
-				<a href="#">
+				<a href="{{path("app_insight")}}">
 					<i class="fi fi-rr-stats"></i>Insight</a>
 			</li>
 			<li>
-				<a href="#">
+				<a href="{{path("app_reimburse")}}">
 					<i class="fi fi-ts-refund-alt"></i>Reimburse</a>
 			</li>
 			<li>
-				<a href="#">
+				<a href="{{path("app_inbox")}}">
 					<i class="fi fi-tr-comment-alt-dots"></i>Inbox</a>
 			</li>
 			<li>
-				<a href="#">
+				<a href="{{path("app_calendar")}}">
 					<i class="fi fi-tr-calendar-days"></i>Calendar</a>
 			</li>
-		</ul>
+		</ul> #}
+<ul>
+	<li class="{{ app.request.attributes.get('_route') == 'app_admin' ? 'active' : '' }}">
+		<a href="{{ path('app_admin') }}">
+			<i class="fi fi-rr-house-blank"></i>Dashboard
+		</a>
+	</li>
+	<li class="{{ app.request.attributes.get('_route') == 'app_rents' ? 'active' : '' }}">
+		<a href="{{ path('app_rents') }}">
+			<i class="fi fi-rr-car-side"></i>Car Rent
+		</a>
+	</li>
+	<li class="{{ app.request.attributes.get('_route') == 'app_insight' ? 'active' : '' }}">
+		<a href="{{ path('app_insight') }}">
+			<i class="fi fi-rr-stats"></i>Insight
+		</a>
+	</li>
+	<li class="{{ app.request.attributes.get('_route') == 'app_reimburse' ? 'active' : '' }}">
+		<a href="{{ path('app_reimburse') }}">
+			<i class="fi fi-ts-refund-alt"></i>Reimburse
+		</a>
+	</li>
+	<li class="{{ app.request.attributes.get('_route') == 'app_inbox' ? 'active' : '' }}">
+		<a href="{{ path('app_inbox') }}">
+			<i class="fi fi-tr-comment-alt-dots"></i>Inbox
+		</a>
+	</li>
+	<li class="{{ app.request.attributes.get('_route') == 'app_calendar' ? 'active' : '' }}">
+		<a href="{{ path('app_calendar') }}">
+			<i class="fi fi-tr-calendar-days"></i>Calendar
+		</a>
+	</li>
+</ul>
+
+
 	</div>
 	<div class="side-item">
 		<span>Preferences</span>
 		<ul>
-			<li><a href="#"><i class="fi fi-tc-settings"></i>Settings</a></li>
+			<li class="{{ app.request.attributes.get('_route') == 'app_settings' ? 'active' : '' }}"><a href="{{path("app_settings")}}"><i class="fi fi-tc-settings"></i>Settings</a></li>
 			<li><a href="#"><i class="fi fi-rr-info"></i>Help Center</a></li>
 			<li><a href="#"><i class="fi fi-ts-dark-mode-alt"></i>Dark Mode</a></li>
 		</ul>
