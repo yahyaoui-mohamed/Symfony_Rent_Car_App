@@ -296,5 +296,23 @@
         });
     });
 
+let favoriteCar = document.querySelectorAll(".cars .car .favorite i");
+
+favoriteCar.forEach(function(car){
+	car.addEventListener("click", function(){
+		if(this.classList.contains("active")){
+			this.classList.add("fi-rr-heart");
+			this.classList.remove("fi-ss-heart");
+			this.classList.remove("active");
+		}
+		else{
+			this.classList.remove("fi-rr-heart");
+			this.classList.add("fi-ss-heart");
+			this.classList.add("active");
+		}
+		// Send to databse to add to favorites
+	});
+});
+
 </script>
 {% endblock %}
