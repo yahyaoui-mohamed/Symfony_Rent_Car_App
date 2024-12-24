@@ -26,10 +26,15 @@
 			</div>
 			<div class="user">
 				{% if app.user %}
-					<a href="{{path("app_account")}}">
-						<i class="fi fi-sr-user"></i>
-					</a>
-					
+					{% if "ROLE_ADMIN" in app.user.roles  %}
+						<a href="{{path("app_admin")}}">
+							<i class="fi fi-sr-user"></i>
+						</a>
+					{% elseif "ROLE_USER" in app.user.roles %}
+						<a href="{{path("app_account")}}">
+							<i class="fi fi-sr-user"></i>
+						</a>
+					{% endif %}
 				{% else %}
 					<a href="{{path("app_login")}}">
 						<i class="fi fi-sr-user"></i>
