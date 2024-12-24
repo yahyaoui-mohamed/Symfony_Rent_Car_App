@@ -13,7 +13,7 @@ use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 class CarsController extends AbstractController
 {
     #[Route('/cars', name: 'app_cars')]
-    public function index(EntityManagerInterface $em): Response
+    public function index(Request $request, EntityManagerInterface $em): Response
     {
         $cars = $em->getRepository(Car::class)->findAll();
         $queryType = $em->createQuery(
@@ -52,7 +52,6 @@ class CarsController extends AbstractController
         $filters = json_decode($request->getContent(), true);
         // $filters = $request->query->all(); // Get filters from the request
         $cars = $carRepository->findByFilters($filters);
-
         $html = $this->renderView('cars/_list.html.twig', ['cars' => $cars]);
 
         return new Response($html);

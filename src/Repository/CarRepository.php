@@ -36,15 +36,15 @@ class CarRepository extends ServiceEntityRepository
                 ->setParameter('maxPrice', $filters['price_max']);
         }
 
-        if (isset($filters['make'])) {
-            $qb->andWhere('c.make IN (:makes)')
-                ->setParameter('makes', $filters['make']);
-        }
+        // if (isset($filters['make'])) {
+        //     $qb->andWhere('c.make IN (:makes)')
+        //         ->setParameter('makes', $filters['make']);
+        // }
 
-        if (isset($filters['year'])) {
-            $qb->andWhere('c.year IN (:years)')
-                ->setParameter('years', $filters['year']);
-        }
+        // if (isset($filters['year'])) {
+        //     $qb->andWhere('c.year IN (:years)')
+        //         ->setParameter('years', $filters['year']);
+        // }
 
         return $qb->getQuery()->getResult();
     }

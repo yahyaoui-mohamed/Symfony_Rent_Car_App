@@ -139,6 +139,7 @@
 							<div class="favorite">
 								<i class="fi fi-rs-heart"></i>
 							</div>
+							<input type="hidden" name="car_id" value={{car.id}}>
 						</div>
 						<div class="car-img">
 							<img src="{{car.img}}" alt="{{car.name}} car image."/>
@@ -188,6 +189,7 @@
 							<div class="favorite">
 								<i class="fi fi-rs-heart"></i>
 							</div>
+							<input type="hidden" name="car_id" value={{car.id}}>
 						</div>
 						<div class="car-img">
 							<img src="{{car.img}}" alt=""/>
@@ -232,7 +234,23 @@ favoriteCar.forEach(function(car){
 			this.classList.add("fi-ss-heart");
 			this.classList.add("active");
 		}
-		// Send to databse to add to favorites
+
+		let carId = this.parentNode.nextElementSibling.value;
+
+		fetch("/favorite", {
+				method: "POST",
+				headers: {
+						"Content-Type": "application/json",
+				},
+				body:JSON.stringify({id : carId})
+		})
+		.then((response) => {
+				if (!response.ok) {
+						throw new Error("Network response was not ok");
+				}
+				return response.text();
+		});
+
 	});
 });
 </script>

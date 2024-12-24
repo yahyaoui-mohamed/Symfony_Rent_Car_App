@@ -99,8 +99,9 @@
 					
 
 					<div class="filter-title">Price</div>
-					<input type="range" id="price-filter" step="1">
+					<input type="range" id="price-filter" step="1" value="100">
 					<p>Max. $100.00</p>
+					<button class="clear-filters">Clear filters</button>
 				</div>
 			</form>
 		</div>
@@ -184,11 +185,13 @@ document.addEventListener("DOMContentLoaded", function () {
     filterForm.addEventListener("change", function () {
         const filters = {};
 
-        const typeFilters = ['sport', 'suv', 'mpv', 'sedan', 'couple', 'hatchback'];
-        const capacityFilters = ['person2', 'person4', 'person5', 'person8'];
+        // const typeFilters = ['sport', 'suv', 'mpv', 'sedan', 'couple', 'hatchback'];
+        const typeFilters = ['sport', 'suv', 'hatchback'];
+        // const capacityFilters = ['person2', 'person4', 'person5', 'person8'];
+        const capacityFilters = ['person2', 'person4', 'person6'];
 
         typeFilters.forEach(function (type) {
-            const checkbox = document.getElementById(type);
+						const checkbox = document.getElementById(type);
             if (checkbox.checked) {
                 if (!filters.type) filters.type = [];
                 filters.type.push(type);
@@ -204,10 +207,10 @@ document.addEventListener("DOMContentLoaded", function () {
         });
 
         const priceRange = document.querySelector('input[type="range"]');
-					if(priceRange) {
-          	filters.price_min = 0;
-          	filters.price_max = priceRange.value;
-					}
+				if(priceRange) {
+					filters.price_min = 0;
+					filters.price_max = priceRange.value;
+				}
 
         fetch("/cars/filter", {
             method: "POST",
@@ -224,12 +227,49 @@ document.addEventListener("DOMContentLoaded", function () {
         })
         .then((html) => {
             carListContainer.innerHTML = html;
+
+						let favoriteCar = document.querySelectorAll(".cars .car .favorite i");
+
+						favoriteCar.forEach(function(car){
+							car.addEventListener("click", function(){
+								if(this.classList.contains("active")){
+									this.classList.add("fi-rr-heart");
+									this.classList.remove("fi-ss-heart");
+									this.classList.remove("active");
+								}
+								else{
+									this.classList.remove("fi-rr-heart");
+									this.classList.add("fi-ss-heart");
+									this.classList.add("active");
+								}
+								let carId = this.parentNode.nextElementSibling.value;
+
+								fetch("/favorite", {
+										method: "POST",
+										headers: {
+												"Content-Type": "application/json",
+										},
+										body:JSON.stringify({id : carId})
+								})
+								.then((response) => {
+										if (!response.ok) {
+												throw new Error("Network response was not ok");
+										}
+										return response.text();
+								});
+
+							});
+						});
+
         })
         .catch((error) => {
             console.error("There was a problem with the fetch operation:", error);
         });
+
+				
     });
 });
+
 
 let favoriteCar = document.querySelectorAll(".cars .car .favorite i");
 
@@ -245,7 +285,22 @@ favoriteCar.forEach(function(car){
 			this.classList.add("fi-ss-heart");
 			this.classList.add("active");
 		}
-		// Send to databse to add to favorites
+		let carId = this.parentNode.nextElementSibling.value;
+
+		fetch("/favorite", {
+				method: "POST",
+				headers: {
+						"Content-Type": "application/json",
+				},
+				body:JSON.stringify({id : carId})
+		})
+		.then((response) => {
+				if (!response.ok) {
+						throw new Error("Network response was not ok");
+				}
+				return response.text();
+		});
+
 	});
 });
 
