@@ -48,9 +48,16 @@ class Car
     #[ORM\OneToMany(targetEntity: Favorite::class, mappedBy: 'car', orphanRemoval: true)]
     private Collection $favorites;
 
+    /**
+     * @var Collection<int, Transaction>
+     */
+    #[ORM\OneToMany(targetEntity: Transaction::class, mappedBy: 'car')]
+    private Collection $transactions;
+
     public function __construct()
     {
         $this->favorites = new ArrayCollection();
+        $this->transactions = new ArrayCollection();
     }
 
     public function getId(): ?int
@@ -190,6 +197,36 @@ class Car
             // set the owning side to null (unless already changed)
             if ($favorite->getCar() === $this) {
                 $favorite->setCar(null);
+            }
+        }
+
+        return $this;
+    }
+
+    /**
+     * @return Collection<int, Transaction>
+     */
+    public function getTransactions(): Collection
+    {
+        return $this->transactions;
+    }
+
+    public function addTransaction(Transaction $transaction): static
+    {
+        if (!$this->transactions->contains($transaction)) {
+            $this->transactions->add($transaction);
+            $transaction->setCar($this);
+        }
+
+        return $this;
+    }
+
+    public function removeTransaction(Transaction $transaction): static
+    {
+        if ($this->transactions->removeElement($transaction)) {
+            // set the owning side to null (unless already changed)
+            if ($transaction->getCar() === $this) {
+                $transaction->setCar(null);
             }
         }
 

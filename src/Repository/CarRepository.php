@@ -39,6 +39,16 @@ class CarRepository extends ServiceEntityRepository
         return $qb->getQuery()->getResult();
     }
 
+    public function findNumbeOfCars(): array
+    {
+        $qb = $this->createQueryBuilder('c')
+            ->select('c.type, COUNT(c.id)')
+            ->groupBy('c.type')
+            ->orderBy('COUNT(c.id)', 'DESC');
+
+        return $qb->getQuery()->getScalarResult();
+    }
+
 
     //    /**
     //     * @return Car[] Returns an array of Car objects

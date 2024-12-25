@@ -6,7 +6,8 @@
 	<div class="checkout">
 		<div class="container-fluid">
 				{{ form_start(form,{'attr':{
-					'id': 'payment-form'
+					'id': 'payment-form',
+					'method' : 'post'
 				}}) }}
 			<div class="row">
 				<div class="col-lg-8">
@@ -64,7 +65,7 @@
 									<select name="" id="" class="form-select">
 										<option value="">Select your city</option>
 									</select> #}
-									{{ form_row(form.pickUpLocation) }}
+									{# {{ form_row(form.pickUpLocation) }} #}
 								</div>
 							</div>
 							<div class="col-lg-6">
@@ -73,7 +74,7 @@
 									<select name="" id="" class="form-select">
 										<option value="">Select your date</option>
 									</select> #}
-									{{ form_row(form.pickUpDate) }}
+									{# {{ form_row(form.pickUpDate) }} #}
 								</div>
 							</div>
 							<div class="col-lg-6">
@@ -82,7 +83,7 @@
 									<select name="" id="" class="form-select">
 										<option value="">Select your time</option>
 									</select> #}
-									{{ form_row(form.pickUpTime) }}
+									{# {{ form_row(form.pickUpTime) }} #}
 								</div>
 							</div>
 						</div>
@@ -94,7 +95,7 @@
 									<select name="" id="" class="form-select">
 										<option value="">Select your city</option>
 									</select> #}
-									{{ form_row(form.dropOffLocation) }}
+									{# {{ form_row(form.dropOffLocation) }} #}
 								</div>
 							</div>
 							<div class="col-lg-6">
@@ -103,7 +104,7 @@
 									<select name="" id="" class="form-select">
 										<option value="">Select your date</option>
 									</select> #}
-									{{ form_row(form.dropOffDate) }}
+									{# {{ form_row(form.dropOffDate) }} #}
 								</div>
 							</div>
 							<div class="col-lg-6">
@@ -112,7 +113,7 @@
 									<select name="" id="" class="form-select">
 										<option value="">Select your time</option>
 									</select> #}
-									{{ form_row(form.dropOffTime) }}
+									{# {{ form_row(form.dropOffTime) }} #}
 								</div>
 							</div>
 						</div>
@@ -297,47 +298,70 @@ const style = {
 };
 
 
-const cardNumber = elements.create('cardNumber',{style});
+const cardNumber = elements.create('cardNumber', { style });
 cardNumber.mount('#card-number-element');
 
-const cardExpiry = elements.create('cardExpiry',{style});
+const cardExpiry = elements.create('cardExpiry', { style });
 cardExpiry.mount('#card-expiry-element');
 
-const cardCvc = elements.create('cardCvc',{style});
+const cardCvc = elements.create('cardCvc', { style });
 cardCvc.mount('#card-cvc-element');
 
 document.querySelector('#payment-form').addEventListener('submit', async (event) => {
-    event.preventDefault();
+  event.preventDefault(); // Allow form submission for backend processing
 
-    const form = event.target;
-    const formData = new FormData(form);
-    
+  const form = event.target;
+  const formData = new FormData(form);
+
+  try {
     const response = await fetch('{{ path("app_checkout", { id: car.id }) }}', {
-        method: 'POST',
-        headers: {
-            'Accept': 'application/json'
-        },
-        body: formData
+      method: 'POST',
+      body: formData,
     });
 
-    const data = await response.json();
-    
-    if (data.error) {
-        document.querySelector('#card-errors').textContent = data.error;
-        return;
+    if (!response.ok) {
+      const errorText = await response.text();
+      throw new Error(`Server returned ${response.status}: ${errorText}`);
     }
 
+    const data = await response.json();
+
+    if (data.error) {
+      document.querySelector('#card-errors').textContent = data.error;
+      return;
+    }
+        /*billing_details: { // Include billing details (optional)
+          name: form.querySelector('#card-name').value || '', // Example: Get name from a form field (or empty string if not provided)
+          email: form.querySelector('#card-email').value || '',
+          address: {
+            city: form.querySelector('#card-city').value || '',
+            country: form.querySelector('#card-country').value || '',
+            line1: form.querySelector('#card-line1').value || '',
+            postal_code: form.querySelector('#card-postalcode').value || '',
+            state: form.querySelector('#card-state').value || '',
+          }
+        }*/
+
     const { error, paymentIntent } = await stripe.confirmCardPayment(data.clientSecret, {
-        payment_method: {
-            card: cardNumber,
-        },
+      payment_method: {
+        card: cardNumber, // Use the individual cardNumber element
+      }
     });
 
     if (error) {
-        document.querySelector('#card-errors').textContent = error.message;
+      document.querySelector('#card-errors').textContent = error.message;
     } else if (paymentIntent.status === 'succeeded') {
-				console.log("success");
+      console.log("Payment successful!");
+      // Optionally redirect the user or display a success message
+    } else {
+      console.error("Unexpected payment status:", paymentIntent.status);
+      document.querySelector('#card-errors').textContent = "An error occurred during payment processing.";
     }
+
+  } catch (error) {
+    console.error("Error during payment process:", error);
+    document.querySelector('#card-errors').textContent = "An error occurred during payment processing.";
+  }
 });
 </script>
 {% endblock %}

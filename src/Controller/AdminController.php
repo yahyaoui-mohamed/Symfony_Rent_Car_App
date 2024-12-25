@@ -2,6 +2,10 @@
 
 namespace App\Controller;
 
+use App\Entity\Car;
+use App\Repository\CarRepository;
+use Doctrine\ORM\EntityManager;
+use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\UX\Chartjs\Builder\ChartBuilderInterface;
 use Symfony\Component\HttpFoundation\Response;
@@ -11,11 +15,14 @@ use Symfony\UX\Chartjs\Model\Chart;
 class AdminController extends AbstractController
 {
     #[Route('/admin', name: 'app_admin')]
-    public function index(ChartBuilderInterface $chartBuilder): Response
+    public function index(ChartBuilderInterface $chartBuilder, CarRepository $carRepository): Response
     {
         $chart = $chartBuilder->createChart(Chart::TYPE_DOUGHNUT);
+        $cars = $carRepository->findNumbeOfCars();
+        $types = array_map(fn($car) => $car['type'], $cars);
+        $totals = array_map(fn($car) => $car[1], $cars);
         $chart->setData([
-            'labels' => ['Sport Car', 'SU', 'Coupe', 'Hatchback', 'MPV'],
+            'labels' => $types,
             'datasets' => [
                 [
                     'backgroundColor' => [
@@ -25,7 +32,7 @@ class AdminController extends AbstractController
                         '#54A6FF',
                         '#98D3FF',
                     ],
-                    'data' => [17439, 9478, 18197, 12510, 14406],
+                    'data' => $totals,
                 ],
             ],
         ]);
