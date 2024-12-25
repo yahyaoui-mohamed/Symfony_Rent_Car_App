@@ -12,46 +12,8 @@
 			<form id="filter-form">
 				<div class="filter">
 					<div class="filter-title">Type</div>
-					{# <ul>
-						<li><input type="checkbox" class="form-check-input" id="sport">
-							<label for="sport">Sport
-								<span>(10)</span>
-							</label>
-						</li>
-						<li><input type="checkbox" class="form-check-input" id="suv">
-							<label for="suv">SUV
-								<span>(12)</span>
-							</label>
-						</li>
-						<li><input type="checkbox" class="form-check-input" id="mpv">
-							<label for="mpv">MPV
-								<span>(16)</span>
-							</label>
-						</li>
-						<li><input type="checkbox" class="form-check-input" id="sedan">
-							<label for="sedan">Sedan
-								<span>(20)</span>
-							</label>
-						</li>
-						<li><input type="checkbox" class="form-check-input" id="couple">
-							<label for="couple">Couple
-								<span>(14)</span>
-							</label>
-						</li>
-						<li><input type="checkbox" class="form-check-input" id="hatchback">
-							<label for="hatchback">Hatchback
-								<span>(14)</span>
-							</label>
-						</li>
-					</ul> #}
 					<ul>
 						{% for car in carDataType %}
-								{# <li><input type="checkbox" class="form-check-input" id="sport">
-									<label for="sport">Sport
-										<span>(10)</span>
-									</label>
-								</li> #}
-								
 								<li>
 										<input type="checkbox" class="form-check-input" id="{{ car.type|lower }}">
 										<label for="{{ car.type|lower }}">
@@ -63,29 +25,6 @@
 					</ul>
 
 					<div class="filter-title">Capacity</div>
-					{# <ul>
-						<li><input type="checkbox" class="form-check-input" id="person2" value="2">
-							<label for="person2">2 Person
-								<span>(10)</span>
-							</label>
-						</li>
-
-						<li><input type="checkbox" class="form-check-input" id="person4" value="4">
-							<label for="person4">4 Person
-								<span>(14)</span>
-							</label>
-						</li>
-						<li><input type="checkbox" class="form-check-input" id="person6"value="6"> 
-							<label for="person6">6 Person
-								<span>(12)</span>
-							</label>
-						</li>
-						<li><input type="checkbox" class="form-check-input" id="person8"value="8">
-							<label for="person8">8 or more
-								<span>(16)</span>
-							</label>
-						</li>
-					</ul> #}
 					<ul>
 						{% for car in carDataCapacity %}
 							<li><input type="checkbox" class="form-check-input" id="person{{car.capacity}}" value="{{car.capacity}}">

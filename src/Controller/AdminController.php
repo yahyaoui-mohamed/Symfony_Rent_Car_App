@@ -47,11 +47,11 @@ class AdminController extends AbstractController
             'plugins' => [
                 'legend' => [
                     'display' => true,
-                    'position' => 'right', // Moves the legend to the right of the chart
+                    'position' => 'right',
                     'labels' => [
                         'usePointStyle' => true,
                         'pointStyle' => 'circle',
-                        'padding' => 20,  // Optional: Adds padding between legend items
+                        'padding' => 20,
                     ],
                 ],
             ],
