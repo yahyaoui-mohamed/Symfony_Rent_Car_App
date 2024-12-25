@@ -214,31 +214,45 @@ let favoriteCar = document.querySelectorAll(".cars .car .favorite i");
 
 favoriteCar.forEach(function(car){
 	car.addEventListener("click", function(){
+		let carId = this.parentNode.nextElementSibling.value;
 		if(this.classList.contains("active")){
 			this.classList.add("fi-rr-heart");
 			this.classList.remove("fi-ss-heart");
 			this.classList.remove("active");
+			fetch("/favorite", {
+						method: "DELETE",
+						headers: {
+								"Content-Type": "application/json",
+						},
+						body:JSON.stringify({id : carId})
+			})
+			.then((response) => {
+					if (!response.ok) {
+							throw new Error("Network response was not ok");
+					}
+					return response.text();
+			});	
 		}
 		else{
 			this.classList.remove("fi-rr-heart");
 			this.classList.add("fi-ss-heart");
 			this.classList.add("active");
+			fetch("/favorite", {
+					method: "POST",
+					headers: {
+							"Content-Type": "application/json",
+					},
+					body:JSON.stringify({id : carId})
+			})
+			.then((response) => {
+					if (!response.ok) {
+							throw new Error("Network response was not ok");
+					}
+					return response.text();
+			});
 		}
-		let carId = this.parentNode.nextElementSibling.value;
 
-		fetch("/favorite", {
-				method: "POST",
-				headers: {
-						"Content-Type": "application/json",
-				},
-				body:JSON.stringify({id : carId})
-		})
-		.then((response) => {
-				if (!response.ok) {
-						throw new Error("Network response was not ok");
-				}
-				return response.text();
-		});
+		
 
 	});
 });

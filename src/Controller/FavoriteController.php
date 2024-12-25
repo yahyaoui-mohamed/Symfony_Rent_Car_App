@@ -16,12 +16,11 @@ class FavoriteController extends AbstractController
     public function index(Request $request, EntityManagerInterface $em): Response
     {
         $visitorId = $request->cookies->get('visitor_id');
-
         if ($request->isMethod("DELETE")) {
             $data = json_decode($request->getContent(), true);
-            $favId = $data["id"];
+            $carId = $data["id"];
 
-            $favCar = $em->getRepository(Favorite::class)->find($favId);
+            $favCar = $em->getRepository(Favorite::class)->findOneBy(['car' => $carId, 'visitor_id' => $visitorId]);
             $em->remove($favCar);
             $em->flush();
             return new Response("Car deleted.");
@@ -36,7 +35,7 @@ class FavoriteController extends AbstractController
 
             $em->persist($favorite);
             $em->flush();
-            return new Response();
+            return new Response("Car added.");
         } else {
             $favoriteCars = $em->getRepository(Favorite::class)->findBy(["visitor_id" => $visitorId]);
             return $this->render('favorite/index.html.twig', [

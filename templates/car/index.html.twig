@@ -77,6 +77,13 @@
                                         <span>{{car.gasoline}}L</span>
                                     </div>
                                 </div>
+                                <div class="col-lg-6">
+                                    <div class="option d-flex justify-content-between">
+                                        <h3>Days</h3>
+                                        {{ form_start(form) }}
+                                            {{ form_row(form.days) }}
+                                    </div>
+                                </div>
                             </div>
                         </div>
                         <div class="price d-flex justify-content-between">
@@ -84,7 +91,9 @@
                                 <h3>${{car.price}}.00/<span>day</span></h3>
                                 <p class="old-price">$100.00</p>
                             </div>
-                            <a href="/checkout/{{car.id}}">Rent Now</a>
+                            {# <a href="/checkout/{{car.id}}">Rent Now</a> #}
+                            {{ form_row(form.proceedToCheckOut) }}
+                            {{ form_end(form) }}
                         </div>
                     </div>
                 </div>
@@ -106,7 +115,7 @@
                             <div class="col-lg-9">
                                 <div class="d-flex">
                                     <div class="reviewer-name">
-                                        <h3>Alex Santon</h3>
+                                        <h3>Alex Sanan</h3>
                                         <span>CEO at Bukalapak</span>
                                     </div>
                                 </div>
@@ -189,6 +198,7 @@
                                 <div class="favorite">
                                     <i class="fi fi-rs-heart"></i>
                                 </div>
+                                <input type="hidden" name="car_id" value={{car.id}}>
                             </div>
                             <div class="car-img">
                                 <img src={{car.img}} alt=""/>
@@ -243,6 +253,7 @@
 								<div class="favorite">
 									<i class="fi fi-rs-heart"></i>
 								</div>
+                                <input type="hidden" name="car_id" value={{car.id}}>
 							</div>
 							<div class="car-img">
 								<img src={{car.img}} alt=""/>
@@ -296,21 +307,48 @@
         });
     });
 
-let favoriteCar = document.querySelectorAll(".cars .car .favorite i");
+let favoriteCar = document.querySelectorAll(".car .favorite i");
 
 favoriteCar.forEach(function(car){
-	car.addEventListener("click", function(){
+	
+    car.addEventListener("click", function(){
+        let carId = this.parentNode.nextElementSibling.value;
 		if(this.classList.contains("active")){
 			this.classList.add("fi-rr-heart");
 			this.classList.remove("fi-ss-heart");
 			this.classList.remove("active");
+            fetch("/favorite", {
+					method: "DELETE",
+					headers: {
+							"Content-Type": "application/json",
+					},
+					body:JSON.stringify({id : carId})
+			})
+			.then((response) => {
+					if (!response.ok) {
+							throw new Error("Network response was not ok");
+					}
+					return response.text();
+			});
 		}
 		else{
 			this.classList.remove("fi-rr-heart");
 			this.classList.add("fi-ss-heart");
 			this.classList.add("active");
+            fetch("/favorite", {
+					method: "POST",
+					headers: {
+							"Content-Type": "application/json",
+					},
+					body:JSON.stringify({id : carId})
+			})
+			.then((response) => {
+					if (!response.ok) {
+							throw new Error("Network response was not ok");
+					}
+					return response.text();
+			});
 		}
-		// Send to databse to add to favorites
 	});
 });
 

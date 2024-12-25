@@ -39,48 +39,48 @@ class CheckoutType extends AbstractType
                 ],
                 'label' => 'Town / City'
             ])
-            // ->add('pickUpLocation', ChoiceType::class, [
-            //     'attr' => [
-            //         'class' => 'form-select'
-            //     ],
-            //     'placeholder' => 'Select your city',
-            //     'label' => 'Location'
-            // ])
-            // ->add('pickUpDate', ChoiceType::class, [
-            //     'attr' => [
-            //         'class' => 'form-select'
-            //     ],
-            //     'placeholder' => 'Select your date',
-            //     'label' => 'Date'
-            // ])
-            // ->add('pickUpTime', ChoiceType::class, [
-            //     'attr' => [
-            //         'class' => 'form-select'
-            //     ],
-            //     'placeholder' => 'Select your time',
-            //     'label' => 'Time'
-            // ])
-            // ->add('dropOffLocation', ChoiceType::class, [
-            //     'attr' => [
-            //         'class' => 'form-select'
-            //     ],
-            //     'placeholder' => 'Select your city',
-            //     'label' => 'Location'
-            // ])
-            // ->add('dropOffDate', ChoiceType::class, [
-            //     'attr' => [
-            //         'class' => 'form-select'
-            //     ],
-            //     'placeholder' => 'Select your date',
-            //     'label' => 'Date'
-            // ])
-            // ->add('dropOffTime', ChoiceType::class, [
-            //     'attr' => [
-            //         'class' => 'form-select'
-            //     ],
-            //     'placeholder' => 'Select your time',
-            //     'label' => 'Time'
-            // ])
+            ->add('pickUpLocation', ChoiceType::class, [
+                'attr' => [
+                    'class' => 'form-select'
+                ],
+                'placeholder' => 'Select your city',
+                'label' => 'Location'
+            ])
+            ->add('pickUpDate', ChoiceType::class, [
+                'attr' => [
+                    'class' => 'form-select'
+                ],
+                'placeholder' => 'Select your date',
+                'label' => 'Date'
+            ])
+            ->add('pickUpTime', ChoiceType::class, [
+                'attr' => [
+                    'class' => 'form-select'
+                ],
+                'placeholder' => 'Select your time',
+                'label' => 'Time'
+            ])
+            ->add('dropOffLocation', ChoiceType::class, [
+                'attr' => [
+                    'class' => 'form-select'
+                ],
+                'placeholder' => 'Select your city',
+                'label' => 'Location'
+            ])
+            ->add('dropOffDate', ChoiceType::class, [
+                'attr' => [
+                    'class' => 'form-select'
+                ],
+                'placeholder' => 'Select your date',
+                'label' => 'Date'
+            ])
+            ->add('dropOffTime', ChoiceType::class, [
+                'attr' => [
+                    'class' => 'form-select'
+                ],
+                'placeholder' => 'Select your time',
+                'label' => 'Time'
+            ])
             ->add('promoCode', TextType::class, [
                 'attr' => [
                     'placeholder' => 'Apply promo code'
