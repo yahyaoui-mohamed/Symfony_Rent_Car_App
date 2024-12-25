@@ -5,10 +5,12 @@
 	{% include 'navbar.html.twig' %}
 	<div class="checkout">
 		<div class="container-fluid">
+				{{ form_start(form,{'attr':{
+					'id': 'payment-form'
+				}}) }}
 			<div class="row">
 				<div class="col-lg-8">
 					<div class="form-billing">
-						
 						<div class="title d-flex justify-content-between">
 							<div class="title-content">
 								<h3>Billing Info</h3>
@@ -22,26 +24,31 @@
 						<div class="row">
 							<div class="col-lg-6">
 								<div class="mb-3">
-									<label for="">Name</label>
-									<input type="text" class="form-control" placeholder="Your name"/>
+									{# <label for="">Name</label>
+									<input type="text" class="form-control" placeholder="Your name"/> #}
+									{{ form_row(form.name) }}
 								</div>
 							</div>
 							<div class="col-lg-6">
 								<div class="mb-3">
-									<label for="">Phone Number</label>
-									<input type="text" class="form-control" placeholder="Phone number"/>
+									{# <label for="">Phone Number</label>
+									<input type="text" class="form-control" placeholder="Phone number"/> #}
+									{{ form_row(form.phoneNumber) }}
+
 								</div>
 							</div>
 							<div class="col-lg-6">
 								<div class="mb-3">
-									<label for="">Address</label>
-									<input type="text" class="form-control" placeholder="Address"/>
+									{# <label for="">Address</label>
+									<input type="text" class="form-control" placeholder="Address"/> #}
+									{{ form_row(form.address) }}
 								</div>
 							</div>
 							<div class="col-lg-6">
 								<div class="mb-3">
-									<label for="">Town / City</label>
-									<input type="text" class="form-control" placeholder="Town or city"/>
+									{# <label for="">Town / City</label>
+									<input type="text" class="form-control" placeholder="Town or city"/> #}
+									{{ form_row(form.townCity) }}
 								</div>
 							</div>
 						</div>
@@ -61,26 +68,29 @@
 							<h3>Pick - Up</h3>
 							<div class="col-lg-6">
 								<div class="mb-3">
-									<label for="">Locations</label>
+									{# <label for="">Locations</label>
 									<select name="" id="" class="form-select">
 										<option value="">Select your city</option>
-									</select>
+									</select> #}
+									{# {{ form_row(form.pickUpLocation) }} #}
 								</div>
 							</div>
 							<div class="col-lg-6">
 								<div class="mb-3">
-									<label for="">Date</label>
+									{# <label for="">Date</label>
 									<select name="" id="" class="form-select">
 										<option value="">Select your date</option>
-									</select>
+									</select> #}
+									{# {{ form_row(form.pickUpDate) }} #}
 								</div>
 							</div>
 							<div class="col-lg-6">
 								<div class="mb-3">
-									<label for="">Time</label>
+									{# <label for="">Time</label>
 									<select name="" id="" class="form-select">
 										<option value="">Select your time</option>
-									</select>
+									</select> #}
+									{# {{ form_row(form.pickUpTime) }} #}
 								</div>
 							</div>
 						</div>
@@ -88,26 +98,29 @@
 							<h3>Drop - Off</h3>
 							<div class="col-lg-6">
 								<div class="mb-3">
-									<label for="">Locations</label>
+									{# <label for="">Locations</label>
 									<select name="" id="" class="form-select">
 										<option value="">Select your city</option>
-									</select>
+									</select> #}
+									{# {{ form_row(form.dropOffLocation) }} #}
 								</div>
 							</div>
 							<div class="col-lg-6">
 								<div class="mb-3">
-									<label for="">Date</label>
+									{# <label for="">Date</label>
 									<select name="" id="" class="form-select">
 										<option value="">Select your date</option>
-									</select>
+									</select> #}
+									{# {{ form_row(form.dropOffDate) }} #}
 								</div>
 							</div>
 							<div class="col-lg-6">
 								<div class="mb-3">
-									<label for="">Time</label>
+									{# <label for="">Time</label>
 									<select name="" id="" class="form-select">
 										<option value="">Select your time</option>
-									</select>
+									</select> #}
+									{# {{ form_row(form.dropOffTime) }} #}
 								</div>
 							</div>
 						</div>
@@ -135,14 +148,16 @@
 								<div class="row">
 									<div class="col-lg-6">
 										<div class="mb-3">
-											<label for="">Card Number</label>
-											<input type="text" id="" placeholder="Card number" class="form-control"/>
+											<div id="card-number-element" class="card-style"></div>
+											{# <label for="">Card Number</label> #}
+											{# <input type="text" id="" placeholder="Card number" class="form-control"/> #}
 										</div>
 									</div>
 									<div class="col-lg-6">
 										<div class="mb-3">
-											<label for="">Expiration Date</label>
-											<input type="text" id="" placeholder="DD / MM / YYYY" class="form-control"/>
+											<div id="card-expiry-element" class="card-style"></div>
+											{# <label for="">Expiration Date</label>
+											<input type="text" id="" placeholder="MM /YY" class="form-control"/> #}
 										</div>
 									</div>
 									<div class="col-lg-6">
@@ -153,8 +168,9 @@
 									</div>
 									<div class="col-lg-6">
 										<div class="mb-3">
-											<label for="">CVC</label>
-											<input type="text" id="" placeholder="CVC" class="form-control"/>
+											<div id="card-cvc-element" class="card-style"></div>
+											{# <label for="">CVC</label>
+											<input type="text" id="" placeholder="CVC" class="form-control"/> #}
 										</div>
 									</div>
 								</div>
@@ -203,7 +219,8 @@
 							<input type="checkbox" name="" id="confirmcheckbox2">
 							<label for="confirmcheckbox2">I agree with our terms and conditions and privacy policy.</label>
 						</div>
-						<button class="mb-3">Rent now</button>
+						{{ form_row(form.rentNow) }}
+						{# <button class="mb-3">Rent now</button> #}
 						<div class="safe-payment">
 							<i class="fi fi-ts-shield-check"></i>
 							<h3>All your data are safe</h3>
@@ -251,7 +268,8 @@
 								<p class="price">$0</p>
 							</div>
 							<div class="promo-code mb-3">
-								<input type="text" name="" id="" placeholder="Apply promo code">
+									{{ form_row(form.promoCode) }}
+								{# <input type="text" name="" id="" placeholder="Apply promo code"> #}
 								<a href="#">Apply Now</a>
 							</div>
 							<div class="total-rent-price">
@@ -269,7 +287,83 @@
 					</div>
 				</div>
 			</div>
+				{{ form_end(form) }}
+				<div id="card-errors" role="alert"></div>
 		</div>
 	</div>
 	{% include 'footer.html.twig' %}
+
+<script src="https://js.stripe.com/v3/"></script>
+<script>
+const stripe = Stripe('pk_test_51QZHxGFVL9wIFzsNvy9IdJtVBWFORGRGlzGBOatTli0TumAGHsZcmhqgfX3NPzkoV0IWwsuPuvSGItB492CE4Xzy00ePT9RZtF');
+const elements = stripe.elements();
+{# const cardElement = elements.create('card');
+cardElement.mount('#card-element'); #}
+
+const style = {
+  base: {
+    fontSize: '14px',
+    color: '#90A3B9',
+    backgroundColor: '#fff',
+		display: 'block',
+    width: '100%',
+    padding: '10px 20px',
+    fontWeight: '400',
+    lineHeight: '1.5',
+		borderRadius : '8px'
+  },
+};
+
+
+const cardNumber = elements.create('cardNumber',{style});
+cardNumber.mount('#card-number-element');
+
+const cardExpiry = elements.create('cardExpiry',{style});
+cardExpiry.mount('#card-expiry-element');
+
+const cardCvc = elements.create('cardCvc',{style});
+cardCvc.mount('#card-cvc-element');
+
+// When the user submits the form
+document.querySelector('#payment-form').addEventListener('submit', async (event) => {
+    event.preventDefault();
+
+    // Collect form data
+    const form = event.target;
+    const formData = new FormData(form);
+    
+    // Submit the form data to backend to create PaymentIntent
+    const response = await fetch('{{ path("app_checkout", { id: car.id }) }}', {
+        method: 'POST',
+        headers: {
+            'Accept': 'application/json'
+        },
+        body: formData
+    });
+
+    // Parse the response from backend
+    const data = await response.json();
+    
+    if (data.error) {
+        document.querySelector('#card-errors').textContent = data.error;
+        return;
+    }
+
+    // Confirm the payment using the client secret received from backend
+    const { error, paymentIntent } = await stripe.confirmCardPayment(data.clientSecret, {
+        payment_method: {
+            card: cardNumber,
+        },
+    });
+
+    // Handle payment confirmation
+    if (error) {
+        document.querySelector('#card-errors').textContent = error.message;
+    } else if (paymentIntent.status === 'succeeded') {
+        // Payment was successful
+        // window.location.href = '/confirmation';  // Redirect to confirmation page
+				console.log("success");
+    }
+});
+</script>
 {% endblock %}
