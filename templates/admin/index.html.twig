@@ -73,90 +73,44 @@
               <div class="recent-transaction">
                 <div class="title d-flex justify-content-between">
                   <h3>Recent Transaction</h3>
-                  <a href="#">View all</a>
+                  <a href="{{path("app_rents")}}">View all</a>
                 </div>
                 <div class="transactions">
-                  <div class="transaction-item">
-                    <div class="row">
-                      <div class="col-lg-4">
-                        <img src="/images/Car1.png" alt="">
-                      </div>
-                      <div class="col-lg-6">
-                        <div class="car-name">
-                          <h3>Nissan GT - R</h3>
-                          <span>Sport Car</span>
+                  {% for transaction in recentTransactions %}
+                    <div class="transaction-item">
+                      <div class="row">
+                        <div class="col-lg-4">
+                          <img src="{{transaction.car.img}}" alt="">
+                        </div>
+                        <div class="col-lg-6">
+                          <div class="car-name">
+                            <h3>{{transaction.car.name}}</h3>
+                            <span>{{transaction.car.type}}</span>
+                          </div>
+                        </div>
+                        <div class="col-lg-2">
+                          <div class="date-price">
+                            <span>{{ transaction.creationDate|date("M d") }}</span>
+                            <h3>{{transaction.total | format_currency('USD', {decimal_always_shown:true}, 'en')}}</h3>
+                          </div>
                         </div>
                       </div>
-                      <div class="col-lg-2">
-                        <div class="date-price">
-                          <span>20 July</span>
-                          <h3>$80.00</h3>
-                        </div>
-                      </div>
-                    </div>
-                  </div>
-
-                  <div class="transaction-item">
-                    <div class="row">
-                      <div class="col-lg-4">
-                        <img src="/images/Car1.png" alt="">
-                      </div>
-                      <div class="col-lg-6">
-                        <div class="car-name">
-                          <h3>Nissan GT - R</h3>
-                          <span>Sport Car</span>
-                        </div>
-                      </div>
-                      <div class="col-lg-2">
-                        <div class="date-price">
-                          <span>20 July</span>
-                          <h3>$80.00</h3>
-                        </div>
-                      </div>
-                    </div>
-                  </div>
-
-                  <div class="transaction-item">
-                    <div class="row">
-                      <div class="col-lg-4">
-                        <img src="/images/Car1.png" alt="">
-                      </div>
-                      <div class="col-lg-6">
-                        <div class="car-name">
-                          <h3>Nissan GT - R</h3>
-                          <span>Sport Car</span>
-                        </div>
-                      </div>
-                      <div class="col-lg-2">
-                        <div class="date-price">
-                          <span>20 July</span>
-                          <h3>$80.00</h3>
-                        </div>
-                      </div>
-                    </div>
-                  </div>
-
-                  <div class="transaction-item">
-                    <div class="row">
-                      <div class="col-lg-4">
-                        <img src="/images/Car1.png" alt="">
-                      </div>
-                      <div class="col-lg-6">
-                        <div class="car-name">
-                          <h3>Nissan GT - R</h3>
-                          <span>Sport Car</span>
-                        </div>
-                      </div>
-                      <div class="col-lg-2">
-                        <div class="date-price">
-                          <span>20 July</span>
-                          <h3>$80.00</h3>
-                        </div>
-                      </div>
-                    </div>
-                  </div>
+                    </div>  
+                  {% endfor %}
                   
+
+
+
+
                 </div>
+              
+              
+              
+              
+              
+              
+              
+              
               </div>
 
             </div>

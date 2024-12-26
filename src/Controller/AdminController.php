@@ -3,6 +3,7 @@
 namespace App\Controller;
 
 use App\Entity\Car;
+use App\Entity\Transaction;
 use App\Repository\CarRepository;
 use Doctrine\ORM\EntityManager;
 use Doctrine\ORM\EntityManagerInterface;
@@ -15,8 +16,9 @@ use Symfony\UX\Chartjs\Model\Chart;
 class AdminController extends AbstractController
 {
     #[Route('/admin', name: 'app_admin')]
-    public function index(ChartBuilderInterface $chartBuilder, CarRepository $carRepository): Response
+    public function index(ChartBuilderInterface $chartBuilder, CarRepository $carRepository, EntityManagerInterface $em): Response
     {
+        $recentTransactions = $em->getRepository(Transaction::class)->findBy([], ['creation_date' => 'DESC'], 4);
         $chart = $chartBuilder->createChart(Chart::TYPE_DOUGHNUT);
         $cars = $carRepository->findNumbeOfCars();
         $types = array_map(fn($car) => $car['type'], $cars);
@@ -67,6 +69,7 @@ class AdminController extends AbstractController
 
         return $this->render('admin/index.html.twig', [
             'chart' => $chart,
+            'recentTransactions' => $recentTransactions,
         ]);
     }
 }

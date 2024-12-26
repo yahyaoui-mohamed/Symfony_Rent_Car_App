@@ -3,6 +3,7 @@
 namespace App\Entity;
 
 use App\Repository\TransactionRepository;
+use Doctrine\DBAL\Types\Types;
 use Doctrine\ORM\Mapping as ORM;
 
 #[ORM\Entity(repositoryClass: TransactionRepository::class)]
@@ -24,6 +25,9 @@ class Transaction
 
     #[ORM\Column]
     private ?int $days = null;
+
+    #[ORM\Column(type: Types::DATETIME_MUTABLE)]
+    private ?\DateTimeInterface $creation_date = null;
 
     public function getId(): ?int
     {
@@ -74,6 +78,18 @@ class Transaction
     public function setDays(int $days): static
     {
         $this->days = $days;
+
+        return $this;
+    }
+
+    public function getCreationDate(): ?\DateTimeInterface
+    {
+        return $this->creation_date;
+    }
+
+    public function setCreationDate(\DateTimeInterface $creation_date): static
+    {
+        $this->creation_date = $creation_date;
 
         return $this;
     }
