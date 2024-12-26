@@ -3,6 +3,7 @@
 namespace App\Form;
 
 use Symfony\Component\Form\AbstractType;
+use Symfony\Component\Form\Extension\Core\Type\CheckboxType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
@@ -85,7 +86,14 @@ class CheckoutType extends AbstractType
                 'attr' => [
                     'placeholder' => 'Apply promo code'
                 ],
-                'label' => false
+                'label' => false,
+                'required' => false
+            ])
+            ->add("newsletter", CheckboxType::class, [
+                'label' => 'I agree with sending an Marketing and newsletter emails. No spam, promissed!'
+            ])
+            ->add("termsConditions", CheckboxType::class, [
+                'label' => 'I agree with our terms and conditions and privacy policy.'
             ])
             ->add("rentNow", SubmitType::class, [
                 'attr' => [

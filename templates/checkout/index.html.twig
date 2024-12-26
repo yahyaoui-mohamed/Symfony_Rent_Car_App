@@ -199,12 +199,12 @@
 						</div>
 
 						<div class="confirm mb-3">
-							<input type="checkbox" id="confirmcheckbox1">
-							<label for="confirmcheckbox1">I agree with sending an Marketing and newsletter emails. No spam, promissed!</label>
+							{{form_widget(form.newsletter)}}
+							{{form_label(form.newsletter)}}
 						</div>
 						<div class="confirm mb-3">
-							<input type="checkbox" name="" id="confirmcheckbox2">
-							<label for="confirmcheckbox2">I agree with our terms and conditions and privacy policy.</label>
+							{{form_widget(form.termsConditions)}}
+							{{form_label(form.termsConditions)}}
 						</div>
 						{{ form_row(form.rentNow) }}
 						<div class="safe-payment">

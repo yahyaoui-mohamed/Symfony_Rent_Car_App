@@ -38,7 +38,7 @@
 	<div class="side-item">
 		<span>Preferences</span>
 		<ul>
-			<li class="{{ app.request.attributes.get('_route') == 'app_settings' ? 'active' : '' }}"><a href="{{path("app_settings")}}"><i class="fi fi-tc-settings"></i>Settings</a></li>
+			<li class="{{ app.request.attributes.get('_route') == 'app_admin_settings' ? 'active' : '' }}"><a href="{{path("app_admin_settings")}}"><i class="fi fi-tc-settings"></i>Settings</a></li>
 			<li><a href="#"><i class="fi fi-rr-info"></i>Help Center</a></li>
 			<li><a href="#"><i class="fi fi-ts-dark-mode-alt"></i>Dark Mode</a></li>
 		</ul>
