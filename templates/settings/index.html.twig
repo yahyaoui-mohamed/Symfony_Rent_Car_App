@@ -6,10 +6,22 @@
 {% block body %}
 {% include 'navbar.html.twig' %}
 
-	<div class="admin">
-		{% include "admin_sidebar.html.twig" %}
-		<div class="app"></div>
+	<div class="container">
+		{{ form_start(form) }}
+				<div class="mb-3">
+					{{ form_widget(form.email) }}
+				</div>
+				<div class="mb-3">
+					{{ form_widget(form.password) }}
+				</div>
+				<div class="mb-3">
+					{{ form_widget(form.save) }}
+				</div>
+
+		{{ form_end(form) }}
 	</div>
+
+{% include 'footer.html.twig' %}
 
 
 {% endblock %}
