@@ -4,9 +4,11 @@
 			<a href="{{path("app_index")}}">Morent</a>
 		</div>
 		<div class="search-bar">
-			<input type="text" placeholder="Search something else"/>
+			<input type="text" placeholder="Search something else" id="search"/>
 			<i class="fi fi-rs-search"></i>
 			<i class="fi fi-rs-settings-sliders"></i>
+			<div class="car-search">
+			</div>
 		</div>
 		<div class="settings">
 			<div class="favorite">
@@ -59,5 +61,51 @@
 			}
 		});
 	</script> #}
+
+	<script>
+	let carContainer = document.querySelector(".car-search");
+	document.getElementById("search").addEventListener("input", function(){
+		carContainer.style.display = "block";
+		carContainer.innerHTML = "";
+		if(this.value){
+
+			fetch("/search", {
+			method: "POST",
+			 headers: {
+        "Content-Type": "application/json" // Add this header
+    	},
+			body: JSON.stringify({prefix: this.value})
+			}).then((response) => {
+				return response.json();
+			}).then(res => {
+					res.forEach(car => {
+						carContainer.innerHTML +=
+						`
+						<div class="car-item">
+							<div class="row">
+								<div class="col-lg-3">
+									<img src="${car.img}" alt="">
+								</div>
+								<div class="col-lg-6">
+									<a href="/car/${car.id}">${car.name}</a>
+									<span>${car.type}</span>
+								</div>
+								<div class="col-lg-3">
+									<h3>$${car.price}</h3>
+								</div>
+							</div>
+						</div>
+						`
+					});
+			});
+		}
+		else{
+			carContainer.html = "";
+			carContainer.style.display = "none";
+		}
+		
+	});	
+
+	</script>
 
 {% endblock %}

@@ -6,51 +6,65 @@ use App\Repository\CarRepository;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Serializer\Annotation\Groups;
 
 #[ORM\Entity(repositoryClass: CarRepository::class)]
 class Car
 {
+
     #[ORM\Id]
     #[ORM\GeneratedValue]
     #[ORM\Column]
+    #[Groups(['car_details'])]
     private ?int $id = null;
 
+    #[Groups(['car_details'])]
     #[ORM\Column(length: 255)]
     private ?string $name = null;
 
+    #[Groups(['car_details'])]
     #[ORM\Column(length: 255, nullable: true)]
     private ?string $description = null;
 
+    #[Groups(['car_details'])]
     #[ORM\Column(length: 255)]
     private ?string $type = null;
 
+    #[Groups(['car_details'])]
     #[ORM\Column]
     private ?int $capacity = null;
 
+    #[Groups(['car_details'])]
     #[ORM\Column(length: 255)]
     private ?string $steering = null;
 
+    #[Groups(['car_details'])]
     #[ORM\Column]
     private ?int $gasoline = null;
 
+    #[Groups(['car_details'])]
     #[ORM\Column]
     private ?int $price = null;
 
+    #[Groups(['car_details'])]
     #[ORM\Column(length: 255)]
     private ?string $img = null;
 
+    #[Groups(['car_details'])]
     #[ORM\Column(nullable: true)]
     private ?int $old_price = null;
 
     /**
      * @var Collection<int, Favorite>
      */
+    #[Groups(['car_details'])]
     #[ORM\OneToMany(targetEntity: Favorite::class, mappedBy: 'car', orphanRemoval: true)]
     private Collection $favorites;
 
     /**
      * @var Collection<int, Transaction>
      */
+    #[Groups(['car_details'])]
     #[ORM\OneToMany(targetEntity: Transaction::class, mappedBy: 'car')]
     private Collection $transactions;
 

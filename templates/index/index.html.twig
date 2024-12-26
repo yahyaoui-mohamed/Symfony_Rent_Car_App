@@ -212,7 +212,10 @@
 	{% endfor %}
 	</div>
 </div>
+<div class="d-flex align-items-center">
 	<button class="d-flex show-more">Show more car</button>
+	<p>{{allCars}}</p>
+</div>
 
 </div>
 </div>
@@ -264,6 +267,122 @@ favoriteCar.forEach(function(car){
 		}
 
 	});
+});
+
+let offset = 8; // Start after the initial 8 cars
+const limit = 4; // Number of cars to load each time
+const showMoreButton = document.querySelector(".show-more");
+const carsContainer = document.querySelector(".recommandation-car .cars .row"); // Add a container in your HTML
+
+showMoreButton.addEventListener("click", function() {
+    fetch("/getCars", {
+        method: "POST",
+        headers: {
+            "Content-Type": "application/json",
+        },
+        body: JSON.stringify({ offset, limit }),
+    })
+    .then(response => {
+        if (response.status === 204) {
+            showMoreButton.remove();// Hide the button if no more cars
+            return; // Exit if no content
+        }
+        if (!response.ok) {
+            return response.json().then(err => {throw new Error(err.error)});
+        }
+        return response.json();
+    })
+    .then(carData => {
+        if (carData) {
+            carData.forEach(car => {
+                // Create HTML elements for each car
+                const carDiv = `
+								<div class="col-lg-3">
+									<div class="car">
+										<div class="car-name d-flex justify-content-between">
+											<div class="name">
+												<h3>${car.name}</h3>
+												<span>${car.type}</span>
+											</div>
+											<div class="favorite">
+												<i class="fi fi-rs-heart"></i>
+											</div>
+											<input type="hidden" name="car_id" value=${car.id}>
+										</div>
+										<div class="car-img">
+											<img src="${car.img}" alt=""/>
+										</div>
+										<div class="options d-flex justify-content-between">
+											<div class="litres"><i class="fi fi-tr-gas-pump"></i>${car.gasoline}L</div>
+											<div class="gear"><i class="fi fi-ts-tire"></i> ${car.steering}</div>
+											<div class="seats"><i class="fi fi-tr-seat-airline"></i>${car.capacity} People</div>
+										</div>
+										<div class="rent-price d-flex align-items-center justify-content-between">
+											<div class="price">${car.price}.00/
+												<span>day</span>
+											</div>
+											<div class="rent-btn">
+												<a href="/car/${car.id}">Rent Now</a>
+											</div>
+										</div>
+									</div>
+								</div>
+								`;
+                carsContainer.innerHTML += carDiv; // Append to the container
+            });
+            offset += limit; // Increment the offset for the next request
+						let favoriteCar = document.querySelectorAll(".cars .car .favorite i");
+
+		favoriteCar.forEach(function(car){
+			car.addEventListener("click", function(){
+				let carId = this.parentNode.nextElementSibling.value;
+				if(this.classList.contains("active")){
+					this.classList.add("fi-rr-heart");
+					this.classList.remove("fi-ss-heart");
+					this.classList.remove("active");
+							fetch("/favorite", {
+									method: "DELETE",
+									headers: {
+											"Content-Type": "application/json",
+									},
+									body:JSON.stringify({id : carId})
+							})
+							.then((response) => {
+									if (!response.ok) {
+											throw new Error("Network response was not ok");
+									}
+									return response.text();
+							});
+						}
+						else{
+							this.classList.remove("fi-rr-heart");
+							this.classList.add("fi-ss-heart");
+							this.classList.add("active");
+
+							fetch("/favorite", {
+									method: "POST",
+									headers: {
+											"Content-Type": "application/json",
+									},
+									body:JSON.stringify({id : carId})
+							})
+							.then((response) => {
+									if (!response.ok) {
+											throw new Error("Network response was not ok");
+									}
+									return response.text();
+							});
+						}
+
+					});
+				});
+
+			  }
+    })
+    .catch(error => {
+        console.error("Error:", error.message);
+    });
+
 });
 </script>
 {% endblock %}

@@ -9,10 +9,18 @@ use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Attribute\Route;
 use Symfony\Component\HttpFoundation\Cookie;
-
+use Symfony\Component\HttpFoundation\JsonResponse;
+use Symfony\Component\Serializer\Encoder\JsonDecode;
+use Symfony\Component\Serializer\SerializerInterface; // Import the interface
 
 class IndexController extends AbstractController
 {
+    private SerializerInterface $serializer;
+
+    public function __construct(SerializerInterface $serializer)
+    {
+        $this->serializer = $serializer;
+    }
     #[Route('/', name: 'app_index')]
     public function index(Request $request, EntityManagerInterface $em): Response
     {
@@ -39,11 +47,31 @@ class IndexController extends AbstractController
             $response->headers->setCookie($cookie);
             $response->send();
         }
+
+        $cars = $em->getRepository(Car::class)->findAll();
         $popularCars = $em->getRepository(Car::class)->findBy([], null, 4);
         $recommandationCars = $em->getRepository(Car::class)->findBy([], null, 8);
         return $this->render('index/index.html.twig', [
             'recommandationCars' => $recommandationCars,
             'popularCars' => $popularCars,
+            'allCars' => count($cars),
         ]);
+    }
+
+    #[Route('/getCars', name: 'app_get_cars', methods: ['POST'])]
+    public function getCars(Request $request, EntityManagerInterface $em, SerializerInterface $serializer): JsonResponse
+    {
+        $offset = json_decode($request->getContent(), true)["offset"];
+        $limit = json_decode($request->getContent(), true)["limit"];
+
+        $cars = $em->getRepository(Car::class)->findBy([], null, $limit, $offset);
+        if (!$cars) {
+            return new JsonResponse([], 204);
+        }
+
+        $data = $serializer->normalize($cars, null, ['groups' => 'car_details']);
+
+        // dd($cars);
+        return new JsonResponse($data);
     }
 }
