@@ -72,12 +72,20 @@
 			fetch("/search", {
 			method: "POST",
 			 headers: {
-        "Content-Type": "application/json" // Add this header
+        "Content-Type": "application/json"
     	},
 			body: JSON.stringify({prefix: this.value})
 			}).then((response) => {
-				return response.json();
+				if(response.status === 204){
+					let res = document.createElement("p");
+					res.textContent = "No car found.";
+					carContainer.appendChild(res);
+				}
+				else{
+					return response.json();
+				}
 			}).then(res => {
+				if(res)
 					res.forEach(car => {
 						carContainer.innerHTML +=
 						`

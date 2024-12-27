@@ -204,7 +204,7 @@
 						</div>
 						<div class="confirm mb-3">
 							{{form_widget(form.termsConditions)}}
-							{{form_label(form.termsConditions)}}
+							<label for="checkout_termsConditions">I agree with our <a href="{{path("app_terms_conditions")}}">terms and conditions</a> and <a href="{{path("app_privacy_policy")}}">privacy policy</a>.</label>
 						</div>
 						{{ form_row(form.rentNow) }}
 						<div class="safe-payment">
@@ -288,11 +288,8 @@ const style = {
     fontSize: '14px',
     color: '#90A3B9',
     backgroundColor: '#fff',
-		display: 'block',
     width: '100%',
-    padding: '10px 20px',
     fontWeight: '400',
-    lineHeight: '1.5',
 		borderRadius : '8px'
   },
 };
@@ -352,6 +349,7 @@ document.querySelector('#payment-form').addEventListener('submit', async (event)
       document.querySelector('#card-errors').textContent = error.message;
     } else if (paymentIntent.status === 'succeeded') {
       console.log("Payment successful!");
+			window.location.href = '{{ path("app_success_payment") }}'; // Redirect to the success page
       // Optionally redirect the user or display a success message
     } else {
       console.error("Unexpected payment status:", paymentIntent.status);
@@ -363,5 +361,13 @@ document.querySelector('#payment-form').addEventListener('submit', async (event)
     document.querySelector('#card-errors').textContent = "An error occurred during payment processing.";
   }
 });
+
+document.querySelector(".promo-code a").addEventListener("click", function(e){
+	e.preventDefault();
+	let promoCode = document.querySelector(".promo-code input").value;
+
+});
+
+
 </script>
 {% endblock %}

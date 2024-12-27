@@ -27,11 +27,11 @@ class CheckoutController extends AbstractController
         $car = $em->getRepository(Car::class)->find($id);
         $visitorId = $request->cookies->get("visitor_id");
 
-        $days = $session->get('days');
-        $total = $days * $car->getPrice();
 
         if ($request->isMethod("POST")) {
-
+            $days = $session->get('days');
+            $total = $days * $car->getPrice();
+            // $promoCode = $session->get('days');
             Stripe::setApiKey('sk_test_51QZHxGFVL9wIFzsNS5qhf1xmfAIKMakSAztK18P27FQWkIoqJGy0kzsCUdEwMwYfb2znp8BSe1YNVsYhfYAP5S9W00y8aRXGz0');
 
             $currency = 'usd';
@@ -58,6 +58,7 @@ class CheckoutController extends AbstractController
             } catch (\Exception $e) {
                 return new JsonResponse(['error' => $e->getMessage(),], 500);
             }
+            return $this->redirectToRoute("app_success_payment");
         }
 
 

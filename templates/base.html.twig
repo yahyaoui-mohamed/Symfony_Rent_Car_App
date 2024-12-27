@@ -8,11 +8,14 @@
         <link rel='stylesheet' href='https://cdn-uicons.flaticon.com/2.6.0/uicons-thin-chubby/css/uicons-thin-chubby.css'>
         <title>{% block title %}Morent{% endblock %}</title>
         {% block stylesheets %}
+
             {{ encore_entry_link_tags('app') }}
         {% endblock %}
 
         {% block javascripts %}
+
             {{ encore_entry_script_tags('app') }}
+            {# {% block importmap %}{{ importmap('app') }}{% endblock %} #}
         {% endblock %}
     </head>
     <body>

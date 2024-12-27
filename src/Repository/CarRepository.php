@@ -52,11 +52,15 @@ class CarRepository extends ServiceEntityRepository
 
     public function findCarsStartingWith(string $prefix): array
     {
-        return $this->createQueryBuilder('c') // 'c' is the alias for the Car entity
-            ->where('c.name LIKE :prefix') // Use LIKE and :prefix placeholder
-            ->setParameter('prefix', $prefix . '%') // Add % for "starts with"
-            ->getQuery()
-            ->getResult();
+        // return $this->createQueryBuilder('c')
+        //     ->where('c.name LIKE %:prefix')
+        //     ->setParameter('prefix', $prefix, '%')
+        //     ->getQuery()
+        //     ->getResult();
+        $qb = $this->createQueryBuilder('u');
+        $qb->where($qb->expr()->like('u.name', ':prefix'))
+            ->setParameter('prefix', $prefix . '%');
+        return $qb->getQuery()->getResult();
     }
 
     //    /**

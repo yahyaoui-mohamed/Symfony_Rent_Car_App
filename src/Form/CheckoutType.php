@@ -90,11 +90,10 @@ class CheckoutType extends AbstractType
                 'required' => false
             ])
             ->add("newsletter", CheckboxType::class, [
-                'label' => 'I agree with sending an Marketing and newsletter emails. No spam, promissed!'
+                'label' => 'I agree with sending an Marketing and newsletter emails. No spam, promissed!',
+                'required' => false,
             ])
-            ->add("termsConditions", CheckboxType::class, [
-                'label' => 'I agree with our terms and conditions and privacy policy.'
-            ])
+            ->add("termsConditions", CheckboxType::class)
             ->add("rentNow", SubmitType::class, [
                 'attr' => [
                     'class' => 'mb-3'
