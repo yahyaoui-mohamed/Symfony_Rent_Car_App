@@ -1,3 +1,10 @@
+@media (max-width: 768px) {
+
+  .reservation-items {
+    flex-direction: column;
+  }
+}
+
 .reservation {
   display: flex;
   justify-content: space-around;
@@ -85,5 +92,6 @@
     border-radius: 10px;
     font-size: 15px;
     box-shadow: rgba(100, 100, 111, 0.2) 0px 7px 29px 0px;
+    margin: 15px 0;
   }
 }

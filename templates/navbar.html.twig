@@ -1,49 +1,49 @@
 <div class="navbar animate__animated">
 	<div class="container">
-		<div class="navbar-brand">
-			<a href="{{path("app_index")}}">Morent</a>
-		</div>
-		<div class="search-bar">
-			<input type="text" placeholder="Search something else" id="search"/>
-			<i class="fi fi-rs-search"></i>
-			<i class="fi fi-rs-settings-sliders"></i>
-			<div class="car-search">
+			<div class="navbar-brand">
+				<a href="{{path("app_index")}}">Morent</a>
 			</div>
-		</div>
-		<div class="settings">
-			<div class="favorite">
-				<a href="{{path("app_favorite")}}">
-					<i class="fi fi-sr-heart"></i>
-				</a>
+			<div class="search-bar">
+				<input type="text" placeholder="Search something else" id="search"/>
+				<i class="fi fi-rs-search"></i>
+				<i class="fi fi-rs-settings-sliders"></i>
+				<div class="car-search">
+				</div>
 			</div>
-			<div class="notification">
-				<a href="#">
-					<i class="fi fi-sr-bell"></i>
-				</a>
-			</div>
-			<div class="setting">
-				<a href="{{path("app_settings")}}">
-					<i class="fi fi-sr-settings"></i>
-				</a>
-			</div>
-			<div class="user">
-				{% if app.user %}
-					{% if "ROLE_ADMIN" in app.user.roles  %}
-						<a href="{{path("app_admin")}}">
-							<i class="fi fi-sr-user"></i>
-						</a>
-					{% elseif "ROLE_USER" in app.user.roles %}
-						<a href="{{path("app_account")}}">
+			<div class="settings">
+				<div class="favorite">
+					<a href="{{path("app_favorite")}}">
+						<i class="fi fi-sr-heart"></i>
+					</a>
+				</div>
+				<div class="notification">
+					<a href="#">
+						<i class="fi fi-sr-bell"></i>
+					</a>
+				</div>
+				<div class="setting">
+					<a href="{{path("app_settings")}}">
+						<i class="fi fi-sr-settings"></i>
+					</a>
+				</div>
+				<div class="user">
+					{% if app.user %}
+						{% if "ROLE_ADMIN" in app.user.roles  %}
+							<a href="{{path("app_admin")}}">
+								<i class="fi fi-sr-user"></i>
+							</a>
+						{% elseif "ROLE_USER" in app.user.roles %}
+							<a href="{{path("app_account")}}">
+								<i class="fi fi-sr-user"></i>
+							</a>
+						{% endif %}
+					{% else %}
+						<a href="{{path("app_login")}}">
 							<i class="fi fi-sr-user"></i>
 						</a>
 					{% endif %}
-				{% else %}
-					<a href="{{path("app_login")}}">
-						<i class="fi fi-sr-user"></i>
-					</a>
-				{% endif %}
+				</div>
 			</div>
-		</div>
 	</div>
 </div>
 {% block globalscripts %}
