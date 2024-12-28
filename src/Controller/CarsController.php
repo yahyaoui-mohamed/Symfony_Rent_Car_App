@@ -3,6 +3,7 @@
 namespace App\Controller;
 
 use App\Entity\Car;
+use App\Entity\Favorite;
 use App\Repository\CarRepository;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Component\HttpFoundation\Request;
@@ -15,6 +16,9 @@ class CarsController extends AbstractController
     #[Route('/cars', name: 'app_cars')]
     public function index(Request $request, EntityManagerInterface $em): Response
     {
+        $visitorId = $request->cookies->get('visitor_id');
+        $favoriteCarUser = $em->getRepository(Favorite::class)->findBy(["visitor_id" => $visitorId]);
+
         $cars = $em->getRepository(Car::class)->findAll();
         $queryType = $em->createQuery(
             'SELECT c.type, COUNT(c.id) as car_count 
@@ -36,6 +40,7 @@ class CarsController extends AbstractController
             'cars' => $cars,
             'carDataType' => $carDataType,
             'carDataCapacity' => $carDataCapacity,
+            'favoriteCarUser' => $favoriteCarUser,
         ]);
     }
 

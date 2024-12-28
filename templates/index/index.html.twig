@@ -300,7 +300,7 @@ favoriteCar.forEach(function(car){
 		let carId = this.parentNode.nextElementSibling.value;
 		if(this.classList.contains("active")){
 			this.classList.add("fi-rr-heart");
-			this.classList.remove("fi-ss-heart");
+			this.classList.remove("fi-sr-heart");
 			this.classList.remove("active");
 			fetch("/favorite", {
 					method: "DELETE",
@@ -318,7 +318,7 @@ favoriteCar.forEach(function(car){
 		}
 		else{
 			this.classList.remove("fi-rr-heart");
-			this.classList.add("fi-ss-heart");
+			this.classList.add("fi-sr-heart");
 			this.classList.add("active");
 
 			fetch("/favorite", {
@@ -378,16 +378,25 @@ showMoreButton.addEventListener("click", function() {
 											</div>
 											<input type="hidden" name="car_id" value=${car.id}>
 										</div>
-										<div class="car-img">
-											<img src="${car.img}" alt=""/>
-										</div>
-										<div class="options d-flex justify-content-between">
-											<div class="litres"><i class="fi fi-tr-gas-pump"></i>${car.gasoline}L</div>
-											<div class="gear"><i class="fi fi-ts-tire"></i> ${car.steering}</div>
-											<div class="seats"><i class="fi fi-tr-seat-airline"></i>${car.capacity} People</div>
+										<div class="group">
+											<div class="car-img">
+												<img src="${car.img}" alt=""/>
+											</div>
+											<div class="options d-flex">
+												<div class="litres">
+													<i class="fi fi-tr-gas-pump"></i>
+													${car.gasoline}L</div>
+												<div class="gear">
+													<i class="fi fi-ts-tire"></i>
+													${car.steering}</div>
+												<div class="seats">
+													<i class="fi fi-tr-seat-airline"></i>
+													${car.capacity}
+													People</div>
+											</div>
 										</div>
 										<div class="rent-price d-flex align-items-center justify-content-between">
-											<div class="price">${car.price}.00/
+											<div class="price">$${car.price}.00/
 												<span>day</span>
 											</div>
 											<div class="rent-btn">

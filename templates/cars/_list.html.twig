@@ -9,7 +9,18 @@
 				<span>{{car.type}}</span>
 			</div>
 			<div class="favorite">
-				<i class="fi fi-rr-heart"></i>
+				{% set found = false %}
+					{% for favorite in favoriteCarUser %}
+						{% if favorite.car.id == car.id %}
+							{% set found = true %}
+						{% endif %}
+					{% endfor %}
+				
+					{% if found %}
+						<i class="fi fi-sr-heart active"></i>
+					{% else %}
+						<i class="fi fi-rr-heart"></i>
+				{% endif %}
 			</div>
 			<input type="hidden" name="car_id" value={{car.id}}>
 		</div>

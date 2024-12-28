@@ -18,8 +18,8 @@ class FavoriteController extends AbstractController
         $visitorId = $request->cookies->get('visitor_id');
         if ($request->isMethod("DELETE")) {
             $data = json_decode($request->getContent(), true);
-            $favId = $data["id"];
-            $favCar = $em->getRepository(Favorite::class)->find($favId);
+            $carId = $data["id"];
+            $favCar = $em->getRepository(Favorite::class)->findOneBy(["car" => $carId, "visitor_id" => $visitorId]);
             $em->remove($favCar);
             $em->flush();
             return new Response("Car deleted.");
