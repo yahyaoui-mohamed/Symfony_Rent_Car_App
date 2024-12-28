@@ -3,24 +3,20 @@
 namespace App\Controller;
 
 use App\Entity\Car;
+use App\Entity\Favorite;
 use Doctrine\ORM\EntityManagerInterface;
-use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
+use Symfony\Component\HttpFoundation\Cookie;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Attribute\Route;
-use Symfony\Component\HttpFoundation\Cookie;
 use Symfony\Component\HttpFoundation\JsonResponse;
-use Symfony\Component\Serializer\Encoder\JsonDecode;
-use Symfony\Component\Serializer\SerializerInterface; // Import the interface
+use Symfony\Component\Serializer\SerializerInterface;
+use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
+
 
 class IndexController extends AbstractController
 {
-    private SerializerInterface $serializer;
 
-    public function __construct(SerializerInterface $serializer)
-    {
-        $this->serializer = $serializer;
-    }
     #[Route('/', name: 'app_index')]
     public function index(Request $request, EntityManagerInterface $em): Response
     {
@@ -48,6 +44,7 @@ class IndexController extends AbstractController
             $response->send();
         }
 
+        $favoriteCarUser = $em->getRepository(Favorite::class)->findBy(["visitor_id" => $visitorId]);
         $cars = $em->getRepository(Car::class)->findAll();
         $popularCars = $em->getRepository(Car::class)->findBy([], null, 8);
         $recommandationCars = $em->getRepository(Car::class)->findBy([], null, 8);
@@ -55,6 +52,7 @@ class IndexController extends AbstractController
             'recommandationCars' => $recommandationCars,
             'popularCars' => $popularCars,
             'allCars' => count($cars),
+            'favoriteCarUser' => $favoriteCarUser,
         ]);
     }
 
@@ -71,7 +69,6 @@ class IndexController extends AbstractController
 
         $data = $serializer->normalize($cars, null, ['groups' => 'car_details']);
 
-        // dd($cars);
         return new JsonResponse($data);
     }
 }

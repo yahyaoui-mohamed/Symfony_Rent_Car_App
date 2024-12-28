@@ -21,17 +21,15 @@
       }
 
       .options {
-        flex-direction: column;
-        justify-content: space-evenly;
+        flex-direction: row;
+        justify-content: space-between;
       }
     }
   }
 
   .car-slide {
-    flex: 0 0 calc(100% - 16px);
-    /* 1 item visible */
-    max-width: calc(100% - 16px);
-    /* Full width for 1 item */
+    flex: 0 0 calc(100% - 70px);
+    max-width: calc(100% - 70px);
   }
 }
 
@@ -141,6 +139,8 @@
   margin: 30px 0;
 
   .title {
+    margin-bottom: 20px;
+
     a {
       text-decoration: none;
       font-weight: 600;
@@ -159,6 +159,16 @@
 }
 
 
+@media (min-width: 992px) {
+
+  .cars-slider {
+    .slider-track {
+      .car-slide {
+        flex: 0 0 25%;
+      }
+    }
+  }
+}
 
 // Slider
 
@@ -175,7 +185,6 @@
     flex-wrap: nowrap;
 
     .car-slide {
-      flex: 0 0 25%;
       box-sizing: border-box;
 
       /* Include padding in width calculation */
