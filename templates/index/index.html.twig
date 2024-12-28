@@ -168,7 +168,7 @@
 <div class="cars-slider">
 	<div class="slider-track row">
 		{% for car in popularCars %}
-			<div class="car-slide col-lg-3">
+			<div class="car-slide col-lg-3 col-12">
 				<div class="car">
 					<div class="car-name d-flex justify-content-between">
 						<div class="name">
@@ -441,87 +441,6 @@ showMoreButton.addEventListener("click", function() {
     const sliderTrack = document.querySelector('.slider-track');
     const slides = document.querySelectorAll('.car-slide');
     const slideWidth = slides[0].clientWidth;
-    const visibleSlides = 4; // Number of slides visible at once
-    const totalSlides = slides.length;
-
-    let isDragging = false;
-    let startX = 0;
-    let currentTranslate = 0;
-    let prevTranslate = 0;
-
-    // Calculate bounds
-    const maxTranslate = 0;
-    const minTranslate = -(slideWidth * (totalSlides - visibleSlides)); // Adjust bounds to ensure the last slide is fully visible
-
-    function setSliderPosition() {
-        sliderTrack.style.transform = `translateX(${currentTranslate}px)`;
-    }
-
-    function handleMouseDown(e) {
-        isDragging = true;
-        startX = e.clientX;
-        sliderTrack.style.transition = 'none'; // Disable smooth transition during drag
-    }
-
-    function handleMouseMove(e) {
-        if (!isDragging) return;
-        const currentX = e.clientX;
-        const distance = currentX - startX;
-        currentTranslate = prevTranslate + distance;
-
-        // Ensure that the translation happens in increments of 4 items
-        const maxDistance = (visibleSlides - 1) * slideWidth; // How much we can slide to show 4 items
-        const clampedTranslate = Math.max(minTranslate, Math.min(currentTranslate, maxTranslate));
-
-        // Only move in increments of the slide width
-        const slideIncrement = Math.round(clampedTranslate / slideWidth) * slideWidth;
-        currentTranslate = slideIncrement;
-
-        setSliderPosition();
-    }
-
-    function handleMouseUp() {
-        isDragging = false;
-        prevTranslate = currentTranslate; // Save the last position
-        sliderTrack.style.transition = 'transform 0.3s ease-out'; // Re-enable smooth transition after drag
-
-        // After the drag ends, we "snap" to the nearest multiple of the slide width
-        const snappedTranslate = Math.round(currentTranslate / slideWidth) * slideWidth;
-        currentTranslate = snappedTranslate;
-
-        setSliderPosition();
-    }
-
-    // Event listeners for dragging
-    sliderTrack.addEventListener('mousedown', handleMouseDown);
-    window.addEventListener('mousemove', handleMouseMove);
-    window.addEventListener('mouseup', handleMouseUp);
-
-    // Prevent text/image selection while dragging
-    sliderTrack.addEventListener('dragstart', (e) => e.preventDefault());
-    sliderTrack.addEventListener('mouseleave', () => {
-        if (isDragging) handleMouseUp();
-    });
-
-    // Adjust bounds and slider position on window resize
-    window.addEventListener('resize', () => {
-        const newSlideWidth = slides[0].clientWidth;
-        const newMinTranslate = -(newSlideWidth * (totalSlides - visibleSlides));
-
-        if (currentTranslate < newMinTranslate) {
-            currentTranslate = newMinTranslate;
-            prevTranslate = newMinTranslate;
-        }
-
-        setSliderPosition();
-    });
-}); #}
-
-
-document.addEventListener('DOMContentLoaded', () => {
-    const sliderTrack = document.querySelector('.slider-track');
-    const slides = document.querySelectorAll('.car-slide');
-    const slideWidth = slides[0].clientWidth;
     const totalSlides = slides.length;
 
     let isDragging = false;
@@ -582,6 +501,164 @@ document.addEventListener('DOMContentLoaded', () => {
         }
 
         setSliderPosition();
+    });
+}); #}
+
+{# document.addEventListener('DOMContentLoaded', () => {
+    const sliderTrack = document.querySelector('.slider-track');
+    const slides = document.querySelectorAll('.car-slide');
+    const slideWidth = slides[0].clientWidth;
+    const totalSlides = slides.length;
+    const visibleSlides = 4;  // Set the number of slides to show by default
+
+    let isDragging = false;
+    let startX = 0;
+    let currentTranslate = 0;
+    let prevTranslate = 0;
+
+    // Calculate the bounds: the maxTranslate ensures no sliding beyond the first element
+    const maxTranslate = 0; 
+    const minTranslate = -(slideWidth * (totalSlides - visibleSlides)); // Prevent showing empty space
+
+    // Function to set the position of the slider
+    function setSliderPosition() {
+        sliderTrack.style.transform = `translateX(${currentTranslate}px)`;
+    }
+
+    // Mouse down event to initiate dragging
+    function handleMouseDown(e) {
+        isDragging = true;
+        startX = e.clientX;
+        sliderTrack.style.transition = 'none'; // Disable transition during drag
+    }
+
+    // Mouse move event to drag the slider
+    function handleMouseMove(e) {
+        if (!isDragging) return;
+        const currentX = e.clientX;
+        const distance = currentX - startX;
+        currentTranslate = prevTranslate + distance;
+
+        // Clamp the translate value to the bounds
+        currentTranslate = Math.max(minTranslate, Math.min(currentTranslate, maxTranslate));
+        setSliderPosition();
+    }
+
+    // Mouse up event to stop dragging
+    function handleMouseUp() {
+        isDragging = false;
+        prevTranslate = currentTranslate; // Save the last position
+        sliderTrack.style.transition = 'transform 0.2s ease-out'; // Re-enable smooth transition
+
+        // After drag, snap to the nearest valid position
+        const snappedTranslate = Math.round(currentTranslate / slideWidth) * slideWidth;
+        currentTranslate = snappedTranslate;
+
+        setSliderPosition();
+    }
+
+    // Event listeners for dragging
+    sliderTrack.addEventListener('mousedown', handleMouseDown);
+    window.addEventListener('mousemove', handleMouseMove);
+    window.addEventListener('mouseup', handleMouseUp);
+
+    // Prevent text/image selection while dragging
+    sliderTrack.addEventListener('dragstart', (e) => e.preventDefault());
+    sliderTrack.addEventListener('mouseleave', () => {
+        if (isDragging) handleMouseUp();
+    });
+
+    // Adjust the bounds and slider position on window resize
+    window.addEventListener('resize', () => {
+        const newSlideWidth = slides[0].clientWidth;
+        const newMinTranslate = -(newSlideWidth * (totalSlides - visibleSlides));
+
+        // Ensure that the translation is clamped correctly after resizing
+        if (currentTranslate < newMinTranslate) {
+            currentTranslate = newMinTranslate;
+            prevTranslate = newMinTranslate;
+        }
+
+        setSliderPosition();
+    });
+}); #}
+
+document.addEventListener('DOMContentLoaded', () => {
+    const sliderTrack = document.querySelector('.slider-track');
+    const slides = document.querySelectorAll('.car-slide');
+    let slideWidth = slides[0].clientWidth;
+    const totalSlides = slides.length;
+    let visibleSlides = 4; // Default to 4 visible slides on larger screens
+
+    let isDragging = false;
+    let startX = 0;
+    let currentTranslate = 0;
+    let prevTranslate = 0;
+
+    // Function to calculate the bounds based on visible slides
+    function calculateBounds() {
+        slideWidth = slides[0].clientWidth; // Recalculate slide width
+        visibleSlides = window.innerWidth <= 767 ? 1 : 4; // Show 1 slide on small screens, 4 on larger screens
+        const maxTranslate = 0; 
+        const minTranslate = -(slideWidth * (totalSlides - visibleSlides)); // Adjust to show the correct number of slides
+
+        return { minTranslate, maxTranslate };
+    }
+
+    // Function to set the position of the slider
+    function setSliderPosition() {
+        const { minTranslate, maxTranslate } = calculateBounds();
+        currentTranslate = Math.max(minTranslate, Math.min(currentTranslate, maxTranslate));
+        sliderTrack.style.transform = `translateX(${currentTranslate}px)`;
+    }
+
+    // Mouse down event to initiate dragging
+    function handleMouseDown(e) {
+        isDragging = true;
+        startX = e.clientX;
+        sliderTrack.style.transition = 'none'; // Disable transition during drag
+    }
+
+    // Mouse move event to drag the slider
+    function handleMouseMove(e) {
+        if (!isDragging) return;
+        const currentX = e.clientX;
+        const distance = currentX - startX;
+        currentTranslate = prevTranslate + distance;
+
+        // Recalculate bounds to ensure we don't slide beyond the first or last slide
+        const { minTranslate, maxTranslate } = calculateBounds();
+        currentTranslate = Math.max(minTranslate, Math.min(currentTranslate, maxTranslate));
+        setSliderPosition();
+    }
+
+    // Mouse up event to stop dragging
+    function handleMouseUp() {
+        isDragging = false;
+        prevTranslate = currentTranslate; // Save the last position
+        sliderTrack.style.transition = 'transform 0.2s ease-out'; // Re-enable smooth transition
+
+        // After drag, snap to the nearest valid position
+        const snappedTranslate = Math.round(currentTranslate / slideWidth) * slideWidth;
+        currentTranslate = snappedTranslate;
+
+        setSliderPosition();
+    }
+
+    // Event listeners for dragging
+    sliderTrack.addEventListener('mousedown', handleMouseDown);
+    window.addEventListener('mousemove', handleMouseMove);
+    window.addEventListener('mouseup', handleMouseUp);
+
+    // Prevent text/image selection while dragging
+    sliderTrack.addEventListener('dragstart', (e) => e.preventDefault());
+    sliderTrack.addEventListener('mouseleave', () => {
+        if (isDragging) handleMouseUp();
+    });
+
+    // Adjust the bounds and slider position on window resize
+    window.addEventListener('resize', () => {
+        setSliderPosition(); // Recalculate the position on resize
     });
 });
 

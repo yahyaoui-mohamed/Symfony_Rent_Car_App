@@ -12,6 +12,27 @@
       }
     }
   }
+
+  .car-slide {
+    .car {
+      .group {
+        flex-direction: row;
+        justify-content: space-between;
+      }
+
+      .options {
+        flex-direction: column;
+        justify-content: space-evenly;
+      }
+    }
+  }
+
+  .car-slide {
+    flex: 0 0 calc(100% - 16px);
+    /* 1 item visible */
+    max-width: calc(100% - 16px);
+    /* Full width for 1 item */
+  }
 }
 
 @media (min-width: 992px) {
@@ -154,10 +175,7 @@
     flex-wrap: nowrap;
 
     .car-slide {
-      flex: 0 0 calc(25% - 16px);
-      /* 4 items visible, adjust for gap */
-      max-width: calc(25% - 16px);
-      /* Match the flex-basis */
+      flex: 0 0 25%;
       box-sizing: border-box;
 
       /* Include padding in width calculation */
@@ -166,10 +184,6 @@
         border-radius: 10px;
         padding: 25px;
         margin-bottom: 30px;
-
-        .group {
-          display: flex;
-        }
 
         .car-name {
           h3 {
