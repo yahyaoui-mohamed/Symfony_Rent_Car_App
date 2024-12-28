@@ -26,11 +26,11 @@ class CheckoutController extends AbstractController
         $form->handleRequest($request);
         $car = $em->getRepository(Car::class)->find($id);
         $visitorId = $request->cookies->get("visitor_id");
+        $days = $session->get('days');
+        $total = $days * $car->getPrice();
 
 
         if ($request->isMethod("POST")) {
-            $days = $session->get('days');
-            $total = $days * $car->getPrice();
             // $promoCode = $session->get('days');
             Stripe::setApiKey('sk_test_51QZHxGFVL9wIFzsNS5qhf1xmfAIKMakSAztK18P27FQWkIoqJGy0kzsCUdEwMwYfb2znp8BSe1YNVsYhfYAP5S9W00y8aRXGz0');
 

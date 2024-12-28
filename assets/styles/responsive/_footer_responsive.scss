@@ -1,0 +1,41 @@
+@media (max-width: 768px) {
+
+  .footer {
+    h1 {
+      margin-bottom: 10px;
+    }
+
+    .container {
+      .row {
+        .col-lg-6 {
+          &:first-child {
+            margin-bottom: 40px;
+          }
+
+          .col-lg-4 {
+            &:nth-child(2) {
+              order: 2;
+            }
+
+            &:nth-child(3) {
+              order: 1
+            }
+          }
+        }
+      }
+    }
+
+    .copyright {
+      .col-lg-4 {
+        order: 1;
+        margin-bottom: 15px;
+      }
+
+      .col-lg-8 {
+        order: 2;
+      }
+    }
+  }
+
+
+}

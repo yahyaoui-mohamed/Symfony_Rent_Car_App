@@ -136,3 +136,121 @@
 .all-cars {
   padding-right: 20px;
 }
+
+
+
+// Slider
+
+.cars-slider {
+  position: relative;
+  width: 100%;
+  overflow: hidden;
+  cursor: grab;
+
+  .slider-track {
+    display: flex;
+    transition: transform 0.3s ease-out;
+    will-change: transform;
+    flex-wrap: nowrap;
+
+    .car-slide {
+      flex: 0 0 calc(25% - 16px);
+      /* 4 items visible, adjust for gap */
+      max-width: calc(25% - 16px);
+      /* Match the flex-basis */
+      box-sizing: border-box;
+
+      /* Include padding in width calculation */
+      .car {
+        background-color: #fff;
+        border-radius: 10px;
+        padding: 25px;
+        margin-bottom: 30px;
+
+        .group {
+          display: flex;
+        }
+
+        .car-name {
+          h3 {
+            font-weight: 600;
+            font-size: 20px;
+          }
+
+          span {
+            color: #596780;
+            font-size: 14px;
+          }
+
+          .favorite {
+            i {
+              cursor: pointer;
+
+              &.active {
+                color: #FF4423;
+              }
+            }
+
+          }
+        }
+
+        .options {
+          color: #596780;
+          margin-bottom: 20px;
+
+          >div {
+            color: #596780;
+            font-size: 14px;
+            font-weight: 500;
+
+            i {
+              margin-right: 5px;
+            }
+          }
+        }
+
+        .car-img {
+          margin: 50px 0;
+          text-align: center;
+
+          img {
+            // width: 232px;
+            // height: 72px;
+            width: 100%;
+          }
+        }
+
+        .rent-price {
+          .price {
+            font-weight: 700;
+
+            span {
+              font-size: 14px;
+              font-weight: 500;
+              color: #596780;
+            }
+          }
+
+          .rent-btn {
+            a {
+              text-decoration: none;
+              color: #fff;
+              background-color: #3563E9;
+              padding: 10px 20px;
+              font-weight: 600;
+              border-radius: 5px;
+              font-size: 14px;
+            }
+          }
+        }
+      }
+    }
+
+  }
+}
+
+
+
+
+
+// Slider

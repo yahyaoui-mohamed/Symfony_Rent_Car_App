@@ -27,6 +27,8 @@
     },
     "dependencies": {
         "@flaticon/flaticon-uicons": "^3.3.1",
-        "boostrap": "^2.0.0"
+        "@splidejs/splide": "^4.1.4",
+        "boostrap": "^2.0.0",
+        "swiper": "^11.1.15"
     }
 }

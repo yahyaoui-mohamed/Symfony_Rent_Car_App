@@ -200,14 +200,17 @@
                                 </div>
                                 <input type="hidden" name="car_id" value={{car.id}}>
                             </div>
-                            <div class="car-img">
-                                <img src={{car.img}} alt=""/>
+                            <div class="group">
+                                <div class="car-img">
+                                    <img src={{car.img}} alt=""/>
+                                </div>
+                                <div class="options d-flex">
+                                    <div class="litres"><i class="fi fi-tr-gas-pump"></i> {{car.gasoline}}L</div>
+                                    <div class="gear"><i class="fi fi-ts-tire"></i> {{car.steering}}</div>
+                                    <div class="seats"><i class="fi fi-tr-seat-airline"></i>{{car.capacity}}</div>
+                                </div>
                             </div>
-                            <div class="options d-flex justify-content-between">
-                                <div class="litres"><i class="fi fi-tr-gas-pump"></i> {{car.gasoline}}L</div>
-                                <div class="gear"><i class="fi fi-ts-tire"></i> {{car.steering}}</div>
-                                <div class="seats"><i class="fi fi-tr-seat-airline"></i>{{car.capacity}}</div>
-                            </div>
+                            
                             <div class="rent-price d-flex align-items-center justify-content-between">
                                 <div class="price">${{car.price}}.00/
                                     <span>day</span>

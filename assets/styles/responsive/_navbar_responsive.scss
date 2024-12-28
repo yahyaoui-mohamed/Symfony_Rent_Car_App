@@ -1,7 +1,23 @@
 // @media (min-width: 576px) {}
 
 // // Medium devices (tablets, 768px and up)
-// @media (min-width: 768px) {}
+@media (max-width: 768px) {
+
+  .navbar-brand {
+    order: 0;
+    margin-bottom: 15px;
+  }
+
+  .setttings {
+    order: 1;
+  }
+
+  .search-bar {
+    order: 2;
+  }
+
+
+}
 
 // // Large devices (desktops, 992px and up)
 // @media (min-width: 992px) {}

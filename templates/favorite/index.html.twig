@@ -20,14 +20,16 @@
           </div>
           <input type="hidden" name="car_id" value={{favoriteCar.id}}>
         </div>
-        <div class="car-img">
-          <img src={{favoriteCar.car.img}} alt="{{favoriteCar.car.name}} car image."/>
-        </div>
+        <div class="group">
+          <div class="car-img">
+            <img src={{favoriteCar.car.img}} alt="{{favoriteCar.car.name}} car image."/>
+          </div>
 
-        <div class="options d-flex justify-content-between">
-          <div class="litres"><i class="fi fi-tr-gas-pump"></i>{{favoriteCar.car.gasoline}}L</div>
-          <div class="gear"><i class="fi fi-ts-tire"></i> {{favoriteCar.car.steering}}</div>
-          <div class="seats"><i class="fi fi-tr-seat-airline"></i> {{favoriteCar.car.capacity}} People</div>
+          <div class="options d-flex">
+            <div class="litres"><i class="fi fi-tr-gas-pump"></i>{{favoriteCar.car.gasoline}}L</div>
+            <div class="gear"><i class="fi fi-ts-tire"></i> {{favoriteCar.car.steering}}</div>
+            <div class="seats"><i class="fi fi-tr-seat-airline"></i> {{favoriteCar.car.capacity}} People</div>
+          </div>
         </div>
 
         <div class="rent-price d-flex align-items-center justify-content-between">

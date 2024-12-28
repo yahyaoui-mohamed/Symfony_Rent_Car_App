@@ -49,7 +49,7 @@ class IndexController extends AbstractController
         }
 
         $cars = $em->getRepository(Car::class)->findAll();
-        $popularCars = $em->getRepository(Car::class)->findBy([], null, 4);
+        $popularCars = $em->getRepository(Car::class)->findBy([], null, 8);
         $recommandationCars = $em->getRepository(Car::class)->findBy([], null, 8);
         return $this->render('index/index.html.twig', [
             'recommandationCars' => $recommandationCars,
