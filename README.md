@@ -36,7 +36,8 @@ This project is a full-featured car rental application that includes a user-faci
 
 To run this project, ensure you have the following installed:
 
-- PHP >= 8.0
+- PHP >= 8.2.12
+- Symfony >= 7.2.1
 - Composer
 - Node.js and npm/yarn
 - MySQL Server
@@ -50,8 +51,8 @@ Follow these steps to install and run the application:
 
 1. **Clone the Repository**
    ```bash
-   git clone https://github.com/your-username/car-rental-app.git
-   cd car-rental-app
+   git clone https://github.com/yahyaoui-mohamed/Symfony_Rent_Car_App
+   cd Symfony_Rent_Car_App
    ```
 
 2. **Install Backend Dependencies**
