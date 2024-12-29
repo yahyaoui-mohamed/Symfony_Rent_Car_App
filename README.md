@@ -30,14 +30,17 @@ This project is a full-featured car rental application that includes a user-faci
 - **Database:**
   - MySQL
 
+- **Payment Gateway:**
+  - Stripe
+
 ---
 
 ## Requirements
 
 To run this project, ensure you have the following installed:
 
-- PHP >= 8.2.12
-- Symfony >= 7.2.1
+- PHP >= 8.2
+- Symfony >= 7
 - Composer
 - Node.js and npm/yarn
 - MySQL Server
