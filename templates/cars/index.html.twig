@@ -251,10 +251,13 @@ favoriteCar.forEach(function(car){
 					return response.text();
 			});
 		}
-
-		
-
 	});
+});
+
+
+document.querySelector(".clear-filters").addEventListener("click", function(e){
+	e.preventDefault();
+	document.getElementById("filter-form").reset();
 });
 
 

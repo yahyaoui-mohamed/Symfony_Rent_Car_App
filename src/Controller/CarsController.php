@@ -45,11 +45,16 @@ class CarsController extends AbstractController
     }
 
     #[Route('/cars/filter', name: 'app_cars_filter')]
-    public function filter(Request $request, CarRepository $carRepository): Response
+    public function filter(Request $request, CarRepository $carRepository, EntityManagerInterface $em): Response
     {
+        $visitorId = $request->cookies->get('visitor_id');
+        $favoriteCarUser = $em->getRepository(Favorite::class)->findBy(["visitor_id" => $visitorId]);
         $filters = json_decode($request->getContent(), true);
         $cars = $carRepository->findByFilters($filters);
-        $html = $this->renderView('cars/_list.html.twig', ['cars' => $cars]);
+        $html = $this->renderView('cars/_list.html.twig', [
+            'cars' => $cars,
+            'favoriteCarUser' => $favoriteCarUser,
+        ]);
 
         return new Response($html);
     }
