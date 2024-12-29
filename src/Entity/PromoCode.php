@@ -23,6 +23,9 @@ class PromoCode
     #[ORM\Column]
     private ?bool $used = null;
 
+    #[ORM\Column]
+    private ?float $discount_rate = null;
+
     public function getId(): ?int
     {
         return $this->id;
@@ -60,6 +63,18 @@ class PromoCode
     public function setUsed(bool $used): static
     {
         $this->used = $used;
+
+        return $this;
+    }
+
+    public function getDiscountRate(): ?float
+    {
+        return $this->discount_rate;
+    }
+
+    public function setDiscountRate(float $discount_rate): static
+    {
+        $this->discount_rate = $discount_rate;
 
         return $this;
     }

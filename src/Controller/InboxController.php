@@ -11,6 +11,7 @@ class InboxController extends AbstractController
     #[Route('/admin/inbox', name: 'app_inbox')]
     public function index(): Response
     {
+
         return $this->render('inbox/index.html.twig');
     }
 }
