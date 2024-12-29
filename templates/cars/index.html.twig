@@ -40,7 +40,7 @@
 					<div class="filter-title">Price</div>
 					<input type="range" id="price-filter" step="1" value="100">
 					<p>Max. $100.00</p>
-					<button class="clear-filters">Clear filters</button>
+					{# <button class="clear-filters">Clear filters</button> #}
 				</div>
 			</form>
 		</div>
@@ -255,10 +255,10 @@ favoriteCar.forEach(function(car){
 });
 
 
-document.querySelector(".clear-filters").addEventListener("click", function(e){
+{# document.querySelector(".clear-filters").addEventListener("click", function(e){
 	e.preventDefault();
 	document.getElementById("filter-form").reset();
-});
+}); #}
 
 
 </script>
