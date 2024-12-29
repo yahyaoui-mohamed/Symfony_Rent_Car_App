@@ -37,9 +37,14 @@
         font-size: 20px;
       }
 
-      i.active {
-        color: #FF4423;
+      i {
+        cursor: pointer;
+
+        &.active {
+          color: #FF4423;
+        }
       }
+
     }
 
     .review {

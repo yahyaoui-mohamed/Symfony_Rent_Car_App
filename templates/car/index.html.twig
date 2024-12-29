@@ -41,6 +41,7 @@
                                     <i class="fi fi-rr-heart"></i>
                                 {% endif %}
                             </div>
+                            <input type="hidden" name="car_id" value="{{ car.id }}">
                         </div>
                         <div class="review d-flex align-item-center">
                             <div class="stars">
@@ -359,7 +360,51 @@ favoriteCar.forEach(function(car){
 	});
 });
 
-{# let car = document.querySelector(""); #}
+let car = document.querySelector(".car-description .car-name .favorite i");
+
+let carId = car.parentNode.nextElementSibling.value;
+
+car.addEventListener("click", function(){
+
+    if(this.classList.contains("active")){
+        this.classList.add("fi-rr-heart");
+        this.classList.remove("fi-sr-heart");
+        this.classList.remove("active");
+        fetch("/favorite", {
+                method: "DELETE",
+                headers: {
+                        "Content-Type": "application/json",
+                },
+                body:JSON.stringify({id : carId})
+        })
+        .then((response) => {
+                if (!response.ok) {
+                        throw new Error("Network response was not ok");
+                }
+                return response.text();
+        });
+    }
+    else{
+        this.classList.remove("fi-rr-heart");
+        this.classList.add("fi-sr-heart");
+        this.classList.add("active");
+
+        fetch("/favorite", {
+                method: "POST",
+                headers: {
+                        "Content-Type": "application/json",
+                },
+                body:JSON.stringify({id : carId})
+        })
+        .then((response) => {
+                if (!response.ok) {
+                        throw new Error("Network response was not ok");
+                }
+                return response.text();
+        });
+    }
+
+});
 
 </script>
 {% endblock %}
