@@ -66,13 +66,13 @@ Follow these steps to install and run the application:
    ```
 
 4. **Set Up the Database**
-   - Create a MySQL database:
-     ```sql
-     CREATE DATABASE car_rental;
-     ```
    - Configure the `.env` file in the project root with your database credentials:
      ```env
      DATABASE_URL="mysql://username:password@127.0.0.1:3306/car_rental"
+     ```
+    - Create a MySQL database:
+     ```bash
+     php bin/console doctrine:database:create
      ```
    - Run database migrations:
      ```bash
@@ -111,11 +111,11 @@ Follow these steps to install and run the application:
   npm run watch
   ```
 
-- **Admin Credentials:**
+<!-- - **Admin Credentials:**
   After running migrations, you may need to seed the database with an admin user. Use the following command to create an admin:
   ```bash
   php bin/console app:create-admin
-  ```
+  ``` -->
 
 - **Testing:**
   Run the test suite to ensure everything is functioning correctly:
@@ -146,12 +146,12 @@ Contributions are welcome! Please follow these steps:
 
 ---
 
-## License
+<!-- ## License
 
-This project is licensed under the MIT License. See the `LICENSE` file for details.
+This project is licensed under the MIT License. See the `LICENSE` file for details. -->
 
 ---
 
 ## Contact
 
-For inquiries or support, please contact [your-email@example.com].
+For inquiries or support, please contact [alayahyaoui1999@gmail.com].
