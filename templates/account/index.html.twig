@@ -4,5 +4,32 @@
 
 {% block body %}
     {% include 'navbar.html.twig' %}
+    <div class="container">
+        <div class="user-account">
+            <h3>Account</h3>
+            {{ form_start(form) }}
+                <div class="row">
+                    <div class="col-lg-6 mb-3">
+                        {{ form_label(form.firstName) }}
+                        {{ form_widget(form.firstName) }}
+                    </div>
+                    <div class="col-lg-6 mb-3">
+                        {{ form_label(form.lastName) }}
+                        {{ form_widget(form.lastName) }}
+                    </div>
+                    <div class="col-lg-6 mb-3">
+                        {{ form_label(form.email) }}
+                        {{ form_widget(form.email) }}
+                    </div>
+                    <div class="col-lg-6 mb-3">
+                        {{ form_label(form.password) }}
+                        {{ form_widget(form.password) }}
+                    </div>
+                </div>
+                {{ form_row(form.save) }}
+            {{ form_end(form) }}
+        </div>
+    </div>
+
     {% include 'footer.html.twig' %}
 {% endblock %}
