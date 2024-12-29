@@ -35,7 +35,11 @@
                         <div class="car-name d-flex justify-content-between">
                             <h3>{{car.name}}</h3>
                             <div class="favorite">
-                                <i class="fi fi-ss-heart"></i>
+                                {% if isFav %}
+                                    <i class="fi fi-sr-heart active"></i>
+                                {% else %}
+                                    <i class="fi fi-rr-heart"></i>
+                                {% endif %}
                             </div>
                         </div>
                         <div class="review d-flex align-item-center">
@@ -354,6 +358,8 @@ favoriteCar.forEach(function(car){
 		}
 	});
 });
+
+{# let car = document.querySelector(""); #}
 
 </script>
 {% endblock %}
