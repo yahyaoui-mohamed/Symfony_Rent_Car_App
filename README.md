@@ -20,8 +20,8 @@ This project is a full-featured car rental application that includes a user-faci
 
 ## Screenshots
 
-(https://i.imgur.com/dhRrC4q.png "Home Page")
-(https://i.imgur.com/jsIBE5O.png "Home Page")
+![Home Page](https://i.imgur.com/dhRrC4q.png "Home Page")
+![](https://i.imgur.com/jsIBE5O.png "Home Page")
 
 
 ## Technologies Used
