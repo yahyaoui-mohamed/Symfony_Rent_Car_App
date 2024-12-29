@@ -16,7 +16,7 @@ class SearchController extends AbstractController
     public function index(Request $request, EntityManagerInterface $em, SerializerInterface $serializer): JsonResponse
     {
         $prefix = json_decode($request->getContent(), true)["prefix"];
-        // $prefix = $request->getContent();
+
         $cars = $em->getRepository(Car::class)->findCarsStartingWith($prefix);
         if (!$cars) {
             return new JsonResponse([], 204);

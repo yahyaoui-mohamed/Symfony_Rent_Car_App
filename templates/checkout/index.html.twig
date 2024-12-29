@@ -305,7 +305,7 @@ const cardCvc = elements.create('cardCvc', { style });
 cardCvc.mount('#card-cvc-element');
 
 document.querySelector('#payment-form').addEventListener('submit', async (event) => {
-  event.preventDefault(); // Allow form submission for backend processing
+  event.preventDefault();
 
   const form = event.target;
   const formData = new FormData(form);
@@ -327,21 +327,10 @@ document.querySelector('#payment-form').addEventListener('submit', async (event)
       document.querySelector('#card-errors').textContent = data.error;
       return;
     }
-        /*billing_details: { // Include billing details (optional)
-          name: form.querySelector('#card-name').value || '', // Example: Get name from a form field (or empty string if not provided)
-          email: form.querySelector('#card-email').value || '',
-          address: {
-            city: form.querySelector('#card-city').value || '',
-            country: form.querySelector('#card-country').value || '',
-            line1: form.querySelector('#card-line1').value || '',
-            postal_code: form.querySelector('#card-postalcode').value || '',
-            state: form.querySelector('#card-state').value || '',
-          }
-        }*/
 
     const { error, paymentIntent } = await stripe.confirmCardPayment(data.clientSecret, {
       payment_method: {
-        card: cardNumber, // Use the individual cardNumber element
+        card: cardNumber,
       }
     });
 
@@ -349,8 +338,7 @@ document.querySelector('#payment-form').addEventListener('submit', async (event)
       document.querySelector('#card-errors').textContent = error.message;
     } else if (paymentIntent.status === 'succeeded') {
       console.log("Payment successful!");
-			window.location.href = '{{ path("app_success_payment") }}'; // Redirect to the success page
-      // Optionally redirect the user or display a success message
+			window.location.href = '{{ path("app_success_payment") }}';
     } else {
       console.error("Unexpected payment status:", paymentIntent.status);
       document.querySelector('#card-errors').textContent = "An error occurred during payment processing.";

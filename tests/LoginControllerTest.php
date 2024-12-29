@@ -18,7 +18,6 @@ class LoginControllerTest extends WebTestCase
         $em = $container->get('doctrine.orm.entity_manager');
         $userRepository = $em->getRepository(User::class);
 
-        // Remove any existing users from the test database
         foreach ($userRepository->findAll() as $user) {
             $em->remove($user);
         }

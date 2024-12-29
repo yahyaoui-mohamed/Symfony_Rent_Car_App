@@ -1,5 +1,4 @@
 // import './bootstrap.js';
-// import "chart.js";
 /*
  * Welcome to your app's main JavaScript file!
  *

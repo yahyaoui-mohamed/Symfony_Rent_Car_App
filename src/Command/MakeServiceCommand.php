@@ -35,15 +35,12 @@ class MakeServiceCommand extends Command
     {
         $name = $input->getArgument('name');
 
-        // If no name is provided, ask the user for input
         if (!$name) {
             $helper = $this->getHelper('question');
-            // $output->writeln('');
             $question = new Question("<fg=green>\n Choose a name for your service class (e.g. <fg=yellow>MyService</>)</> \n > ");
 
             $name = $helper->ask($input, $output, $question);
 
-            // If the user doesn't provide a name, return with an error
             if (!$name) {
                 $output->writeln('');
                 $output->writeln('<error>[ERROR] This value cannot be blank.</error>');
@@ -52,7 +49,6 @@ class MakeServiceCommand extends Command
             }
         }
 
-        // Ensure the name is valid
         if (!preg_match('/^[A-Za-z][A-Za-z0-9_]*$/', $name)) {
             $output->writeln('');
             $output->writeln('<error>Invalid service name. Use only letters, numbers, and underscores, starting with a letter.</error>');
@@ -65,14 +61,12 @@ class MakeServiceCommand extends Command
         $directory = __DIR__ . '/../../src/Service';
         $filePath = $directory . '/' . $name . '.php';
 
-        // Check if the file already exists
         if ($this->filesystem->exists($filePath)) {
             $output->writeln('');
             $output->writeln('<error>The service file already exists!</error>');
             return Command::FAILURE;
         }
 
-        // Create the file content
         $fileContent = <<<PHP
 <?php
 
@@ -87,10 +81,8 @@ class $name
 }
 PHP;
 
-        // Ensure the directory exists
         $this->filesystem->mkdir($directory);
 
-        // Write the file
         $this->filesystem->dumpFile($filePath, $fileContent);
         $output->writeln("");
         $output->writeln("<info>Service '$name' created successfully in src/Service!</info>");
