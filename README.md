@@ -24,6 +24,20 @@ This project is a full-featured car rental application that includes a user-faci
 ![](https://i.imgur.com/jsIBE5O.png "Home Page")
 
 
+![Login Page](https://i.imgur.com/uU4ke8o.png "Login")
+![Sign Up Page](https://i.imgur.com/6ZcngUL.png "Register")
+
+
+![Car details Page](https://i.imgur.com/os8JXIZ.png "Car Details")
+
+
+![All Cars Page](https://i.imgur.com/W7irOrD.png "All Cars")
+
+
+![Checkout Page](https://i.imgur.com/OAQ2Ugx.png "Checkout")
+![Checkout Page](https://i.imgur.com/cCEE71x.png "Checkout")
+
+
 ## Technologies Used
 
 - **Frontend:**
