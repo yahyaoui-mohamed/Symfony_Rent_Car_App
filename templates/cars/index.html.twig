@@ -111,9 +111,29 @@
 					{% include 'cars/_list.html.twig' with {'cars': cars} %}
 					
 				</div>
-				<div class="text-center">
-					<button class="mt-5 show-more">Show more car</button>
+				<div class="pagination">
+					{% set totalPages = (totalCars / limit)|round(0, 'ceil') %}
+					<ul>
+						{% if currentPage > 1 %}
+							<li>
+								<a href="{{ path('app_cars', { page: currentPage - 1 }) }}">Previous</a>
+							</li>
+						{% endif %}
+						{% for i in 1..totalPages %}
+							<li>
+								<a href="{{ path('app_cars', { page: i }) }}" class="{{ currentPage == i ? 'active' : '' }}">
+									{{ i }}
+								</a>
+							</li>
+						{% endfor %}
+						{% if currentPage < totalPages %}
+							<li>
+								<a href="{{ path('app_cars', { page: currentPage + 1 }) }}">Next</a>
+							</li>
+						{% endif %}
+					</ul>
 				</div>
+
 			</div>
 
 		</div>
@@ -123,9 +143,9 @@
 <script>
 
 {# document.addEventListener("DOMContentLoaded", function () {
-    const filterForm = document.querySelector("#filter-form");
     const carListContainer = document.querySelector(".cars .row");
 
+    const filterForm = document.querySelector("#filter-form");
     filterForm.addEventListener("change", function () {
         const filters = {};
 
@@ -262,16 +282,13 @@ favoriteCar.forEach(function(car){
 let maxValue = document.getElementById("value");
 maxValue.innerText = "$" + document.getElementById("price-filter").value;
 
+ #}
+
 document.getElementById("price-filter").addEventListener("input", function(){
 	maxValue.innerText = "$" + this.value;
-}); #}
-
+});
 let maxValue = document.getElementById("value");
 maxValue.innerText = "$" + document.getElementById("price-filter").value;
-
-document.getElementById("price-filter").addEventListener("input", function () {
-    maxValue.innerText = "$" + this.value;
-});
 
 
 document.addEventListener("DOMContentLoaded", function () {
@@ -369,7 +386,6 @@ document.addEventListener("DOMContentLoaded", function () {
         fetchCars();
     });
 
-    fetchCars();
 });
 </script>
 {% endblock %}
