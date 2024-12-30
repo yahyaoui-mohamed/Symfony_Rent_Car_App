@@ -53,14 +53,24 @@
       font-weight: 600;
     }
 
-    .filter-title {
+    .filter-price {
+      position: relative;
 
-      font-size: 10px;
-      color: #596780;
-      font-weight: 500;
-      margin-bottom: 15px;
-      text-transform: uppercase;
-      letter-spacing: 2px;
+      .filter-title {
+
+        font-size: 10px;
+        color: #596780;
+        font-weight: 500;
+        margin-bottom: 15px;
+        text-transform: uppercase;
+        letter-spacing: 2px;
+      }
+
+
+    }
+
+    span {
+      font-weight: 600;
     }
   }
 }

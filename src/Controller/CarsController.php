@@ -33,6 +33,8 @@ class CarsController extends AbstractController
              ORDER BY c.capacity'
         );
 
+        $max = $em->getRepository(Car::class)->getMaxCarPrice();
+
         $carDataCapacity = $queryCapacity->getResult();
         $carDataType = $queryType->getResult();
 
@@ -41,6 +43,7 @@ class CarsController extends AbstractController
             'carDataType' => $carDataType,
             'carDataCapacity' => $carDataCapacity,
             'favoriteCarUser' => $favoriteCarUser,
+            'max' => $max,
         ]);
     }
 

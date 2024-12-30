@@ -36,11 +36,13 @@
 					</ul>
 
 					
-
-					<div class="filter-title">Price</div>
-					<input type="range" id="price-filter" step="1" value="100">
-					<p>Max. $100.00</p>
-					{# <button class="clear-filters">Clear filters</button> #}
+					<div class="d-flex justify-content-between align-items-center mb-3">
+						<div class="filter-title">Price</div>
+						<span id="value"></span>
+					</div>
+					<input type="range" id="price-filter" step="1" value="{{max}}" max="{{max}}">
+					<p>Max. ${{max}}</p>
+					<button id="clear-filters">Clear filters</button>
 				</div>
 			</form>
 		</div>
@@ -109,7 +111,9 @@
 					{% include 'cars/_list.html.twig' with {'cars': cars} %}
 					
 				</div>
-				<button class="mt-5">Show more car</button>
+				<div class="text-center">
+					<button class="mt-5 show-more">Show more car</button>
+				</div>
 			</div>
 
 		</div>
@@ -117,7 +121,8 @@
 
 	{% include "footer.html.twig" %}
 <script>
-document.addEventListener("DOMContentLoaded", function () {
+
+{# document.addEventListener("DOMContentLoaded", function () {
     const filterForm = document.querySelector("#filter-form");
     const carListContainer = document.querySelector(".cars .row");
 
@@ -254,12 +259,117 @@ favoriteCar.forEach(function(car){
 	});
 });
 
+let maxValue = document.getElementById("value");
+maxValue.innerText = "$" + document.getElementById("price-filter").value;
 
-{# document.querySelector(".clear-filters").addEventListener("click", function(e){
-	e.preventDefault();
-	document.getElementById("filter-form").reset();
+document.getElementById("price-filter").addEventListener("input", function(){
+	maxValue.innerText = "$" + this.value;
 }); #}
 
+let maxValue = document.getElementById("value");
+maxValue.innerText = "$" + document.getElementById("price-filter").value;
 
+document.getElementById("price-filter").addEventListener("input", function () {
+    maxValue.innerText = "$" + this.value;
+});
+
+
+document.addEventListener("DOMContentLoaded", function () {
+    const filterForm = document.querySelector("#filter-form");
+    const carListContainer = document.querySelector(".cars .row");
+    const clearFiltersButton = document.getElementById("clear-filters");
+
+    function fetchCars(filters = {}) {
+        fetch("/cars/filter", {
+            method: "POST",
+            headers: {
+                "Content-Type": "application/json",
+            },
+            body: JSON.stringify(filters),
+        })
+        .then((response) => {
+            if (!response.ok) {
+                throw new Error("Network response was not ok");
+            }
+            return response.text();
+        })
+        .then((html) => {
+            carListContainer.innerHTML = html;
+
+            let favoriteCar = document.querySelectorAll(".cars .car .favorite i");
+            favoriteCar.forEach(function(car){
+                car.addEventListener("click", function(){
+                    if(this.classList.contains("active")){
+                        this.classList.add("fi-rr-heart");
+                        this.classList.remove("fi-ss-heart");
+                        this.classList.remove("active");
+                    }
+                    else{
+                        this.classList.remove("fi-rr-heart");
+                        this.classList.add("fi-ss-heart");
+                        this.classList.add("active");
+                    }
+                    let carId = this.parentNode.nextElementSibling.value;
+
+                    fetch("/favorite", {
+                        method: "POST",
+                        headers: {
+                            "Content-Type": "application/json",
+                        },
+                        body: JSON.stringify({ id: carId })
+                    })
+                    .then((response) => {
+                        if (!response.ok) {
+                            throw new Error("Network response was not ok");
+                        }
+                        return response.text();
+                    });
+                });
+            });
+        })
+        .catch((error) => {
+            console.error("There was a problem with the fetch operation:", error);
+        });
+    }
+
+    filterForm.addEventListener("change", function () {
+        const filters = {};
+
+        const typeFilters = ['sport', 'suv', 'hatchback'];
+        typeFilters.forEach(function (type) {
+            const checkbox = document.getElementById(type);
+            if (checkbox.checked) {
+                if (!filters.type) filters.type = [];
+                filters.type.push(type);
+            }
+        });
+
+        const capacityFilters = ['person2', 'person4', 'person6'];
+        capacityFilters.forEach(function (capacity) {
+            const checkbox = document.getElementById(capacity);
+            if (checkbox.checked) {
+                if (!filters.capacity) filters.capacity = [];
+                filters.capacity.push(checkbox.value);
+            }
+        });
+
+        const priceRange = document.querySelector('input[type="range"]');
+        if (priceRange) {
+            filters.price_min = 0;
+            filters.price_max = priceRange.value;
+        }
+
+        fetchCars(filters);
+    });
+
+    clearFiltersButton.addEventListener("click", function (e) {
+				e.preventDefault();
+        filterForm.reset();
+				maxValue.innerText = "$" + document.getElementById("price-filter").value;
+        fetchCars();
+    });
+
+    fetchCars();
+});
 </script>
 {% endblock %}

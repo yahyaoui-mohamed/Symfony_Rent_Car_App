@@ -52,15 +52,18 @@ class CarRepository extends ServiceEntityRepository
 
     public function findCarsStartingWith(string $prefix): array
     {
-        // return $this->createQueryBuilder('c')
-        //     ->where('c.name LIKE %:prefix')
-        //     ->setParameter('prefix', $prefix, '%')
-        //     ->getQuery()
-        //     ->getResult();
         $qb = $this->createQueryBuilder('u');
         $qb->where($qb->expr()->like('u.name', ':prefix'))
             ->setParameter('prefix', $prefix . '%');
         return $qb->getQuery()->getResult();
+    }
+
+    public function getMaxCarPrice(): float
+    {
+        $qb = $this->createQueryBuilder('c')
+            ->select('MAX(c.price)');
+
+        return $qb->getQuery()->getSingleScalarResult();
     }
 
     //    /**
