@@ -8,7 +8,12 @@
 	<div class="login-form">
 		<form method="post">
 
-            <h1>Please sign in</h1>
+			<h1>Please sign in</h1>
+
+			{% if error %}
+				<div class="alert alert-danger">Inavalid email/password.</div>
+			{% endif %}
+
 
 			<div class="mb-3">
 				<label for="username">Email</label>
@@ -17,14 +22,14 @@
 
 			<div class="mb-3">
 				<label for="password">Password</label>
-                <input type="password" name="password" id="inputPassword" class="form-control" autocomplete="current-password" required placeholder="Enter your password">
+				<input type="password" name="password" id="inputPassword" class="form-control" autocomplete="current-password" required placeholder="Enter your password">
 			</div>
 
 
 			<input type="hidden" name="_csrf_token" value="{{ csrf_token('authenticate') }}">
 
-            <div class="mb-3">
-				<div class="checkbox mb-3">
+			<div class="mb-3">
+				<div class="checkbox d-flex">
 					<input type="checkbox" name="_remember_me" id="_remember_me" class="form-check-input">
 					<label for="_remember_me">Remember me</label>
 				</div>
@@ -35,8 +40,7 @@
 			</div>
 
 			<div class="signin mb-3">
-				Didn't have an account ?
-				<a href="{{path("app_register")}}">Sign up</a>
+				Didn't have an account ? <a href="{{path("app_register")}}">Sign up</a>
 			</div>
 
 		</form>

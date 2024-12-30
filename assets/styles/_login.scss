@@ -43,4 +43,17 @@
     }
   }
 
+  .checkbox {
+    input[type=checkbox] {
+      margin-right: 5px;
+      border-color: #e2e2e2;
+
+      &:focus {
+        border-color: #e2e2e2;
+        box-shadow: none;
+
+      }
+    }
+  }
+
 }

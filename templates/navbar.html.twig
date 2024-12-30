@@ -57,58 +57,206 @@
 		});
 	</script> #}
 
-	<script>
-	let carContainer = document.querySelector(".car-search");
-	document.getElementById("search").addEventListener("input", function(){
-		carContainer.style.display = "block";
-		carContainer.innerHTML = "";
-		if(this.value){
+<script>
+{# let carContainer = document.querySelector(".car-search");
+let abortController = null; // To track and cancel the current fetch request
 
-			fetch("/search", {
-			method: "POST",
-			 headers: {
-        "Content-Type": "application/json"
-    	},
-			body: JSON.stringify({prefix: this.value})
-			}).then((response) => {
-				if(response.status === 204){
-					let res = document.createElement("p");
-					res.textContent = "No car found.";
-					carContainer.appendChild(res);
-				}
-				else{
-					return response.json();
-				}
-			}).then(res => {
-				if(res)
-					res.forEach(car => {
-						carContainer.innerHTML +=
-						`
-						<div class="car-item">
-							<div class="row">
-								<div class="col-lg-3 col-md-3 col-3">
-									<img src="${car.img}" alt="">
-								</div>
-								<div class="col-lg-6 col-md-6 col-6">
-									<a href="/car/${car.id}">${car.name}</a>
-									<span>${car.type}</span>
-								</div>
-								<div class="col-lg-3 col-md-3 col-3">
-									<h3>$${car.price}</h3>
-								</div>
-							</div>
-						</div>
-						`
-					});
-			});
-		}
-		else{
-			carContainer.html = "";
-			carContainer.style.display = "none";
-		}
-		
-	});	
+document.getElementById("search").addEventListener("input", function () {
+    const searchValue = this.value.trim(); // Trim to avoid unnecessary spaces
 
-	</script>
+    carContainer.style.display = "block";
+    carContainer.innerHTML = ""; // Clear previous results immediately
+
+    if (searchValue === "") {
+        carContainer.style.display = "none"; // Hide results when the input is empty
+        return;
+    }
+
+    // If there is an ongoing request, abort it
+    if (abortController) {
+        abortController.abort();
+    }
+
+    // Create a new AbortController for the current fetch request
+    abortController = new AbortController();
+    const signal = abortController.signal;
+
+    // Initiate a new fetch request
+    fetch("/search", {
+        method: "POST",
+        headers: {
+            "Content-Type": "application/json",
+        },
+        body: JSON.stringify({ prefix: searchValue }),
+        signal: signal, // Attach the abort signal
+    })
+        .then((response) => {
+            if (response.status === 204) {
+                carContainer.innerHTML = "<p>No car found.</p>";
+            } else {
+                return response.json();
+            }
+        })
+        .then((res) => {
+            if (res) {
+                res.forEach((car) => {
+                    carContainer.innerHTML += `
+                        <div class="car-item">
+                            <div class="row">
+                                <div class="col-lg-3 col-md-3 col-3">
+                                    <img src="${car.img}" alt="">
+                                </div>
+                                <div class="col-lg-6 col-md-6 col-6">
+                                    <a href="/car/${car.id}">${car.name}</a>
+                                    <span>${car.type}</span>
+                                </div>
+                                <div class="col-lg-3 col-md-3 col-3">
+                                    <h3>$${car.price}</h3>
+                                </div>
+                            </div>
+                        </div>
+                    `;
+                });
+            }
+        })
+}); #}
+
+
+{# let carContainer = document.querySelector(".car-search");
+let currentSearchRequest = null;  // To track the current request
+
+document.getElementById("search").addEventListener("input", function () {
+    const searchValue = this.value.trim(); // Trim to avoid unnecessary spaces
+
+    carContainer.style.display = "block";
+    carContainer.innerHTML = ""; // Clear previous results immediately
+
+    if (searchValue === "") {
+        carContainer.style.display = "none"; // Hide results when the input is empty
+        return;
+    }
+
+    // Cancel the previous search if it was in progress
+    if (currentSearchRequest) {
+        currentSearchRequest.cancel();  // Cancel the previous request
+    }
+
+    // Create a new object to track the request
+    const searchRequest = {
+        cancel: () => {
+            currentSearchRequest = null;
+        }
+    };
+
+    // Assign the new request to the current search request
+    currentSearchRequest = searchRequest;
+
+    // Make a fetch request
+    fetch("/search", {
+        method: "POST",
+        headers: {
+            "Content-Type": "application/json",
+        },
+        body: JSON.stringify({ prefix: searchValue })
+    })
+    .then((response) => {
+        if (response.status === 204) {
+            carContainer.innerHTML = "<p>No car found.</p>";
+        } else {
+            return response.json();
+        }
+    })
+    .then((res) => {
+        // Ensure we only update the results for the latest search
+        if (currentSearchRequest === searchRequest) {
+            if (res) {
+                res.forEach((car) => {
+                    carContainer.innerHTML += `
+                        <div class="car-item">
+                            <div class="row">
+                                <div class="col-lg-3 col-md-3 col-3">
+                                    <img src="${car.img}" alt="">
+                                </div>
+                                <div class="col-lg-6 col-md-6 col-6">
+                                    <a href="/car/${car.id}">${car.name}</a>
+                                    <span>${car.type}</span>
+                                </div>
+                                <div class="col-lg-3 col-md-3 col-3">
+                                    <h3>$${car.price}</h3>
+                                </div>
+                            </div>
+                        </div>
+                    `;
+                });
+            }
+        }
+    });
+}); #}
+
+let carContainer = document.querySelector(".car-search");
+let currentSearchTimestamp = 0;  // To track the timestamp of the current search request
+
+document.getElementById("search").addEventListener("input", function () {
+    const searchValue = this.value.trim(); // Trim to avoid unnecessary spaces
+
+    carContainer.style.display = "block";
+    carContainer.innerHTML = ""; // Clear previous results immediately
+
+    if (searchValue === "") {
+        carContainer.style.display = "none"; // Hide results when the input is empty
+        return;
+    }
+
+    // Increment the search timestamp with each new input
+    const searchTimestamp = ++currentSearchTimestamp;
+
+    // Make a fetch request
+    fetch("/search", {
+        method: "POST",
+        headers: {
+            "Content-Type": "application/json",
+        },
+        body: JSON.stringify({ prefix: searchValue })
+    })
+    .then((response) => {
+        if (response.status === 204) {
+            carContainer.innerHTML = "<p>No car found.</p>";
+        } else {
+            return response.json();
+        }
+    })
+    .then((res) => {
+        // Check if this response is from the latest search (based on timestamp)
+        if (searchTimestamp === currentSearchTimestamp) {
+            if (res) {
+                res.forEach((car) => {
+                    carContainer.innerHTML += `
+                        <div class="car-item">
+                            <div class="row">
+                                <div class="col-lg-3 col-md-3 col-3">
+                                    <img src="${car.img}" alt="">
+                                </div>
+                                <div class="col-lg-6 col-md-6 col-6">
+                                    <a href="/car/${car.id}">${car.name}</a>
+                                    <span>${car.type}</span>
+                                </div>
+                                <div class="col-lg-3 col-md-3 col-3">
+                                    <h3>$${car.price}</h3>
+                                </div>
+                            </div>
+                        </div>
+                    `;
+                });
+            }
+        }
+    })
+    .catch((error) => {
+        console.error("Fetch error:", error);
+    });
+});
+
+
+
+</script>
 
 {% endblock %}

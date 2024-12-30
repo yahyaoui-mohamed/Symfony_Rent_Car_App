@@ -15,8 +15,8 @@
 				<div class="hero-card left">
 					<h5>The best platform <br/> for Car Rental</h5>
 					<p>Ease of doing car rental safely and <br/> reliably. Of course at low price.</p>
-					<button>Rental Car</button>
-					<img src="/images/car1.png" alt="image1" width={406} height={116}/>
+					<a href="{{path("app_cars")}}">Rental Car</a>
+					<img src="/images/car1.png" alt="image1"/>
 				</div>
 			</div>
 
@@ -24,8 +24,8 @@
 				<div class="hero-card right">
 					<h5>Easy way to rent a <br/> car at a low price</h5>
 					<p>Providing cheap car rental services <br/> and safe and comfortable facilities.</p>
-					<button>Rental Car</button>
-					<img src="/images/car2.png" alt="image2" width={340} height={108}/>
+					<a href="{{path("app_cars")}}">Rental Car</a>
+					<img src="/images/car2.png" alt="image2"/>
 				</div>
 			</div>
 
@@ -37,12 +37,10 @@
 
 
 
-
-<div class="reservation d-flex">
+{# <div class="reservation d-flex">
 	<div class="container">
 		<div class="reservation-items d-flex justify-content-between">
 
-			{# <div class="col-lg-5"> #}
 				<div class="pick-up">
 					<div class="title">Pick - Up</div>
 					<div class="info">
@@ -66,8 +64,6 @@
 						</div>
 					</div>
 				</div>
-			{# </div> #}
-
 
 			<div class="col-lg-1 d-flex align-items-center justify-content-center">
 				<button class="change-btn d-flex">
@@ -75,8 +71,6 @@
 				</button>
 			</div>
 
-
-			{# <div class="col-lg-5"> #}
 				<div class="drop-off">
 					<div class="title">Drop - Off</div>
 					<div class="info">
@@ -100,18 +94,9 @@
 						</div>
 					</div>
 				</div>
-			{# </div> #}
-			
 		</div>		
-		
-
-
-
-
 	</div>
-
-</div>
-
+</div> #}
 
 
 
@@ -284,7 +269,6 @@
 </div>
 <div class="d-flex align-items-center">
 	<button class="d-flex show-more">Show more car</button>
-	<p>{{allCars}}</p>
 </div>
 
 </div>
@@ -534,4 +518,3 @@ document.addEventListener('DOMContentLoaded', () => {
 
 </script>
 {% endblock %}
-

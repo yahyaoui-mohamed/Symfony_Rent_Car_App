@@ -45,13 +45,11 @@ class IndexController extends AbstractController
         }
 
         $favoriteCarUser = $em->getRepository(Favorite::class)->findBy(["visitor_id" => $visitorId]);
-        $cars = $em->getRepository(Car::class)->findAll();
         $popularCars = $em->getRepository(Car::class)->findBy([], null, 8);
         $recommandationCars = $em->getRepository(Car::class)->findBy([], null, 8);
         return $this->render('index/index.html.twig', [
             'recommandationCars' => $recommandationCars,
             'popularCars' => $popularCars,
-            'allCars' => count($cars),
             'favoriteCarUser' => $favoriteCarUser,
         ]);
     }

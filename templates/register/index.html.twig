@@ -8,7 +8,17 @@
     <div class="register-form">
 
         {{ form_start(form) }}
+
             <h1>Sign up</h1>
+
+            {% for label, messages in app.flashes %}
+                {% for message in messages %}
+                    <div class="alert alert-{{label}}">
+                        {{ message }}
+                    </div>
+                {% endfor %}
+            {% endfor %}
+
             <div class="mb-3">
                 {{ form_label(form.email) }}
                 {{ form_widget(form.email) }}
@@ -18,14 +28,18 @@
                 {{ form_label(form.password) }}
                 {{ form_widget(form.password) }}
             </div>
-            
+
+            <div class="mb-3">
+                {{ form_row(form.sign_up) }}            
+            </div>
+
             <div class="login mb-3">
                 You already have an account? <a href="{{path("app_login")}}">Sign in</a>
             </div>
+
         {{ form_end(form) }}
 
     </div>
-
 {% include 'footer.html.twig' %}
 
 {% endblock %}

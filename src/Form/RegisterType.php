@@ -27,7 +27,7 @@ class RegisterType extends AbstractType
                     'placeholder' => 'You password',
                 ]
             ])
-            ->add("sign_in", SubmitType::class)
+            ->add("sign_up", SubmitType::class)
         ;
     }
 

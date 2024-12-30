@@ -6,45 +6,59 @@
 {% include 'navbar.html.twig' %}
 <div class="cars">
 <div class="container">
-  <div class="row">
-    {% for favoriteCar in favoriteCars %}
-    <div class="col-lg-4">
-      <div class="car">
-        <div class="car-name d-flex justify-content-between">
-          <div class="name">
-            <h3>{{favoriteCar.car.name}}</h3>
-            <span>{{favoriteCar.car.type}}</span>
-          </div>
-          <div class="favorite">
-            <i class="fi fi-ss-heart active"></i>
-          </div>
-          <input type="hidden" name="car_id" value={{favoriteCar.car.id}}>
-        </div>
-        <div class="group">
-          <div class="car-img">
-            <img src={{favoriteCar.car.img}} alt="{{favoriteCar.car.name}} car image."/>
-          </div>
+  {% if favoriteCars %}
+    <div class="row">
+      {% for favoriteCar in favoriteCars %}
+        <div class="col-lg-4">
+          <div class="car">
+            <div class="car-name d-flex justify-content-between">
+              <div class="name">
+                <h3>{{favoriteCar.car.name}}</h3>
+                <span>{{favoriteCar.car.type}}</span>
+              </div>
+              <div class="favorite">
+                <i class="fi fi-ss-heart active"></i>
+              </div>
+              <input type="hidden" name="car_id" value={{favoriteCar.car.id}}>
+            </div>
+            <div class="group">
+              <div class="car-img">
+                <img src={{favoriteCar.car.img}} alt="{{favoriteCar.car.name}} car image."/>
+              </div>
 
-          <div class="options d-flex">
-            <div class="litres"><i class="fi fi-tr-gas-pump"></i>{{favoriteCar.car.gasoline}}L</div>
-            <div class="gear"><i class="fi fi-ts-tire"></i> {{favoriteCar.car.steering}}</div>
-            <div class="seats"><i class="fi fi-tr-seat-airline"></i> {{favoriteCar.car.capacity}} People</div>
+              <div class="options d-flex">
+                <div class="litres">
+                  <i class="fi fi-tr-gas-pump"></i>
+                  {{favoriteCar.car.gasoline}}L</div>
+                <div class="gear">
+                  <i class="fi fi-ts-tire"></i>
+                  {{favoriteCar.car.steering}}</div>
+                <div class="seats">
+                  <i class="fi fi-tr-seat-airline"></i>
+                  {{favoriteCar.car.capacity}}
+                  People</div>
+              </div>
+            </div>
+
+            <div class="rent-price d-flex align-items-center justify-content-between">
+              <div class="price">${{favoriteCar.car.price}}.00/
+                <span>day</span>
+              </div>
+              <div class="rent-btn">
+                <a href="/car/{{favoriteCar.car.id}}">Rent Now</a>
+              </div>
+            </div>
+
           </div>
         </div>
-
-        <div class="rent-price d-flex align-items-center justify-content-between">
-          <div class="price">${{favoriteCar.car.price}}.00/
-            <span>day</span>
-          </div>
-          <div class="rent-btn">
-            <a href="/car/{{favoriteCar.car.id}}">Rent Now</a>
-          </div>
-        </div>
-
-      </div>
+      {% endfor %}
     </div>
-  {% endfor %}
-  </div>
+  {% else %}
+    <div class="favorite-message text-center">
+      <p>Your wishlist is empty.</p>
+    </div>
+  {% endif %}
+  
 </div>
 </div>
 
