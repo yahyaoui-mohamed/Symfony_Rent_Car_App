@@ -28,6 +28,37 @@
   .settings {
     display: flex;
 
+    .user {
+      position: relative;
+
+      .user-dropdown {
+        &.active {
+          display: block;
+        }
+
+        display:none;
+        position: absolute;
+        background-color: #fff;
+        padding: 10px 50px 10px 15px;
+        left: -90px;
+        top: 50px;
+        box-shadow: rgba(100, 100, 111, 0.2) 0px 7px 29px 0px;
+        border-radius: 5px;
+
+        a {
+          border: none;
+          color: #596780;
+          text-decoration: none;
+          font-size: 16px;
+          display: inline-block;
+
+          &:first-child {
+            margin-bottom: 10px;
+          }
+        }
+      }
+    }
+
     .notification {
       position: relative;
 
@@ -39,11 +70,12 @@
         border-radius: 50%;
         background-color: #FF4423;
         top: 0;
-        right: 11px
+        right: 11px;
+        display: inline-block;
       }
     }
 
-    a {
+    .navbar-item {
       text-decoration: none;
       margin-right: 10px;
       width: 35px;

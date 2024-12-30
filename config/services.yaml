@@ -4,6 +4,10 @@
 # Put parameters here that don't need to change on each machine where the app is deployed
 # https://symfony.com/doc/current/best_practices.html#use-parameters-for-application-configuration
 parameters:
+    social_discord: "%env(SOCIAL_DISCORD)%"
+    social_instagram: "%env(SOCIAL_INSTAGRAM)%"
+    social_twitter: "%env(SOCIAL_TWITTER)%"
+    social_facebook: "%env(SOCIAL_FACEBOOK)%"
 
 services:
     # default configuration for services in *this* file
@@ -21,3 +25,11 @@ services:
 
     # add more service definitions when explicit configuration is needed
     # please note that last definitions always *replace* previous ones
+twig:
+    default_path: "%kernel.project_dir%/templates"
+    globals:
+        app_env: "%env(APP_ENV)%"
+        social_discord: "%social_discord%"
+        social_instagram: "%social_instagram%"
+        social_twitter: "%social_twitter%"
+        social_facebook: "%social_facebook%"

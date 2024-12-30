@@ -12,28 +12,36 @@
 			</div>
 			<div class="settings">
 				<div class="favorite">
-					<a href="{{path("app_favorite")}}">
+					<a href="{{path("app_favorite")}}" class="navbar-item">
 						<i class="fi fi-sr-heart"></i>
 					</a>
 				</div>
 				<div class="notification">
-					<a href="#">
+					<a href="{{path("app_notification")}}" class="navbar-item">
 						<i class="fi fi-sr-bell"></i>
 					</a>
 				</div>
 				<div class="user">
 					{% if app.user %}
 						{% if "ROLE_ADMIN" in app.user.roles  %}
-							<a href="{{path("app_admin")}}">
+							<a href="{{path("app_admin")}}" class="navbar-item">
 								<i class="fi fi-sr-user"></i>
 							</a>
 						{% elseif "ROLE_USER" in app.user.roles %}
-							<a href="{{path("app_account")}}">
-								<i class="fi fi-sr-user"></i>
-							</a>
+                            <a href="#" class="navbar-item">
+                                <i class="fi fi-sr-user"></i>
+                            </a>
+                            <div class="user-dropdown">
+                                <a href="{{path("app_account")}}">
+                                    Account
+                                </a>
+                                <a href="{{path("app_logout")}}">
+                                    Logout
+                                </a>
+                            </div>
 						{% endif %}
 					{% else %}
-						<a href="{{path("app_login")}}">
+						<a href="{{path("app_login")}}" class="navbar-item">
 							<i class="fi fi-sr-user"></i>
 						</a>
 					{% endif %}
@@ -255,6 +263,15 @@ document.getElementById("search").addEventListener("input", function () {
     });
 });
 
+document.querySelector(".user .navbar-item").addEventListener("click", function(e){
+    let dropdown = document.querySelector(".user-dropdown");
+    if(dropdown.classList.contains("active")){
+        dropdown.classList.remove("active");
+    }
+    else{
+        dropdown.classList.add("active");
+    }
+});
 
 
 </script>
