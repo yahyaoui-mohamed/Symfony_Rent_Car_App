@@ -18,17 +18,17 @@ class CarsController extends AbstractController
     public function index(Request $request, EntityManagerInterface $em): Response
     {
 
-        $page = max(1, $request->query->getInt('page', 1));
-        $limit = 5;
+        // $page = max(1, $request->query->getInt('page', 1));
+        // $limit = 5;
 
-        $query = $em->createQuery(
-            'SELECT c 
-         FROM App\Entity\Car c'
-        )->setFirstResult(($page - 1) * $limit)
-            ->setMaxResults($limit);
+        // $query = $em->createQuery(
+        //     'SELECT c 
+        //  FROM App\Entity\Car c'
+        // )->setFirstResult(($page - 1) * $limit)
+        //     ->setMaxResults($limit);
 
-        $paginator = new Paginator($query, true);
-        $totalCars = count($paginator);
+        // $paginator = new Paginator($query, true);
+        // $totalCars = count($paginator);
 
 
 
@@ -55,14 +55,14 @@ class CarsController extends AbstractController
         $carDataType = $queryType->getResult();
 
         return $this->render('cars/index.html.twig', [
-            'cars' => $paginator,
+            'cars' => $cars,
             'carDataType' => $carDataType,
             'carDataCapacity' => $carDataCapacity,
             'favoriteCarUser' => $favoriteCarUser,
             'max' => $max,
-            'totalCars' => $totalCars,
-            'currentPage' => $page,
-            'limit' => $limit,
+            // 'totalCars' => $totalCars,
+            // 'currentPage' => $page,
+            // 'limit' => $limit,
         ]);
     }
 

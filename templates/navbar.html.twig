@@ -24,11 +24,19 @@
 				<div class="user">
 					{% if app.user %}
 						{% if "ROLE_ADMIN" in app.user.roles  %}
-							<a href="{{path("app_admin")}}" class="navbar-item">
+							<a href="./" class="navbar-item">
 								<i class="fi fi-sr-user"></i>
 							</a>
+                            <div class="user-dropdown">
+                                <a href="{{path("app_admin")}}">
+                                    Dashboard
+                                </a>
+                                <a href="{{path("app_logout")}}">
+                                    Logout
+                                </a>
+                            </div>
 						{% elseif "ROLE_USER" in app.user.roles %}
-                            <a href="#" class="navbar-item">
+                            <a href="./" class="navbar-item">
                                 <i class="fi fi-sr-user"></i>
                             </a>
                             <div class="user-dropdown">
@@ -66,7 +74,7 @@
 	</script> #}
 
 <script>
-{# let carContainer = document.querySelector(".car-search");
+let carContainer = document.querySelector(".car-search");
 let abortController = null; // To track and cancel the current fetch request
 
 document.getElementById("search").addEventListener("input", function () {
@@ -127,7 +135,7 @@ document.getElementById("search").addEventListener("input", function () {
                 });
             }
         })
-}); #}
+});
 
 
 {# let carContainer = document.querySelector(".car-search");
@@ -201,7 +209,7 @@ document.getElementById("search").addEventListener("input", function () {
     });
 }); #}
 
-let carContainer = document.querySelector(".car-search");
+{# let carContainer = document.querySelector(".car-search");
 let currentSearchTimestamp = 0;  // To track the timestamp of the current search request
 
 document.getElementById("search").addEventListener("input", function () {
@@ -261,9 +269,10 @@ document.getElementById("search").addEventListener("input", function () {
     .catch((error) => {
         console.error("Fetch error:", error);
     });
-});
+}); #}
 
 document.querySelector(".user .navbar-item").addEventListener("click", function(e){
+    e.preventDefault();
     let dropdown = document.querySelector(".user-dropdown");
     if(dropdown.classList.contains("active")){
         dropdown.classList.remove("active");

@@ -111,7 +111,7 @@
 					{% include 'cars/_list.html.twig' with {'cars': cars} %}
 					
 				</div>
-				<div class="pagination">
+				{# <div class="pagination">
 					{% set totalPages = (totalCars / limit)|round(0, 'ceil') %}
 					<ul>
 						{% if currentPage > 1 %}
@@ -132,7 +132,7 @@
 							</li>
 						{% endif %}
 					</ul>
-				</div>
+				</div> #}
 
 			</div>
 
@@ -234,11 +234,17 @@
     });
 });
 
+let maxValue = document.getElementById("value");
+maxValue.innerText = "$" + document.getElementById("price-filter").value;
+
+ #}
+
 
 let favoriteCar = document.querySelectorAll(".cars .car .favorite i");
 
 favoriteCar.forEach(function(car){
 	car.addEventListener("click", function(){
+		console.log("ok");
 		let carId = this.parentNode.nextElementSibling.value;
 		if(this.classList.contains("active")){
 			this.classList.add("fi-rr-heart");
@@ -279,11 +285,6 @@ favoriteCar.forEach(function(car){
 	});
 });
 
-let maxValue = document.getElementById("value");
-maxValue.innerText = "$" + document.getElementById("price-filter").value;
-
- #}
-
 document.getElementById("price-filter").addEventListener("input", function(){
 	maxValue.innerText = "$" + this.value;
 });
@@ -316,31 +317,43 @@ document.addEventListener("DOMContentLoaded", function () {
             let favoriteCar = document.querySelectorAll(".cars .car .favorite i");
             favoriteCar.forEach(function(car){
                 car.addEventListener("click", function(){
+                    let carId = this.parentNode.nextElementSibling.value;
                     if(this.classList.contains("active")){
                         this.classList.add("fi-rr-heart");
-                        this.classList.remove("fi-ss-heart");
+                        this.classList.remove("fi-sr-heart");
                         this.classList.remove("active");
-                    }
+												fetch("/favorite", {
+													method: "DELETE",
+													headers: {
+															"Content-Type": "application/json",
+													},
+													body: JSON.stringify({ id: carId })
+												})
+												.then((response) => {
+														if (!response.ok) {
+																throw new Error("Network response was not ok");
+														}
+														return response.text();
+												});
+										}
                     else{
                         this.classList.remove("fi-rr-heart");
-                        this.classList.add("fi-ss-heart");
+                        this.classList.add("fi-sr-heart");
                         this.classList.add("active");
+												fetch("/favorite", {
+													method: "POST",
+													headers: {
+															"Content-Type": "application/json",
+													},
+													body: JSON.stringify({ id: carId })
+												})
+												.then((response) => {
+														if (!response.ok) {
+																throw new Error("Network response was not ok");
+														}
+														return response.text();
+												});
                     }
-                    let carId = this.parentNode.nextElementSibling.value;
-
-                    fetch("/favorite", {
-                        method: "POST",
-                        headers: {
-                            "Content-Type": "application/json",
-                        },
-                        body: JSON.stringify({ id: carId })
-                    })
-                    .then((response) => {
-                        if (!response.ok) {
-                            throw new Error("Network response was not ok");
-                        }
-                        return response.text();
-                    });
                 });
             });
         })
