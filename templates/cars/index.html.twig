@@ -1,6 +1,6 @@
 {% extends 'base.html.twig' %}
 
-{% block title %} Morent | All cars {% endblock %}
+{% block title %}All cars{% endblock %}
 
 {% block body %}
 
@@ -8,11 +8,12 @@
 
 <div class="all-cars">
 	<div class="row">
+		
 		<div class="col-lg-3 col-md-12">
 			<form id="filter-form">
 				<div class="filter">
 					<div class="filter-title">Type</div>
-					<ul>
+					<ul class="type">
 						{% for car in carDataType %}
 								<li>
 										<input type="checkbox" class="form-check-input" id="{{ car.type|lower }}">
@@ -25,7 +26,7 @@
 					</ul>
 
 					<div class="filter-title">Capacity</div>
-					<ul>
+					<ul class="capacity">
 						{% for car in carDataCapacity %}
 							<li><input type="checkbox" class="form-check-input" id="person{{car.capacity}}" value="{{car.capacity}}">
 								<label for="person{{car.capacity}}">{{car.capacity}} Person
@@ -48,203 +49,27 @@
 		</div>
 
 		<div class="col-lg-9 col-md-12">
-			{# <div class="reservation d-flex">
-				<div class="container">
-					<div class="d-flex justify-content-between">
-						<div class="pick-up">
-							<div class="title">Pick - Up</div>
-							<div class="info">
-								<div class="locations">
-									<h5>Locations</h5>
-									<select name="" id="" class="form-select">
-										<option value="">Select your city</option>
-									</select>
-								</div>
-								<div class="date">
-									<h5>Date</h5>
-									<select name="" id="" class="form-select">
-										<option value="">Select your date</option>
-									</select>
-								</div>
-								<div class="time">
-									<h5>Time</h5>
-									<select name="" id="" class="form-select">
-										<option value="">Select your time</option>
-									</select>
-								</div>
-							</div>
-						</div>
-						<div class="col-lg-1 d-flex align-items-center justify-content-center">
-							<button class="change-btn d-flex">
-								<i class="fi fi-sr-exchange"></i>
-							</button>
-						</div>
-						<div class="drop-off">
-							<div class="title">Drop - Off</div>
-							<div class="info">
-								<div class="locations">
-									<h5>Locations</h5>
-									<select name="" id="" class="form-select">
-										<option value="">Select your city</option>
-									</select>
-								</div>
-								<div class="date">
-									<h5>Date</h5>
-									<select name="" id="" class="form-select">
-										<option value="">Select your date</option>
-									</select>
-								</div>
-								<div class="time">
-									<h5>Time</h5>
-									<select name="" id="" class="form-select">
-										<option value="">Select your time</option>
-									</select>
-								</div>
-							</div>
-						</div>
-					</div>
-				</div>
-			</div> #}
-
 			<div class="cars">
 				<div class="row">
 					{% include 'cars/_list.html.twig' with {'cars': cars} %}
-					
 				</div>
-				{# <div class="pagination">
-					{% set totalPages = (totalCars / limit)|round(0, 'ceil') %}
-					<ul>
-						{% if currentPage > 1 %}
-							<li>
-								<a href="{{ path('app_cars', { page: currentPage - 1 }) }}">Previous</a>
-							</li>
-						{% endif %}
-						{% for i in 1..totalPages %}
-							<li>
-								<a href="{{ path('app_cars', { page: i }) }}" class="{{ currentPage == i ? 'active' : '' }}">
-									{{ i }}
-								</a>
-							</li>
-						{% endfor %}
-						{% if currentPage < totalPages %}
-							<li>
-								<a href="{{ path('app_cars', { page: currentPage + 1 }) }}">Next</a>
-							</li>
-						{% endif %}
-					</ul>
-				</div> #}
-
 			</div>
 
 		</div>
 	</div>
+</div>
 
-	{% include "footer.html.twig" %}
+
+{% include "footer.html.twig" %}
+
 <script>
 
-{# document.addEventListener("DOMContentLoaded", function () {
-    const carListContainer = document.querySelector(".cars .row");
-
-    const filterForm = document.querySelector("#filter-form");
-    filterForm.addEventListener("change", function () {
-        const filters = {};
-
-        // const typeFilters = ['sport', 'suv', 'mpv', 'sedan', 'couple', 'hatchback'];
-        const typeFilters = ['sport', 'suv', 'hatchback'];
-        // const capacityFilters = ['person2', 'person4', 'person5', 'person8'];
-        const capacityFilters = ['person2', 'person4', 'person6'];
-
-        typeFilters.forEach(function (type) {
-						const checkbox = document.getElementById(type);
-            if (checkbox.checked) {
-                if (!filters.type) filters.type = [];
-                filters.type.push(type);
-            }
-        });
-
-        capacityFilters.forEach(function (capacity) {
-            const checkbox = document.getElementById(capacity);
-            if (checkbox.checked) {
-                if (!filters.capacity) filters.capacity = [];
-                filters.capacity.push(checkbox.value);
-            }
-        });
-
-        const priceRange = document.querySelector('input[type="range"]');
-				if(priceRange) {
-					filters.price_min = 0;
-					filters.price_max = priceRange.value;
-				}
-
-        fetch("/cars/filter", {
-            method: "POST",
-            headers: {
-                "Content-Type": "application/json",
-            },
-            body: JSON.stringify(filters),
-        })
-        .then((response) => {
-            if (!response.ok) {
-                throw new Error("Network response was not ok");
-            }
-            return response.text();
-        })
-        .then((html) => {
-            carListContainer.innerHTML = html;
-
-						let favoriteCar = document.querySelectorAll(".cars .car .favorite i");
-
-						favoriteCar.forEach(function(car){
-							car.addEventListener("click", function(){
-								if(this.classList.contains("active")){
-									this.classList.add("fi-rr-heart");
-									this.classList.remove("fi-ss-heart");
-									this.classList.remove("active");
-								}
-								else{
-									this.classList.remove("fi-rr-heart");
-									this.classList.add("fi-ss-heart");
-									this.classList.add("active");
-								}
-								let carId = this.parentNode.nextElementSibling.value;
-
-								fetch("/favorite", {
-										method: "POST",
-										headers: {
-												"Content-Type": "application/json",
-										},
-										body:JSON.stringify({id : carId})
-								})
-								.then((response) => {
-										if (!response.ok) {
-												throw new Error("Network response was not ok");
-										}
-										return response.text();
-								});
-
-							});
-						});
-
-        })
-        .catch((error) => {
-            console.error("There was a problem with the fetch operation:", error);
-        });
-
-				
-    });
-});
-
+let favoriteCar = document.querySelectorAll(".cars .car .favorite i");
 let maxValue = document.getElementById("value");
 maxValue.innerText = "$" + document.getElementById("price-filter").value;
 
- #}
-
-
-let favoriteCar = document.querySelectorAll(".cars .car .favorite i");
-
 favoriteCar.forEach(function(car){
 	car.addEventListener("click", function(){
-		console.log("ok");
 		let carId = this.parentNode.nextElementSibling.value;
 		if(this.classList.contains("active")){
 			this.classList.add("fi-rr-heart");
@@ -288,9 +113,6 @@ favoriteCar.forEach(function(car){
 document.getElementById("price-filter").addEventListener("input", function(){
 	maxValue.innerText = "$" + this.value;
 });
-let maxValue = document.getElementById("value");
-maxValue.innerText = "$" + document.getElementById("price-filter").value;
-
 
 document.addEventListener("DOMContentLoaded", function () {
     const filterForm = document.querySelector("#filter-form");
@@ -365,7 +187,7 @@ document.addEventListener("DOMContentLoaded", function () {
     filterForm.addEventListener("change", function () {
         const filters = {};
 
-        const typeFilters = ['sport', 'suv', 'hatchback'];
+				const typeFilters = [...document.querySelectorAll(".filter .type input[type=checkbox]")].map(item => item.id)
         typeFilters.forEach(function (type) {
             const checkbox = document.getElementById(type);
             if (checkbox.checked) {
@@ -400,5 +222,6 @@ document.addEventListener("DOMContentLoaded", function () {
     });
 
 });
+
 </script>
 {% endblock %}
