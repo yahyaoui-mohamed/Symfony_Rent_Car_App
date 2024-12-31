@@ -17,6 +17,11 @@
 					<i class="fi fi-rr-stats"></i>Insight
 				</a>
 			</li>
+			<li class="{{ app.request.attributes.get('_route') == 'app_admin_promo_code' ? 'active' : '' }}">
+				<a href="{{ path('app_admin_promo_code') }}">
+					<i class="fi fi-rr-ticket"></i>Promo Code
+				</a>
+			</li>
 			<li class="{{ app.request.attributes.get('_route') == 'app_reimburse' ? 'active' : '' }}">
 				<a href="{{ path('app_reimburse') }}">
 					<i class="fi fi-ts-refund-alt"></i>Reimburse

@@ -54,7 +54,7 @@
 							</div>
 						</div>
 
-						<div class="row">
+						{# <div class="row">
 							<h3 class="pick-up">Pick - Up</h3>
 							<div class="col-lg-6">
 								<div class="mb-3">
@@ -90,7 +90,7 @@
 								</div>
 							</div>
 						</div>
-					</div>
+					</div> #}
 					<div class="payment-method">
 						<div class="title d-flex justify-content-between">
 							<div class="title-content">
@@ -202,15 +202,17 @@
 						<div class="total">
 							<div class="d-flex justify-content-between">
 								<p>Sub Total</p>
-								<p class="price">{{total | format_currency('USD', {decimal_always_shown:true}, 'en')}}</p>
+								<p class="sub-price">{{total | format_currency('USD', {decimal_always_shown:true}, 'en')}}</p>
 							</div>
 							<div class="d-flex justify-content-between">
 								<p>Tax</p>
-								<p class="price">$0</p>
+								<p class="sub-price">$0</p>
 							</div>
 							<div class="promo-code mb-3">
 									{{ form_row(form.promoCode) }}
 								<a href="#">Apply Now</a>
+								<input type="hidden" id="days" value="{{days}}">
+								<input type="hidden" id="price" value="{{car.price}}">
 							</div>
 							<div class="total-rent-price">
 								<div class="d-flex justify-content-between">
@@ -243,20 +245,16 @@ const style = {
     fontSize: '14px',
     color: '#90A3B9',
     backgroundColor: '#fff',
-    width: '100%',
     fontWeight: '400',
-		borderRadius : '8px'
   },
 };
 
-
 const cardNumber = elements.create('cardNumber', { style });
-cardNumber.mount('#card-number-element');
-
 const cardExpiry = elements.create('cardExpiry', { style });
-cardExpiry.mount('#card-expiry-element');
-
 const cardCvc = elements.create('cardCvc', { style });
+let newTotal = 0;
+cardNumber.mount('#card-number-element');
+cardExpiry.mount('#card-expiry-element');
 cardCvc.mount('#card-cvc-element');
 
 document.querySelector('#payment-form').addEventListener('submit', async (event) => {
@@ -264,6 +262,8 @@ document.querySelector('#payment-form').addEventListener('submit', async (event)
 
   const form = event.target;
   const formData = new FormData(form);
+
+	formData.append('newTotal', newTotal);
 
   try {
     const response = await fetch('{{ path("app_checkout", { id: car.id }) }}', {
@@ -306,7 +306,8 @@ document.querySelector('#payment-form').addEventListener('submit', async (event)
 });
 
 document.querySelector(".promo-code a").addEventListener("click", function(e){
-	console.log("ok");
+	let input = document.querySelector(".promo-code input");
+	input.style.border = "none";
 	e.preventDefault();
 	let promoCode = document.querySelector(".promo-code input").value;
 	fetch("/promocode",{
@@ -316,13 +317,22 @@ document.querySelector(".promo-code a").addEventListener("click", function(e){
 		},
 		body:JSON.stringify({
 			promoCode,
+			days: document.getElementById("days").value,
+			price: document.getElementById("price").value,
 		}),
 	}).then(resp => {
 		if(resp.status === 200){
 			this.style.display = "none";
-			document.querySelector(".promo-code input").setAttribute("disabled", "");
+			input.setAttribute("disabled", "");
+		}
+		else{
+			input.style.border = "1px solid #f00";
 		}
 		return resp.json();
+	}).then(resp => {
+		newTotal = resp.newTotal;
+		document.querySelector(".total-rent-price .price span").innerText = "$" + resp.newTotal;
+		document.querySelector(".total .sub-price").innerText = "$" + resp.newTotal;
 	})
 	.catch(err => {
 		console.log(err);
