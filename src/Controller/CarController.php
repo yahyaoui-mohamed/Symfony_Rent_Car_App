@@ -58,8 +58,9 @@ class CarController extends AbstractController
             ]);
         }
 
-        $recentCars = $em->getRepository(Car::class)->findBy([], null, 4);
+        $recentCars = $em->getRepository(Car::class)->findBy([], null, 8);
         $recommandationCars = $em->getRepository(Car::class)->findBy([], null, 8);
+        $favoriteCarUser = $em->getRepository(Favorite::class)->findBy(["visitor_id" => $visitorId]);
 
         return $this->render('car/index.html.twig', [
             'car' => $car,
@@ -68,6 +69,7 @@ class CarController extends AbstractController
             'form' => $form->createView(),
             'isFav' => $favCar !== null ? true : false,
             'reviews' => $carReviews,
+            'favoriteCarUser' => $favoriteCarUser,
         ]);
     }
 }

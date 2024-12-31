@@ -25,13 +25,13 @@
                             {% endif %}
                             
                             <div class="row">
-                                <div class="col-lg-4">
+                                <div class="col-lg-4 col-md-4 col-4">
                                     <div class="thumbnail-container active">
                                         <img src="{{car.img}}" alt="">
                                     </div>
                                 </div>
                                 {% for img in car.otherImg %}
-                                <div class="col-lg-4">
+                                <div class="col-lg-4 col-md-4 col-4">
                                     <div class="thumbnail-container">
                                         <img src="{{img}}" alt="">
                                     </div>
@@ -61,25 +61,25 @@
                         </div>
                         <div class="options">
                             <div class="row">
-                                <div class="col-lg-6">
+                                <div class="col-lg-6 col-md-6 col-6">
                                     <div class="option d-flex justify-content-between">
                                         <h3>Type Car</h3>
                                         <span>{{car.type}}</span>
                                     </div>
                                 </div>
-                                <div class="col-lg-6">
+                                <div class="col-lg-6 col-md-6 col-6">
                                     <div class="option d-flex justify-content-between">
                                         <h3>Capacity</h3>
                                         <span>{{car.capacity}} Person</span>
                                     </div>
                                 </div>
-                                <div class="col-lg-6">
+                                <div class="col-lg-6 col-md-6 col-6">
                                     <div class="option d-flex justify-content-between">
                                         <h3>Steering</h3>
                                         <span>{{car.steering}}</span>
                                     </div>
                                 </div>
-                                <div class="col-lg-6">
+                                <div class="col-lg-6 col-md-6 col-6">
                                     <div class="option d-flex justify-content-between">
                                         <h3>Gasoline</h3>
                                         <span>{{car.gasoline}}L</span>
@@ -97,7 +97,9 @@
                         <div class="price d-flex justify-content-between">
                             <div class="price-day">
                                 <h3>${{car.price}}.00/<span>day</span></h3>
-                                <p class="old-price">$100.00</p>
+                                {% if car.oldPrice %}
+                                    <p class="old-price">${{car.oldPrice}}.00</p>
+                                {% endif %}
                             </div>
                             {# <a href="/checkout/{{car.id}}">Rent Now</a> #}
                             {{ form_row(form.proceedToCheckOut) }}
@@ -117,12 +119,12 @@
                         {% for review in reviews %}
                             <div class="review-item">
                                 <div class="row">
-                                    <div class="col-lg-1">
+                                    <div class="col-lg-1 col-md-2 col-2">
                                         <div class="reviewer-img">
                                             <img src="/images/avatar.png" alt="">
                                         </div>
                                     </div>
-                                    <div class="col-lg-9">
+                                    <div class="col-lg-9 col-md-7 col-7">
                                         <div class="d-flex">
                                             <div class="reviewer-name">
                                                 <h3>{{review.fullname|capitalize}}</h3>
@@ -132,7 +134,7 @@
                                             <p>{{review.review}}</p>
                                         </div>
                                     </div>
-                                    <div class="col-lg-2">
+                                    <div class="col-lg-2 col-md-3 col-3">
                                         <div class="review-date">
                                             <p>{{review.date|date("d M y")}}</p>
                                         </div>
@@ -167,7 +169,7 @@
         </div>
     </div>
 
-    <div class="recent-cars">
+    {# <div class="recent-cars">
         <div class="container">
             <div class="title d-flex justify-content-between">
                 <h3>Recent Car</h3>
@@ -221,11 +223,139 @@
             </div>
 
         </div>
-    </div>        
+    </div>         #}
+
+<div class="container">
+    <div class="cars-slider">
+        <div class="title d-flex justify-content-between">
+            <h3>Recent Car</h3>
+            <a href="{{path("app_cars")}}">View All</a>
+        </div>
+
+        <div class="slider-track row">
+            {% for car in recentCars %}
+                <div class="car-slide col-lg-3 col-12">
+                    <div class="car">
+                        <div class="car-name d-flex justify-content-between">
+                            <div class="name">
+                                <h3>{{ car.name }}</h3>
+                                <span>{{ car.type }}</span>
+                            </div>
+                            <div class="favorite">
+                                {% set found = false %}
+                                {% for favorite in favoriteCarUser %}
+                                    {% if favorite.car.id == car.id %}
+                                        {% set found = true %}
+                                    {% endif %}
+                                {% endfor %}
+                                {% if found %}
+                                    <i class="fi fi-sr-heart active"></i>
+                                {% else %}
+                                    <i class="fi fi-rr-heart"></i>
+                                {% endif %}
+                            </div>
+                            <input type="hidden" name="car_id" value="{{ car.id }}">
+                        </div>
+                        <div class="group">
+                            <div class="car-img">
+                                <img src="{{ car.img }}" alt="{{ car.name }} car image."/>
+                            </div>
+                            <div class="options d-flex">
+                                <div class="litres">
+                                    <i class="fi fi-tr-gas-pump"></i>
+                                    {{ car.gasoline }}L</div>
+                                <div class="gear">
+                                    <i class="fi fi-ts-tire"></i>
+                                    {{ car.steering }}</div>
+                                <div class="seats">
+                                    <i class="fi fi-tr-seat-airline"></i>
+                                    {{ car.capacity }}
+                                    People</div>
+                            </div>
+                        </div>
+                        <div class="rent-price d-flex align-items-center justify-content-between">
+                            <div class="price">${{ car.price }}.00/
+                                <span>day</span>
+                            </div>
+                            <div class="rent-btn">
+                                <a href="/car/{{ car.id }}">Rent Now</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            {% endfor %}
+        </div>
+    </div>
+
+</div>
+
+<div class="container">
+	<div class="cars-slider">
+		<div class="title d-flex justify-content-between">
+			<h3>Recommandation Car</h3>
+			<a href="{{path("app_cars")}}">View All</a>
+		</div>
+
+		<div class="slider-track row">
+			{% for car in recommandationCars %}
+				<div class="car-slide col-lg-3 col-12">
+					<div class="car">
+						<div class="car-name d-flex justify-content-between">
+							<div class="name">
+								<h3>{{ car.name }}</h3>
+								<span>{{ car.type }}</span>
+							</div>
+							<div class="favorite">
+								{% set found = false %}
+								{% for favorite in favoriteCarUser %}
+									{% if favorite.car.id == car.id %}
+										{% set found = true %}
+									{% endif %}
+								{% endfor %}
+								{% if found %}
+									<i class="fi fi-sr-heart active"></i>
+								{% else %}
+									<i class="fi fi-rr-heart"></i>
+								{% endif %}
+							</div>
+							<input type="hidden" name="car_id" value="{{ car.id }}">
+						</div>
+						<div class="group">
+							<div class="car-img">
+								<img src="{{ car.img }}" alt="{{ car.name }} car image."/>
+							</div>
+							<div class="options d-flex">
+								<div class="litres">
+									<i class="fi fi-tr-gas-pump"></i>
+									{{ car.gasoline }}L</div>
+								<div class="gear">
+									<i class="fi fi-ts-tire"></i>
+									{{ car.steering }}</div>
+								<div class="seats">
+									<i class="fi fi-tr-seat-airline"></i>
+									{{ car.capacity }}
+									People</div>
+							</div>
+						</div>
+						<div class="rent-price d-flex align-items-center justify-content-between">
+							<div class="price">${{ car.price }}.00/
+								<span>day</span>
+							</div>
+							<div class="rent-btn">
+								<a href="/car/{{ car.id }}">Rent Now</a>
+							</div>
+						</div>
+					</div>
+				</div>
+			{% endfor %}
+		</div>
+	</div>
+
+</div>
 
 
 
-<div class="recommandation-cars">
+{# <div class="recommandation-cars">
 	<div class="container">
 		<div class="title d-flex justify-content-between">
 			<h3>Recommandation Car</h3>
@@ -279,10 +409,10 @@
 		</div>
 
 	</div>
-</div>
+</div> #}
 
 
-    {% include 'footer.html.twig' %}
+{% include 'footer.html.twig' %}
 
 <script>
     let activeImg = document.querySelector(".thumbnails .thumbnail-container.active img");
@@ -455,12 +585,6 @@ document.addEventListener('DOMContentLoaded', () => {
     const row = document.querySelector('.thumbnails .row');
     const thumbnailContainers = row.querySelectorAll('.col-lg-4');
 
-    if (thumbnailContainers.length === 0) {
-        console.warn("No images found for the slider.");
-        return; // Exit if no images are present
-    }
-
-    // Variables for tracking the scroll position
     let scrollAmount = 0;
     const scrollStep = 150; // Adjust this value for how much the thumbnails move
     const visibleWidth = row.parentElement.offsetWidth; // The width of the visible area
@@ -488,8 +612,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
 
 document.querySelector(".form-review").addEventListener("submit", function(e) {
-    e.preventDefault(); // Prevent the default form submission behavior
-
+    e.preventDefault(); 
     let fullname = document.getElementById("fullname").value;
     let review = document.getElementById("review").value;
     let carId = document.getElementById("carid").value;
@@ -511,6 +634,75 @@ document.querySelector(".form-review").addEventListener("submit", function(e) {
 
         }
         return;
+    });
+});
+
+document.addEventListener('DOMContentLoaded', () => {
+    const sliderTrack = document.querySelector('.slider-track');
+    const slides = document.querySelectorAll('.car-slide');
+    let slideWidth = slides[0].clientWidth;
+    const totalSlides = slides.length;
+    let visibleSlides = 4;
+
+    let isDragging = false;
+    let startX = 0;
+    let currentTranslate = 0;
+    let prevTranslate = 0;
+
+    function calculateBounds() {
+        slideWidth = slides[0].clientWidth;
+        visibleSlides = window.innerWidth <= 767 ? 1 : 4;
+        const maxTranslate = 0; 
+        const minTranslate = -(slideWidth * (totalSlides - visibleSlides));
+
+        return { minTranslate, maxTranslate };
+    }
+
+    function setSliderPosition() {
+        const { minTranslate, maxTranslate } = calculateBounds();
+        currentTranslate = Math.max(minTranslate, Math.min(currentTranslate, maxTranslate));
+        sliderTrack.style.transform = `translateX(${currentTranslate}px)`;
+    }
+
+    function handleMouseDown(e) {
+        isDragging = true;
+        startX = e.clientX;
+        sliderTrack.style.transition = 'none';
+    }
+
+    function handleMouseMove(e) {
+        if (!isDragging) return;
+        const currentX = e.clientX;
+        const distance = currentX - startX;
+        currentTranslate = prevTranslate + distance;
+
+        const { minTranslate, maxTranslate } = calculateBounds();
+        currentTranslate = Math.max(minTranslate, Math.min(currentTranslate, maxTranslate));
+        setSliderPosition();
+    }
+
+    function handleMouseUp() {
+        isDragging = false;
+        prevTranslate = currentTranslate;
+        sliderTrack.style.transition = 'transform 0.2s ease-out'; 
+
+        const snappedTranslate = Math.round(currentTranslate / slideWidth) * slideWidth;
+        currentTranslate = snappedTranslate;
+
+        setSliderPosition();
+    }
+
+    sliderTrack.addEventListener('mousedown', handleMouseDown);
+    window.addEventListener('mousemove', handleMouseMove);
+    window.addEventListener('mouseup', handleMouseUp);
+
+    sliderTrack.addEventListener('dragstart', (e) => e.preventDefault());
+    sliderTrack.addEventListener('mouseleave', () => {
+        if (isDragging) handleMouseUp();
+    });
+
+    window.addEventListener('resize', () => {
+        setSliderPosition();
     });
 });
 
