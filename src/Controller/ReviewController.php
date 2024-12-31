@@ -16,6 +16,8 @@ class ReviewController extends AbstractController
     #[Route('/review', name: 'app_review', methods: ['POST'])]
     public function index(Request $request, EntityManagerInterface $em): Response
     {
+        $visitorId = $request->cookies->get('visitor_id');
+
         $result = (json_decode($request->getContent(), true));
         $newReview = new Review();
         $fullname = $result["fullname"];
@@ -26,6 +28,7 @@ class ReviewController extends AbstractController
         $newReview->setReview($review);
         $newReview->setCar($car);
         $newReview->setDate(new DateTime());
+        $newReview->setVisitorId($visitorId);
         $em->persist($newReview);
         $em->flush();
         return new Response("Review Added", 200);

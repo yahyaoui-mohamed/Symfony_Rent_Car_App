@@ -16,6 +16,7 @@ class FavoriteController extends AbstractController
     public function index(Request $request, EntityManagerInterface $em): Response
     {
         $visitorId = $request->cookies->get('visitor_id');
+
         if ($request->isMethod("DELETE")) {
             $data = json_decode($request->getContent(), true);
             $carId = $data["id"];
@@ -26,7 +27,6 @@ class FavoriteController extends AbstractController
         } else if ($request->isMethod("POST")) {
             $data = json_decode($request->getContent(), true);
             $carId = $data["id"];
-
             $car = $em->getRepository(Car::class)->find($carId);
             $favorite = new Favorite();
             $favorite->setCar($car)

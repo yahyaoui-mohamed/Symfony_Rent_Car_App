@@ -27,6 +27,9 @@ class Review
     #[ORM\Column(type: Types::DATETIME_MUTABLE)]
     private ?\DateTimeInterface $date = null;
 
+    #[ORM\Column]
+    private ?string $visitor_id = null;
+
     public function getId(): ?int
     {
         return $this->id;
@@ -76,6 +79,18 @@ class Review
     public function setDate(\DateTimeInterface $date): static
     {
         $this->date = $date;
+
+        return $this;
+    }
+
+    public function getVisitorId(): ?string
+    {
+        return $this->visitor_id;
+    }
+
+    public function setVisitorId(string $visitor_id): static
+    {
+        $this->visitor_id = $visitor_id;
 
         return $this;
     }

@@ -1,6 +1,6 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Morent | Home{% endblock %}
+{% block title %}Home{% endblock %}
 
 {% block body %}
 
@@ -99,114 +99,68 @@
 </div> #}
 
 
-
-
 <div class="popular-cars">
 	<div class="container">
 		<div class="title d-flex justify-content-between">
 			<h3>Popular Car</h3>
 			<a href="{{path("app_cars")}}">View All</a>
 		</div>
-		
-		{# <div class="cars">
-						
-			<div class="row">
+
+		<div class="cars-slider">
+			<div class="slider-track row">
 				{% for car in popularCars %}
-				<div class="col-lg-3">
-					<div class="car">
-						<div class="car-name d-flex justify-content-between">
-							<div class="name">
-								<h3>{{car.name}} </h3>
-								<span>{{car.type}}</span>
+					<div class="car-slide col-lg-3 col-12">
+						<div class="car">
+							<div class="car-name d-flex justify-content-between">
+								<div class="name">
+									<h3>{{ car.name }}</h3>
+									<span>{{ car.type }}</span>
+								</div>
+								<div class="favorite">
+									{% set found = false %}
+									{% for favorite in favoriteCarUser %}
+										{% if favorite.car.id == car.id %}
+											{% set found = true %}
+										{% endif %}
+									{% endfor %}
+									{% if found %}
+										<i class="fi fi-sr-heart active"></i>
+									{% else %}
+										<i class="fi fi-rr-heart"></i>
+									{% endif %}
+								</div>
+								<input type="hidden" name="car_id" value="{{ car.id }}">
 							</div>
-							<div class="favorite">
-								<i class="fi fi-rs-heart"></i>
+							<div class="group">
+								<div class="car-img">
+									<img src="{{ car.img }}" alt="{{ car.name }} car image."/>
+								</div>
+								<div class="options d-flex">
+									<div class="litres">
+										<i class="fi fi-tr-gas-pump"></i>
+										{{ car.gasoline }}L</div>
+									<div class="gear">
+										<i class="fi fi-ts-tire"></i>
+										{{ car.steering }}</div>
+									<div class="seats">
+										<i class="fi fi-tr-seat-airline"></i>
+										{{ car.capacity }}
+										People</div>
+								</div>
 							</div>
-							<input type="hidden" name="car_id" value={{car.id}}>
-						</div>
-						<div class="group">
-							<div class="car-img">
-								<img src="{{car.img}}" alt="{{car.name}} car image."/>
-							</div>
-							<div class="options d-flex">
-								<div class="litres"><i class="fi fi-tr-gas-pump"></i> {{car.gasoline}}L</div>
-								<div class="gear"><i class="fi fi-ts-tire"></i> {{car.steering}}</div>
-								<div class="seats"><i class="fi fi-tr-seat-airline"></i>{{car.capacity}} People</div>
-							</div>
-						</div>
-						<div class="rent-price d-flex align-items-center justify-content-between">
-							<div class="price">${{car.price}}.00/
-								<span>day</span>
-							</div>
-							<div class="rent-btn">
-								<a href="/car/{{car.id}}">Rent Now</a>
+							<div class="rent-price d-flex align-items-center justify-content-between">
+								<div class="price">${{ car.price }}.00/
+									<span>day</span>
+								</div>
+								<div class="rent-btn">
+									<a href="/car/{{ car.id }}">Rent Now</a>
+								</div>
 							</div>
 						</div>
 					</div>
-				</div>
-
-				{% endfor %}		
+				{% endfor %}
 			</div>
-		
-		</div> #}
-
-<div class="cars-slider">
-	<div class="slider-track row">
-		{% for car in popularCars %}
-			<div class="car-slide col-lg-3 col-12">
-				<div class="car">
-					<div class="car-name d-flex justify-content-between">
-						<div class="name">
-							<h3>{{ car.name }}</h3>
-							<span>{{ car.type }}</span>
-						</div>
-						<div class="favorite">
-							{% set found = false %}
-							{% for favorite in favoriteCarUser %}
-								{% if favorite.car.id == car.id %}
-									{% set found = true %}
-								{% endif %}
-							{% endfor %}
-							{% if found %}
-								<i class="fi fi-sr-heart active"></i>
-							{% else %}
-								<i class="fi fi-rr-heart"></i>
-							{% endif %}
-						</div>
-						<input type="hidden" name="car_id" value="{{ car.id }}">
-					</div>
-					<div class="group">
-						<div class="car-img">
-							<img src="{{ car.img }}" alt="{{ car.name }} car image."/>
-						</div>
-						<div class="options d-flex">
-							<div class="litres">
-								<i class="fi fi-tr-gas-pump"></i>
-								{{ car.gasoline }}L</div>
-							<div class="gear">
-								<i class="fi fi-ts-tire"></i>
-								{{ car.steering }}</div>
-							<div class="seats">
-								<i class="fi fi-tr-seat-airline"></i>
-								{{ car.capacity }}
-								People</div>
-						</div>
-					</div>
-					<div class="rent-price d-flex align-items-center justify-content-between">
-						<div class="price">${{ car.price }}.00/
-							<span>day</span>
-						</div>
-						<div class="rent-btn">
-							<a href="/car/{{ car.id }}">Rent Now</a>
-						</div>
-					</div>
-				</div>
-			</div>
-		{% endfor %}
-	</div>
-</div>
-
-
+		</div>
 
 	</div>
 </div>
@@ -267,6 +221,8 @@
 	{% endfor %}
 	</div>
 </div>
+
+
 <div class="d-flex align-items-center">
 	<button class="d-flex show-more">Show more car</button>
 </div>
@@ -277,7 +233,12 @@
 {% include 'footer.html.twig' %}
 <script>
 
-let favoriteCar = document.querySelectorAll(".car .favorite i");
+let favoriteCar = document.querySelectorAll(".car .favorite i"),
+offset = 8,
+limit = 4,
+showMoreButton = document.querySelector(".show-more"),
+carsContainer = document.querySelector(".recommandation-car .cars .row");
+
 favoriteCar.forEach(function(car){
 	car.addEventListener("click", function(){
 		console.log(this);
@@ -322,11 +283,6 @@ favoriteCar.forEach(function(car){
 
 	});
 });
-
-let offset = 8;
-const limit = 4;
-const showMoreButton = document.querySelector(".show-more");
-const carsContainer = document.querySelector(".recommandation-car .cars .row");
 
 showMoreButton.addEventListener("click", function() {
     fetch("/getCars", {

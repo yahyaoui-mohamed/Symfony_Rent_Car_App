@@ -22,6 +22,7 @@ class CarController extends AbstractController
         $visitorId = $request->cookies->get('visitor_id');
 
         $carReviews = $em->getRepository(Review::class)->findBy(['car' => $id]);
+        $review = $em->getRepository(Review::class)->findBy(['car' => $id, 'visitor_id' => $visitorId]);
 
         $favCar = $em->getRepository(Favorite::class)->findOneBy(["car" => $id, "visitor_id" => $visitorId]);
         $car = $em->getRepository(Car::class)->find($id);
@@ -70,6 +71,7 @@ class CarController extends AbstractController
             'isFav' => $favCar !== null ? true : false,
             'reviews' => $carReviews,
             'favoriteCarUser' => $favoriteCarUser,
+            'hasReviewed' => $review ? true : false,
         ]);
     }
 }

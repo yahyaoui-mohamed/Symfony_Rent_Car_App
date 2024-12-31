@@ -1,156 +1,159 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Morent | Car details{% endblock %}
+{% block title %}Car details{% endblock %}
 
 {% block body %}
-    {% include 'navbar.html.twig' %}
 
-    <div class="car-details">
-        <div class="container">
-            <div class="row">
+{% include 'navbar.html.twig' %}
 
-                <div class="col-lg-6">
-                    <div class="car-images">
-                        <div class="main-img">
-                            <img src="{{car.img}}" alt=""/>
+<div class="car-details">
+    <div class="container">
+        <div class="row">
+
+            <div class="col-lg-6">
+                <div class="car-images">
+                    <div class="main-img">
+                        <img src="{{car.img}}" alt=""/>
+                    </div>
+                    <div class="thumbnails">
+                        {% if car.otherImg|length > 3 %}
+                            <div class="left-button">
+                                <i class="fi fi-rr-angle-left"></i>
+                            </div>
+                            <div class="right-button">
+                                <i class="fi fi-rr-angle-right"></i>
+                            </div>
+                        {% endif %}
+                        
+                        <div class="row">
+                            <div class="col-lg-4 col-md-4 col-4">
+                                <div class="thumbnail-container active">
+                                    <img src="{{car.img}}" alt="">
+                                </div>
+                            </div>
+                            {% for img in car.otherImg %}
+                            <div class="col-lg-4 col-md-4 col-4">
+                                <div class="thumbnail-container">
+                                    <img src="{{img}}" alt="">
+                                </div>
+                            </div>
+                            {% endfor %}
                         </div>
-                        <div class="thumbnails">
-                            {% if car.otherImg|length > 3 %}
-                                <div class="left-button">
-                                    <i class="fi fi-rr-angle-left"></i>
-                                </div>
-                                <div class="right-button">
-                                    <i class="fi fi-rr-angle-right"></i>
-                                </div>
+
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-lg-6">
+                <div class="car-description">
+                    <div class="car-name d-flex justify-content-between">
+                        <h3>{{car.name}}</h3>
+                        <div class="favorite">
+                            {% if isFav %}
+                                <i class="fi fi-sr-heart active"></i>
+                            {% else %}
+                                <i class="fi fi-rr-heart"></i>
                             {% endif %}
-                            
-                            <div class="row">
-                                <div class="col-lg-4 col-md-4 col-4">
-                                    <div class="thumbnail-container active">
-                                        <img src="{{car.img}}" alt="">
-                                    </div>
+                        </div>
+                        <input type="hidden" name="car_id" value="{{ car.id }}" id="carid">
+                    </div>
+                    <div class="desc">
+                        <p>{{car.description}}</p>
+                    </div>
+                    <div class="options">
+                        <div class="row">
+                            <div class="col-lg-6 col-md-6 col-6">
+                                <div class="option d-flex justify-content-between">
+                                    <h3>Type Car</h3>
+                                    <span>{{car.type}}</span>
                                 </div>
-                                {% for img in car.otherImg %}
-                                <div class="col-lg-4 col-md-4 col-4">
-                                    <div class="thumbnail-container">
-                                        <img src="{{img}}" alt="">
-                                    </div>
-                                </div>
-                                {% endfor %}
                             </div>
-
+                            <div class="col-lg-6 col-md-6 col-6">
+                                <div class="option d-flex justify-content-between">
+                                    <h3>Capacity</h3>
+                                    <span>{{car.capacity}} Person</span>
+                                </div>
+                            </div>
+                            <div class="col-lg-6 col-md-6 col-6">
+                                <div class="option d-flex justify-content-between">
+                                    <h3>Steering</h3>
+                                    <span>{{car.steering}}</span>
+                                </div>
+                            </div>
+                            <div class="col-lg-6 col-md-6 col-6">
+                                <div class="option d-flex justify-content-between">
+                                    <h3>Gasoline</h3>
+                                    <span>{{car.gasoline}}L</span>
+                                </div>
+                            </div>
+                            <div class="col-lg-6">
+                                <div class="option d-flex justify-content-between align-items-center">
+                                    <h3>Days</h3>
+                                    {{ form_start(form) }}
+                                        {{ form_row(form.days) }}
+                                </div>
+                            </div>
                         </div>
                     </div>
-                </div>
-
-                <div class="col-lg-6">
-                    <div class="car-description">
-                        <div class="car-name d-flex justify-content-between">
-                            <h3>{{car.name}}</h3>
-                            <div class="favorite">
-                                {% if isFav %}
-                                    <i class="fi fi-sr-heart active"></i>
-                                {% else %}
-                                    <i class="fi fi-rr-heart"></i>
-                                {% endif %}
-                            </div>
-                            <input type="hidden" name="car_id" value="{{ car.id }}" id="carid">
+                    <div class="price d-flex justify-content-between">
+                        <div class="price-day">
+                            <h3>${{car.price}}.00/<span>day</span></h3>
+                            {% if car.oldPrice %}
+                                <p class="old-price">${{car.oldPrice}}.00</p>
+                            {% endif %}
                         </div>
-                        <div class="desc">
-                            <p>{{car.description}}</p>
-                        </div>
-                        <div class="options">
-                            <div class="row">
-                                <div class="col-lg-6 col-md-6 col-6">
-                                    <div class="option d-flex justify-content-between">
-                                        <h3>Type Car</h3>
-                                        <span>{{car.type}}</span>
-                                    </div>
-                                </div>
-                                <div class="col-lg-6 col-md-6 col-6">
-                                    <div class="option d-flex justify-content-between">
-                                        <h3>Capacity</h3>
-                                        <span>{{car.capacity}} Person</span>
-                                    </div>
-                                </div>
-                                <div class="col-lg-6 col-md-6 col-6">
-                                    <div class="option d-flex justify-content-between">
-                                        <h3>Steering</h3>
-                                        <span>{{car.steering}}</span>
-                                    </div>
-                                </div>
-                                <div class="col-lg-6 col-md-6 col-6">
-                                    <div class="option d-flex justify-content-between">
-                                        <h3>Gasoline</h3>
-                                        <span>{{car.gasoline}}L</span>
-                                    </div>
-                                </div>
-                                <div class="col-lg-6">
-                                    <div class="option d-flex justify-content-between align-items-center">
-                                        <h3>Days</h3>
-                                        {{ form_start(form) }}
-                                            {{ form_row(form.days) }}
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="price d-flex justify-content-between">
-                            <div class="price-day">
-                                <h3>${{car.price}}.00/<span>day</span></h3>
-                                {% if car.oldPrice %}
-                                    <p class="old-price">${{car.oldPrice}}.00</p>
-                                {% endif %}
-                            </div>
-                            {# <a href="/checkout/{{car.id}}">Rent Now</a> #}
-                            {{ form_row(form.proceedToCheckOut) }}
-                            {{ form_end(form) }}
-                        </div>
+                        {{ form_row(form.proceedToCheckOut) }}
+                        {{ form_end(form) }}
                     </div>
-                </div>
-
-            </div>
-
-            <div class="reviews">
-                <h3>Reviews
-                    <span>{{reviews|length}}</span>
-                </h3>
-                <div class="items">
-                    {% if reviews|length > 0 %}
-                        {% for review in reviews %}
-                            <div class="review-item">
-                                <div class="row">
-                                    <div class="col-lg-1 col-md-2 col-2">
-                                        <div class="reviewer-img">
-                                            <img src="/images/avatar.png" alt="">
-                                        </div>
-                                    </div>
-                                    <div class="col-lg-9 col-md-7 col-7">
-                                        <div class="d-flex">
-                                            <div class="reviewer-name">
-                                                <h3>{{review.fullname|capitalize}}</h3>
-                                            </div>
-                                        </div>
-                                        <div class="review-description">
-                                            <p>{{review.review}}</p>
-                                        </div>
-                                    </div>
-                                    <div class="col-lg-2 col-md-3 col-3">
-                                        <div class="review-date">
-                                            <p>{{review.date|date("d M y")}}</p>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-
-                        {% endfor %}
-                    {% else %}
-                        <p>No reviews for this car.</p>
-                    {% endif %}
-
                 </div>
             </div>
 
-            <div class="add-review">
+        </div>
+
+        <div class="reviews">
+            <h3>Reviews
+                <span class="reviews-count">{{reviews|length}}</span>
+            </h3>
+            <div class="items">
+                {% if reviews|length > 0 %}
+                    {% for review in reviews %}
+                        <div class="review-item">
+                            <div class="row">
+                                <div class="col-lg-1 col-md-2 col-2">
+                                    <div class="reviewer-img">
+                                        <img src="/images/avatar.png" alt="">
+                                    </div>
+                                </div>
+                                <div class="col-lg-9 col-md-7 col-7">
+                                    <div class="d-flex">
+                                        <div class="reviewer-name">
+                                            <h3>{{review.fullname|capitalize}}</h3>
+                                        </div>
+                                    </div>
+                                    <div class="review-description">
+                                        <p>{{review.review}}</p>
+                                    </div>
+                                </div>
+                                <div class="col-lg-2 col-md-3 col-3">
+                                    <div class="review-date">
+                                        <p>{{review.date|date("d M y")}}</p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                    {% endfor %}
+                {% else %}
+                    <p>No reviews for this car.</p>
+                {% endif %}
+
+            </div>
+        </div>
+
+        <div class="add-review">
+            {% if hasReviewed %}
+                <p>You have already post a review.</p>
+            {% else %}
                 <h3>Add review</h3>
                 <form method="POST" class="form-review">
                     <div class="mb-3">
@@ -163,272 +166,163 @@
                         <button type="submit" id="form-submit">Submit</button>
                     </div>
                 </form>
-            </div>
-
-            
+            {% endif %}
         </div>
-    </div>
 
-    {# <div class="recent-cars">
-        <div class="container">
+        
+    </div>
+</div>
+
+<div class="recent-car">
+    <div class="container">
+        <div class="cars-slider">
             <div class="title d-flex justify-content-between">
                 <h3>Recent Car</h3>
                 <a href="{{path("app_cars")}}">View All</a>
             </div>
-            
-            <div class="cars">
-                
-                
-                <div class="row">
-                    {% for car in recentCars %}
-                    <div class="col-lg-3">
+
+            <div class="slider-track row">
+                {% for car in recentCars %}
+                    <div class="car-slide col-lg-3 col-12">
                         <div class="car">
                             <div class="car-name d-flex justify-content-between">
                                 <div class="name">
-                                    <h3>{{car.name}}</h3>
-                                    <span>{{car.type}}</span>
+                                    <h3>{{ car.name }}</h3>
+                                    <span>{{ car.type }}</span>
                                 </div>
                                 <div class="favorite">
-                                    <i class="fi fi-rs-heart"></i>
+                                    {% set found = false %}
+                                    {% for favorite in favoriteCarUser %}
+                                        {% if favorite.car.id == car.id %}
+                                            {% set found = true %}
+                                        {% endif %}
+                                    {% endfor %}
+                                    {% if found %}
+                                        <i class="fi fi-sr-heart active"></i>
+                                    {% else %}
+                                        <i class="fi fi-rr-heart"></i>
+                                    {% endif %}
                                 </div>
-                                <input type="hidden" name="car_id" value={{car.id}}>
+                                <input type="hidden" name="car_id" value="{{ car.id }}">
                             </div>
                             <div class="group">
                                 <div class="car-img">
-                                    <img src={{car.img}} alt=""/>
+                                    <img src="{{ car.img }}" alt="{{ car.name }} car image."/>
                                 </div>
                                 <div class="options d-flex">
-                                    <div class="litres"><i class="fi fi-tr-gas-pump"></i> {{car.gasoline}}L</div>
-                                    <div class="gear"><i class="fi fi-ts-tire"></i> {{car.steering}}</div>
-                                    <div class="seats"><i class="fi fi-tr-seat-airline"></i>{{car.capacity}}</div>
+                                    <div class="litres">
+                                        <i class="fi fi-tr-gas-pump"></i>
+                                        {{ car.gasoline }}L</div>
+                                    <div class="gear">
+                                        <i class="fi fi-ts-tire"></i>
+                                        {{ car.steering }}</div>
+                                    <div class="seats">
+                                        <i class="fi fi-tr-seat-airline"></i>
+                                        {{ car.capacity }}
+                                        People</div>
                                 </div>
                             </div>
-                            
                             <div class="rent-price d-flex align-items-center justify-content-between">
-                                <div class="price">${{car.price}}.00/
+                                <div class="price">${{ car.price }}.00/
                                     <span>day</span>
                                 </div>
                                 <div class="rent-btn">
-                                    <a href="/car/{{car.id}}">Rent Now</a>
+                                    <a href="/car/{{ car.id }}">Rent Now</a>
                                 </div>
                             </div>
                         </div>
                     </div>
+                {% endfor %}
+            </div>
+        </div>
+    </div>
+</div>
 
-                    {% endfor %}
-            
-            
-                </div>
-            
+<div class="recommandation-car">
+    <div class="container">
+        <div class="cars-slider">
+            <div class="title d-flex justify-content-between">
+                <h3>Recommandation Car</h3>
+                <a href="{{path("app_cars")}}">View All</a>
             </div>
 
-        </div>
-    </div>         #}
-
-<div class="container">
-    <div class="cars-slider">
-        <div class="title d-flex justify-content-between">
-            <h3>Recent Car</h3>
-            <a href="{{path("app_cars")}}">View All</a>
-        </div>
-
-        <div class="slider-track row">
-            {% for car in recentCars %}
-                <div class="car-slide col-lg-3 col-12">
-                    <div class="car">
-                        <div class="car-name d-flex justify-content-between">
-                            <div class="name">
-                                <h3>{{ car.name }}</h3>
-                                <span>{{ car.type }}</span>
-                            </div>
-                            <div class="favorite">
-                                {% set found = false %}
-                                {% for favorite in favoriteCarUser %}
-                                    {% if favorite.car.id == car.id %}
-                                        {% set found = true %}
+            <div class="slider-track row">
+                {% for car in recommandationCars %}
+                    <div class="car-slide col-lg-3 col-12">
+                        <div class="car">
+                            <div class="car-name d-flex justify-content-between">
+                                <div class="name">
+                                    <h3>{{ car.name }}</h3>
+                                    <span>{{ car.type }}</span>
+                                </div>
+                                <div class="favorite">
+                                    {% set found = false %}
+                                    {% for favorite in favoriteCarUser %}
+                                        {% if favorite.car.id == car.id %}
+                                            {% set found = true %}
+                                        {% endif %}
+                                    {% endfor %}
+                                    {% if found %}
+                                        <i class="fi fi-sr-heart active"></i>
+                                    {% else %}
+                                        <i class="fi fi-rr-heart"></i>
                                     {% endif %}
-                                {% endfor %}
-                                {% if found %}
-                                    <i class="fi fi-sr-heart active"></i>
-                                {% else %}
-                                    <i class="fi fi-rr-heart"></i>
-                                {% endif %}
+                                </div>
+                                <input type="hidden" name="car_id" value="{{ car.id }}">
                             </div>
-                            <input type="hidden" name="car_id" value="{{ car.id }}">
-                        </div>
-                        <div class="group">
-                            <div class="car-img">
-                                <img src="{{ car.img }}" alt="{{ car.name }} car image."/>
+                            <div class="group">
+                                <div class="car-img">
+                                    <img src="{{ car.img }}" alt="{{ car.name }} car image."/>
+                                </div>
+                                <div class="options d-flex">
+                                    <div class="litres">
+                                        <i class="fi fi-tr-gas-pump"></i>
+                                        {{ car.gasoline }}L</div>
+                                    <div class="gear">
+                                        <i class="fi fi-ts-tire"></i>
+                                        {{ car.steering }}</div>
+                                    <div class="seats">
+                                        <i class="fi fi-tr-seat-airline"></i>
+                                        {{ car.capacity }}
+                                        People</div>
+                                </div>
                             </div>
-                            <div class="options d-flex">
-                                <div class="litres">
-                                    <i class="fi fi-tr-gas-pump"></i>
-                                    {{ car.gasoline }}L</div>
-                                <div class="gear">
-                                    <i class="fi fi-ts-tire"></i>
-                                    {{ car.steering }}</div>
-                                <div class="seats">
-                                    <i class="fi fi-tr-seat-airline"></i>
-                                    {{ car.capacity }}
-                                    People</div>
-                            </div>
-                        </div>
-                        <div class="rent-price d-flex align-items-center justify-content-between">
-                            <div class="price">${{ car.price }}.00/
-                                <span>day</span>
-                            </div>
-                            <div class="rent-btn">
-                                <a href="/car/{{ car.id }}">Rent Now</a>
+                            <div class="rent-price d-flex align-items-center justify-content-between">
+                                <div class="price">${{ car.price }}.00/
+                                    <span>day</span>
+                                </div>
+                                <div class="rent-btn">
+                                    <a href="/car/{{ car.id }}">Rent Now</a>
+                                </div>
                             </div>
                         </div>
                     </div>
-                </div>
-            {% endfor %}
+                {% endfor %}
+            </div>
         </div>
     </div>
-
 </div>
-
-<div class="container">
-	<div class="cars-slider">
-		<div class="title d-flex justify-content-between">
-			<h3>Recommandation Car</h3>
-			<a href="{{path("app_cars")}}">View All</a>
-		</div>
-
-		<div class="slider-track row">
-			{% for car in recommandationCars %}
-				<div class="car-slide col-lg-3 col-12">
-					<div class="car">
-						<div class="car-name d-flex justify-content-between">
-							<div class="name">
-								<h3>{{ car.name }}</h3>
-								<span>{{ car.type }}</span>
-							</div>
-							<div class="favorite">
-								{% set found = false %}
-								{% for favorite in favoriteCarUser %}
-									{% if favorite.car.id == car.id %}
-										{% set found = true %}
-									{% endif %}
-								{% endfor %}
-								{% if found %}
-									<i class="fi fi-sr-heart active"></i>
-								{% else %}
-									<i class="fi fi-rr-heart"></i>
-								{% endif %}
-							</div>
-							<input type="hidden" name="car_id" value="{{ car.id }}">
-						</div>
-						<div class="group">
-							<div class="car-img">
-								<img src="{{ car.img }}" alt="{{ car.name }} car image."/>
-							</div>
-							<div class="options d-flex">
-								<div class="litres">
-									<i class="fi fi-tr-gas-pump"></i>
-									{{ car.gasoline }}L</div>
-								<div class="gear">
-									<i class="fi fi-ts-tire"></i>
-									{{ car.steering }}</div>
-								<div class="seats">
-									<i class="fi fi-tr-seat-airline"></i>
-									{{ car.capacity }}
-									People</div>
-							</div>
-						</div>
-						<div class="rent-price d-flex align-items-center justify-content-between">
-							<div class="price">${{ car.price }}.00/
-								<span>day</span>
-							</div>
-							<div class="rent-btn">
-								<a href="/car/{{ car.id }}">Rent Now</a>
-							</div>
-						</div>
-					</div>
-				</div>
-			{% endfor %}
-		</div>
-	</div>
-
-</div>
-
-
-
-{# <div class="recommandation-cars">
-	<div class="container">
-		<div class="title d-flex justify-content-between">
-			<h3>Recommandation Car</h3>
-			<a href="{{path("app_cars")}}">View All</a>
-		</div>
-
-		<div class="cars">
-
-
-			<div class="row">
-				{% for car in recommandationCars %}
-					<div class="col-lg-3">
-						<div class="car">
-							<div class="car-name d-flex justify-content-between">
-								<div class="name">
-									<h3>{{car.name}}</h3>
-									<span>{{car.type}}</span>
-								</div>
-								<div class="favorite">
-									<i class="fi fi-rs-heart"></i>
-								</div>
-                                <input type="hidden" name="car_id" value={{car.id}}>
-							</div>
-							<div class="car-img">
-								<img src={{car.img}} alt=""/>
-							</div>
-							<div class="options d-flex justify-content-between">
-								<div class="litres">
-									<i class="fi fi-tr-gas-pump"></i>{{car.gasoline}}L</div>
-								<div class="gear">
-									<i class="fi fi-ts-tire"></i>{{car.steering}}</div>
-								<div class="seats">
-									<i class="fi fi-tr-seat-airline"></i>{{car.capacity}}</div>
-							</div>
-							<div class="rent-price d-flex align-items-center justify-content-between">
-								<div class="price">${{car.price}}.00/
-									<span>day</span>
-								</div>
-								<div class="rent-btn">
-									<a href="/car/{{car.id}}">Rent Now</a>
-								</div>
-							</div>
-						</div>
-					</div>
-
-				{% endfor %}
-
-
-			</div>
-
-		</div>
-
-	</div>
-</div> #}
 
 
 {% include 'footer.html.twig' %}
 
 <script>
-    let activeImg = document.querySelector(".thumbnails .thumbnail-container.active img");
-
-    let mainImg = document.querySelector(".main-img img");
-    document.querySelectorAll(".thumbnails img").forEach(function(img){
-        img.addEventListener("click", function(){
-            if(!this.parentNode.classList.contains("active")){
-                activeImg.parentNode.classList.remove("active");
-                this.parentNode.classList.add("active");
-                activeImg = this;
-                mainImg.setAttribute("src", activeImg.src);
-        }});
-    });
-
+let activeImg = document.querySelector(".thumbnails .thumbnail-container.active img");
 let favoriteCar = document.querySelectorAll(".car .favorite i");
+let mainImg = document.querySelector(".main-img img");
+let car = document.querySelector(".car-description .car-name .favorite i");
+let carId = car.parentNode.nextElementSibling.value;
+
+document.querySelectorAll(".thumbnails img").forEach(function(img){
+    img.addEventListener("click", function(){
+        if(!this.parentNode.classList.contains("active")){
+            activeImg.parentNode.classList.remove("active");
+            this.parentNode.classList.add("active");
+            activeImg = this;
+            mainImg.setAttribute("src", activeImg.src);
+    }});
+});
+
 
 favoriteCar.forEach(function(car){
 	
@@ -473,9 +367,6 @@ favoriteCar.forEach(function(car){
 	});
 });
 
-let car = document.querySelector(".car-description .car-name .favorite i");
-
-let carId = car.parentNode.nextElementSibling.value;
 
 car.addEventListener("click", function(){
 
@@ -519,95 +410,34 @@ car.addEventListener("click", function(){
 
 });
 
-{# document.addEventListener('DOMContentLoaded', () => {
-    const leftButton = document.querySelector('.left-button');
-    const rightButton = document.querySelector('.right-button');
-    const row = document.querySelector('.thumbnails .row');
-    const thumbnailContainers = row.querySelectorAll('.col-lg-4');
-
-    // Variables for tracking the scroll position
-    let scrollAmount = 0;
-    const scrollStep = 150; // Adjust this value for how much the thumbnails move
-
-    // Event Listener for the Left Button
-    leftButton.addEventListener('click', () => {
-        // Move the thumbnails to the right (scroll left)
-        scrollAmount = Math.max(0, scrollAmount - scrollStep);
-        row.style.transform = `translateX(-${scrollAmount}px)`;
-        row.style.transition = 'transform 0.3s ease-in-out';
-    });
-
-    // Event Listener for the Right Button
-    rightButton.addEventListener('click', () => {
-        // Move the thumbnails to the left (scroll right)
-        const maxScroll = row.scrollWidth - row.clientWidth;
-        scrollAmount = Math.min(maxScroll, scrollAmount + scrollStep);
-        row.style.transform = `translateX(-${scrollAmount}px)`;
-        row.style.transition = 'transform 0.3s ease-in-out';
-    });
-});
-
 document.addEventListener('DOMContentLoaded', () => {
-    const leftButton = document.querySelector('.left-button');
-    const rightButton = document.querySelector('.right-button');
-    const row = document.querySelector('.thumbnails .row');
-    const thumbnailContainers = row.querySelectorAll('.col-lg-4');
+    let leftButton = document.querySelector('.left-button'),
+    rightButton = document.querySelector('.right-button'),
+    row = document.querySelector('.thumbnails .row'),
+    thumbnailContainers = row.querySelectorAll('.col-lg-4'),
+    scrollAmount = 0,
+    scrollStep = 150,
+    visibleWidth = row.parentElement.offsetWidth,
+    totalWidth = Array.from(thumbnailContainers).reduce((sum, item) => sum + item.offsetWidth, 0),
+    maxScroll = Math.max(0, totalWidth - visibleWidth);
 
-    let scrollAmount = 0;
-    const scrollStep = 200; // Adjust this value for how much the thumbnails move
-    const visibleWidth = row.parentElement.offsetWidth; // The width of the visible area
-    const totalWidth = Array.from(thumbnailContainers).reduce((sum, item) => sum + item.offsetWidth, 0); // Total width of thumbnails
-    const maxScroll = Math.max(0, totalWidth - visibleWidth); // Calculate the maximum scroll position
+    if(leftButton && rightButton){
+        leftButton.addEventListener('click', () => {
+            if (scrollAmount > 0) {
+                scrollAmount = Math.max(0, scrollAmount - scrollStep);
+                row.style.transform = `translateX(-${scrollAmount}px)`;
+                row.style.transition = 'transform 0.3s ease-in-out';
+            }
+        });
 
-    // Event Listener for the Left Button
-    leftButton.addEventListener('click', () => {
-        if (scrollAmount > 0) {
-            scrollAmount = Math.max(0, scrollAmount - scrollStep);
-            row.style.transform = `translateX(-${scrollAmount}px)`;
-            row.style.transition = 'transform 0.3s ease-in-out';
-        }
-    });
-
-    // Event Listener for the Right Button
-    rightButton.addEventListener('click', () => {
-        if (scrollAmount < maxScroll) {
-            scrollAmount = Math.min(maxScroll, scrollAmount + scrollStep);
-            row.style.transform = `translateX(-${scrollAmount}px)`;
-            row.style.transition = 'transform 0.3s ease-in-out';
-        }
-    });
-}); #}
-
-
-document.addEventListener('DOMContentLoaded', () => {
-    const leftButton = document.querySelector('.left-button');
-    const rightButton = document.querySelector('.right-button');
-    const row = document.querySelector('.thumbnails .row');
-    const thumbnailContainers = row.querySelectorAll('.col-lg-4');
-
-    let scrollAmount = 0;
-    const scrollStep = 150; // Adjust this value for how much the thumbnails move
-    const visibleWidth = row.parentElement.offsetWidth; // The width of the visible area
-    const totalWidth = Array.from(thumbnailContainers).reduce((sum, item) => sum + item.offsetWidth, 0); // Total width of thumbnails
-    const maxScroll = Math.max(0, totalWidth - visibleWidth); // Calculate the maximum scroll position
-
-    // Event Listener for the Left Button
-    leftButton.addEventListener('click', () => {
-        if (scrollAmount > 0) {
-            scrollAmount = Math.max(0, scrollAmount - scrollStep);
-            row.style.transform = `translateX(-${scrollAmount}px)`;
-            row.style.transition = 'transform 0.3s ease-in-out';
-        }
-    });
-
-    // Event Listener for the Right Button
-    rightButton.addEventListener('click', () => {
-        if (scrollAmount < maxScroll) {
-            scrollAmount = Math.min(maxScroll, scrollAmount + scrollStep);
-            row.style.transform = `translateX(-${scrollAmount}px)`;
-            row.style.transition = 'transform 0.3s ease-in-out';
-        }
-    });
+        rightButton.addEventListener('click', () => {
+            if (scrollAmount < maxScroll) {
+                scrollAmount = Math.min(maxScroll, scrollAmount + scrollStep);
+                row.style.transform = `translateX(-${scrollAmount}px)`;
+                row.style.transition = 'transform 0.3s ease-in-out';
+            }
+        });
+    }
 });
 
 
@@ -626,19 +456,119 @@ document.querySelector(".form-review").addEventListener("submit", function(e) {
     })
     .then(resp => {
         if(resp.status === 200){
+            let months = ['Jan','Feb','Mars','Apr','May','Jun','Jul','Août','Sep','Oct','Nov','Dec'];
             let container = document.querySelector(".add-review");
             let p = document.createElement("p");
+            let reviewsCount = document.querySelector(".reviews-count");
             p.textContent = "Thank you for your review !";
             container.innerHTML = "";
             container.appendChild(p);
-
+            let reviewsContainer = document.querySelector(".reviews .items");
+            let el = `<div class="review-item">
+                <div class="row">
+                    <div class="col-lg-1 col-md-2 col-2">
+                        <div class="reviewer-img">
+                            <img src="/images/avatar.png" alt="">
+                        </div>
+                    </div>
+                    <div class="col-lg-9 col-md-7 col-7">
+                        <div class="d-flex">
+                            <div class="reviewer-name">
+                                <h3>${fullname}</h3>
+                            </div>
+                        </div>
+                        <div class="review-description">
+                            <p>${review}</p>
+                        </div>
+                    </div>
+                    <div class="col-lg-2 col-md-3 col-3">
+                        <div class="review-date">
+                            <p>${new Date().getDate() + " " + months[new Date().getMonth()] + " " + new Date().getFullYear()}</p>
+                        </div>
+                    </div>
+                </div>
+            </div>`;
+            let paragraph = document.querySelector(".reviews .items p");
+            if(paragraph) paragraph.remove();
+            reviewsContainer.innerHTML += el;
+            reviewsCount.innerText = +reviewsCount.innerText + 1;
         }
         return;
+    });
+
+});
+
+document.addEventListener('DOMContentLoaded', () => {
+    const sliderTrack = document.querySelector('.recent-car .slider-track');
+    const slides = document.querySelectorAll('.car-slide');
+    let slideWidth = slides[0].clientWidth;
+    const totalSlides = slides.length;
+    let visibleSlides = 4;
+
+    let isDragging = false;
+    let startX = 0;
+    let currentTranslate = 0;
+    let prevTranslate = 0;
+
+    function calculateBounds() {
+        slideWidth = slides[0].clientWidth;
+        visibleSlides = window.innerWidth <= 767 ? 1 : 4;
+        const maxTranslate = 0; 
+        const minTranslate = -(slideWidth * (totalSlides - visibleSlides));
+
+        return { minTranslate, maxTranslate };
+    }
+
+    function setSliderPosition() {
+        const { minTranslate, maxTranslate } = calculateBounds();
+        currentTranslate = Math.max(minTranslate, Math.min(currentTranslate, maxTranslate));
+        sliderTrack.style.transform = `translateX(${currentTranslate}px)`;
+    }
+
+    function handleMouseDown(e) {
+        isDragging = true;
+        startX = e.clientX;
+        sliderTrack.style.transition = 'none';
+    }
+
+    function handleMouseMove(e) {
+        if (!isDragging) return;
+        const currentX = e.clientX;
+        const distance = currentX - startX;
+        currentTranslate = prevTranslate + distance;
+
+        const { minTranslate, maxTranslate } = calculateBounds();
+        currentTranslate = Math.max(minTranslate, Math.min(currentTranslate, maxTranslate));
+        setSliderPosition();
+    }
+
+    function handleMouseUp() {
+        isDragging = false;
+        prevTranslate = currentTranslate;
+        sliderTrack.style.transition = 'transform 0.2s ease-out'; 
+
+        const snappedTranslate = Math.round(currentTranslate / slideWidth) * slideWidth;
+        currentTranslate = snappedTranslate;
+
+        setSliderPosition();
+    }
+
+    sliderTrack.addEventListener('mousedown', handleMouseDown);
+    window.addEventListener('mousemove', handleMouseMove);
+    window.addEventListener('mouseup', handleMouseUp);
+
+    sliderTrack.addEventListener('dragstart', (e) => e.preventDefault());
+    sliderTrack.addEventListener('mouseleave', () => {
+        if (isDragging) handleMouseUp();
+    });
+
+    window.addEventListener('resize', () => {
+        setSliderPosition();
     });
 });
 
 document.addEventListener('DOMContentLoaded', () => {
-    const sliderTrack = document.querySelector('.slider-track');
+    const sliderTrack = document.querySelector('.recommandation-car .slider-track');
     const slides = document.querySelectorAll('.car-slide');
     let slideWidth = slides[0].clientWidth;
     const totalSlides = slides.length;
