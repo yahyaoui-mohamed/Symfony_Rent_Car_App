@@ -18,7 +18,7 @@ class Transaction
     private ?Car $car = null;
 
     #[ORM\Column]
-    private ?int $total = null;
+    private ?float $total = null;
 
     #[ORM\Column(length: 255)]
     private ?string $visitor_id = null;
@@ -46,12 +46,12 @@ class Transaction
         return $this;
     }
 
-    public function getTotal(): ?int
+    public function getTotal(): ?float
     {
         return $this->total;
     }
 
-    public function setTotal(int $total): static
+    public function setTotal(float $total): static
     {
         $this->total = $total;
 

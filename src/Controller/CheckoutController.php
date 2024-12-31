@@ -43,7 +43,7 @@ class CheckoutController extends AbstractController
                 if ($form->isSubmitted() && $form->isValid()) {
                     $transaction = new Transaction();
                     $transaction->setCar($car)
-                        ->setTotal($total)
+                        ->setTotal($updatedTotal)
                         ->setVisitorId($visitorId)
                         ->setDays($days)
                         ->setCreationDate(new DateTime());

@@ -32,6 +32,7 @@ class PromoCodeController extends AbstractController
         $total = $days * $price;
         $actualCode = $em->getRepository(PromoCode::class)->findOneBy(['value' => $promoCode, 'used' => 0]);
         $actualCode->setUsed(1);
+        $em->flush();
         $newTotal = $total - ($total * $actualCode->getDiscountRate());
         if ($actualCode) {
             return new JsonResponse(['newTotal' => $newTotal], 200);

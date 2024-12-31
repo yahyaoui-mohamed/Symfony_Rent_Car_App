@@ -54,7 +54,7 @@
 							</div>
 						</div>
 
-						<div class="row">
+						{# <div class="row">
 							<h3 class="pick-up">Pick - Up</h3>
 							<div class="col-lg-6">
 								<div class="mb-3">
@@ -89,7 +89,8 @@
 									{{ form_row(form.dropOffTime) }}
 								</div>
 							</div>
-						</div>
+						</div> #}
+
 					</div>
 					<div class="payment-method">
 						<div class="title d-flex justify-content-between">
@@ -259,12 +260,14 @@ cardCvc.mount('#card-cvc-element');
 
 document.querySelector('#payment-form').addEventListener('submit', async (event) => {
   event.preventDefault();
+	if(newTotal === 0){
+		newTotal = document.getElementById("days").value * document.getElementById("price").value;
+	}		
 
   const form = event.target;
   const formData = new FormData(form);
 
 	formData.append('newTotal', newTotal);
-
   try {
     const response = await fetch('{{ path("app_checkout", { id: car.id }) }}', {
       method: 'POST',
