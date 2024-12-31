@@ -2,12 +2,12 @@
 
 namespace App\DataFixtures;
 
+use DateTime;
 use App\Entity\Car;
 use App\Entity\Transaction;
-use DateTime;
-use Doctrine\Bundle\FixturesBundle\Fixture;
-use Doctrine\ORM\EntityManagerInterface;
 use Doctrine\Persistence\ObjectManager;
+use Doctrine\ORM\EntityManagerInterface;
+use Doctrine\Bundle\FixturesBundle\Fixture;
 
 class TransactionFixture extends Fixture
 {
@@ -30,8 +30,6 @@ class TransactionFixture extends Fixture
                 ->setCreationDate(new DateTime());
             $manager->persist($transaction);
         }
-
-
 
         $manager->flush();
     }

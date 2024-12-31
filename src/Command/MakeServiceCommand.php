@@ -76,7 +76,7 @@ class $name
 {
     public function __construct()
     {
-        // Initialize your service
+        
     }
 }
 PHP;
