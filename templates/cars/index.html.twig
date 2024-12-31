@@ -196,7 +196,7 @@ document.addEventListener("DOMContentLoaded", function () {
             }
         });
 
-        const capacityFilters = ['person2', 'person4', 'person6'];
+        const capacityFilters = [...document.querySelectorAll(".filter .capacity input[type=checkbox]")].map(item => item.id);
         capacityFilters.forEach(function (capacity) {
             const checkbox = document.getElementById(capacity);
             if (checkbox.checked) {
