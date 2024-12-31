@@ -5,10 +5,7 @@
 	{% include 'navbar.html.twig' %}
 	<div class="checkout">
 		<div class="container-fluid">
-				{{ form_start(form,{'attr':{
-					'id': 'payment-form',
-					'method' : 'post'
-				}}) }}
+				{{ form_start(form,{'attr':{'id': 'payment-form','method' : 'post'}}) }}
 			<div class="row">
 				<div class="col-lg-8">
 					<div class="form-billing">
@@ -58,7 +55,7 @@
 						</div>
 
 						<div class="row">
-							<h3>Pick - Up</h3>
+							<h3 class="pick-up">Pick - Up</h3>
 							<div class="col-lg-6">
 								<div class="mb-3">
 									{{ form_row(form.pickUpLocation) }}
@@ -76,7 +73,7 @@
 							</div>
 						</div>
 						<div class="row">
-							<h3>Drop - Off</h3>
+							<h3 class="drop-off">Drop - Off</h3>
 							<div class="col-lg-6">
 								<div class="mb-3">
 									{{ form_row(form.dropOffLocation) }}
@@ -188,28 +185,16 @@
 					<div class="rental-summary">
 						<h3>Rental Summary</h3>
 						<p>Prices may changes depending on the length of the rental and the price of your rental car.</p>
-						<div class="rent-info d-flex align-items-center">
-							<div class="col-lg-6">
+						<div class="rent-info d-flex">
+							<div class="col-lg-6 col-md-6 col-6">
 								<div class="car-img">
-									<img src="/images/Look.png" alt="">
+									<img src="{{car.img}}" alt="">
 								</div>
 							</div>
-							<div class="col-lg-6">
+							<div class="col-lg-6 col-md-6 col-6">
 								<div class="car-desc">
 									<div class="car-name">
 										{{car.name}}
-										<div class="reviews d-flex justify-content-between">
-											<div class="stars">
-												<i class="fi fi-rs-star"></i>
-												<i class="fi fi-ss-star filled"></i>
-												<i class="fi fi-ss-star filled"></i>
-												<i class="fi fi-ss-star filled"></i>
-												<i class="fi fi-ss-star filled"></i>
-											</div>
-											<div class="reviews-count">
-												<p>440+ Reviewer</p>
-											</div>
-										</div>
 									</div>
 								</div>
 							</div>

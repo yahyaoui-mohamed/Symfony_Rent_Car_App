@@ -58,6 +58,44 @@
     font-size: 14px;
   }
 
+  .pick-up {
+    position: relative;
+    padding-left: 35px;
+    margin: 25px 0;
+
+    &::before {
+      content: "";
+      position: absolute;
+      width: 10px;
+      height: 10px;
+      border-radius: 50%;
+      background-color: #3563E9;
+      box-shadow: 0 0 0px 4px #98D3FF;
+      top: 50%;
+      left: 10px;
+      transform: translateY(-60%);
+    }
+  }
+
+  .drop-off {
+    position: relative;
+    padding-left: 35px;
+    margin: 25px 0;
+
+    &::before {
+      content: "";
+      position: absolute;
+      width: 10px;
+      height: 10px;
+      border-radius: 50%;
+      background-color: #3563E9;
+      box-shadow: 0 0 0px 4px #98D3FF;
+      top: 50%;
+      left: 10px;
+      transform: translateY(-60%);
+    }
+  }
+
   .form-select {
     font-size: 12px;
     color: #90A3B9;
@@ -226,6 +264,7 @@
   .car-img {
     img {
       border-radius: 8px;
+      width: 100%;
     }
   }
 
@@ -309,4 +348,18 @@
 
 .card-style {
   padding: 10px 20px;
+}
+
+
+@media (max-width: 768px) {
+  .checkout {
+    .col-lg-4 {
+      order: 1;
+    }
+
+    .col-lg-8 {
+      order: 2;
+    }
+  }
+
 }
