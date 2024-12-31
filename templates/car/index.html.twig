@@ -12,20 +12,33 @@
                 <div class="col-lg-6">
                     <div class="car-images">
                         <div class="main-img">
-                            <img src="/images/View.png" alt=""/>
+                            <img src="{{car.img}}" alt=""/>
                         </div>
                         <div class="thumbnails">
+                            {% if car.otherImg|length > 3 %}
+                                <div class="left-button">
+                                    <i class="fi fi-rr-angle-left"></i>
+                                </div>
+                                <div class="right-button">
+                                    <i class="fi fi-rr-angle-right"></i>
+                                </div>
+                            {% endif %}
+                            
                             <div class="row">
                                 <div class="col-lg-4">
-                                    <img src="/images/View 1.png" class="active" alt="">
+                                    <div class="thumbnail-container active">
+                                        <img src="{{car.img}}" alt="">
+                                    </div>
                                 </div>
+                                {% for img in car.otherImg %}
                                 <div class="col-lg-4">
-                                    <img src="/images/View 2.png" alt="">
+                                    <div class="thumbnail-container">
+                                        <img src="{{img}}" alt="">
+                                    </div>
                                 </div>
-                                <div class="col-lg-4">
-                                    <img src="/images/View 3.png" alt="">
-                                </div>
+                                {% endfor %}
                             </div>
+
                         </div>
                     </div>
                 </div>
@@ -41,17 +54,7 @@
                                     <i class="fi fi-rr-heart"></i>
                                 {% endif %}
                             </div>
-                            <input type="hidden" name="car_id" value="{{ car.id }}">
-                        </div>
-                        <div class="review d-flex align-item-center">
-                            <div class="stars">
-                                <i class="fi fi-rs-star"></i>
-                                <i class="fi fi-ss-star filled"></i>
-                                <i class="fi fi-ss-star filled"></i>
-                                <i class="fi fi-ss-star filled"></i>
-                                <i class="fi fi-ss-star filled"></i>
-                            </div>
-                            <span>440+ Reviewer</span>
+                            <input type="hidden" name="car_id" value="{{ car.id }}" id="carid">
                         </div>
                         <div class="desc">
                             <p>{{car.description}}</p>
@@ -83,7 +86,7 @@
                                     </div>
                                 </div>
                                 <div class="col-lg-6">
-                                    <div class="option d-flex justify-content-between">
+                                    <div class="option d-flex justify-content-between align-items-center">
                                         <h3>Days</h3>
                                         {{ form_start(form) }}
                                             {{ form_row(form.days) }}
@@ -107,77 +110,60 @@
 
             <div class="reviews">
                 <h3>Reviews
-                    <span>13</span>
+                    <span>{{reviews|length}}</span>
                 </h3>
                 <div class="items">
-                    <div class="review-item">
-                        <div class="row">
-                            <div class="col-lg-1">
-                                <div class="reviewer-img">
-                                    <img src="/images/Profill.png" alt="">
-                                </div>
-                            </div>
-                            <div class="col-lg-9">
-                                <div class="d-flex">
-                                    <div class="reviewer-name">
-                                        <h3>Alex Sanan</h3>
-                                        <span>CEO at Bukalapak</span>
+                    {% if reviews|length > 0 %}
+                        {% for review in reviews %}
+                            <div class="review-item">
+                                <div class="row">
+                                    <div class="col-lg-1">
+                                        <div class="reviewer-img">
+                                            <img src="/images/avatar.png" alt="">
+                                        </div>
                                     </div>
-                                </div>
-                                <div class="review-description">
-                                    <p>We are very happy with the service from the MORENT App. Morent has a low price and also a large variety of cars with good and comfortable facilities. In addition, the service provided by the officers is also very friendly and very polite.</p>
-                                </div>
-                            </div>
-                            <div class="col-lg-2">
-                                <div class="review-date">
-                                    <p>21 July 2022</p>
-                                    <div class="stars">
-                                        <i class="fi fi-rs-star"></i>
-                                        <i class="fi fi-ss-star filled"></i>
-                                        <i class="fi fi-ss-star filled"></i>
-                                        <i class="fi fi-ss-star filled"></i>
-                                        <i class="fi fi-ss-star filled"></i>
+                                    <div class="col-lg-9">
+                                        <div class="d-flex">
+                                            <div class="reviewer-name">
+                                                <h3>{{review.fullname|capitalize}}</h3>
+                                            </div>
+                                        </div>
+                                        <div class="review-description">
+                                            <p>{{review.review}}</p>
+                                        </div>
+                                    </div>
+                                    <div class="col-lg-2">
+                                        <div class="review-date">
+                                            <p>{{review.date|date("d M y")}}</p>
+                                        </div>
                                     </div>
                                 </div>
                             </div>
-                        </div>
-                    </div>
 
-                    <div class="review-item">
-                        <div class="row">
-                            <div class="col-lg-1">
-                                <div class="reviewer-img">
-                                    <img src="/images/Profill2.png" alt="">
-                                </div>
-                            </div>
-                            <div class="col-lg-9">
-                                <div class="d-flex">
-                                    <div class="reviewer-name">
-                                        <h3>Skylar Dias</h3>
-                                        <span>CEO at Amazon</span>
-                                    </div>
-                                </div>
-                                <div class="review-description">
-                                    <p>We are greatly helped by the services of the MORENT Application. Morent has low prices and also a wide variety of cars with good and comfortable facilities. In addition, the service provided by the officers is also very friendly and very polite.</p>
-                                </div>
-                            </div>
-                            <div class="col-lg-2">
-                                <div class="review-date">
-                                    <p>20 July 2022</p>
-                                    <div class="stars">
-                                        <i class="fi fi-rs-star"></i>
-                                        <i class="fi fi-ss-star filled"></i>
-                                        <i class="fi fi-ss-star filled"></i>
-                                        <i class="fi fi-ss-star filled"></i>
-                                        <i class="fi fi-ss-star filled"></i>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
+                        {% endfor %}
+                    {% else %}
+                        <p>No reviews for this car.</p>
+                    {% endif %}
 
                 </div>
             </div>
+
+            <div class="add-review">
+                <h3>Add review</h3>
+                <form method="POST" class="form-review">
+                    <div class="mb-3">
+                        <input type="text" id="fullname" class="form-control" placeholder="Full name">
+                    </div>
+                    <div class="mb-3">
+                        <textarea id="review" class="form-control" placeholder="Your review"></textarea>
+                    </div>
+                    <div class="mb-3">
+                        <button type="submit" id="form-submit">Submit</button>
+                    </div>
+                </form>
+            </div>
+
+            
         </div>
     </div>
 
@@ -221,7 +207,7 @@
                                     <span>day</span>
                                 </div>
                                 <div class="rent-btn">
-                                    <button>Rent Now</button>
+                                    <a href="/car/{{car.id}}">Rent Now</a>
                                 </div>
                             </div>
                         </div>
@@ -279,7 +265,7 @@
 									<span>day</span>
 								</div>
 								<div class="rent-btn">
-									<button>Rent Now</button>
+									<a href="/car/{{car.id}}">Rent Now</a>
 								</div>
 							</div>
 						</div>
@@ -296,23 +282,20 @@
 </div>
 
 
-
-
-
     {% include 'footer.html.twig' %}
 
 <script>
-    let activeImg = document.querySelector(".thumbnails img.active");
+    let activeImg = document.querySelector(".thumbnails .thumbnail-container.active img");
+
     let mainImg = document.querySelector(".main-img img");
-    let images = document.querySelectorAll(".thumbnails img").forEach(function(img){
+    document.querySelectorAll(".thumbnails img").forEach(function(img){
         img.addEventListener("click", function(){
-            if(!this.classList.contains("active")){
-                activeImg.classList.remove("active");
-                this.classList.add("active");
+            if(!this.parentNode.classList.contains("active")){
+                activeImg.parentNode.classList.remove("active");
+                this.parentNode.classList.add("active");
                 activeImg = this;
-                // mainImg.setAttribute("src", activeImg.src);
-            }
-        });
+                mainImg.setAttribute("src", activeImg.src);
+        }});
     });
 
 let favoriteCar = document.querySelectorAll(".car .favorite i");
@@ -405,6 +388,132 @@ car.addEventListener("click", function(){
     }
 
 });
+
+{# document.addEventListener('DOMContentLoaded', () => {
+    const leftButton = document.querySelector('.left-button');
+    const rightButton = document.querySelector('.right-button');
+    const row = document.querySelector('.thumbnails .row');
+    const thumbnailContainers = row.querySelectorAll('.col-lg-4');
+
+    // Variables for tracking the scroll position
+    let scrollAmount = 0;
+    const scrollStep = 150; // Adjust this value for how much the thumbnails move
+
+    // Event Listener for the Left Button
+    leftButton.addEventListener('click', () => {
+        // Move the thumbnails to the right (scroll left)
+        scrollAmount = Math.max(0, scrollAmount - scrollStep);
+        row.style.transform = `translateX(-${scrollAmount}px)`;
+        row.style.transition = 'transform 0.3s ease-in-out';
+    });
+
+    // Event Listener for the Right Button
+    rightButton.addEventListener('click', () => {
+        // Move the thumbnails to the left (scroll right)
+        const maxScroll = row.scrollWidth - row.clientWidth;
+        scrollAmount = Math.min(maxScroll, scrollAmount + scrollStep);
+        row.style.transform = `translateX(-${scrollAmount}px)`;
+        row.style.transition = 'transform 0.3s ease-in-out';
+    });
+});
+
+document.addEventListener('DOMContentLoaded', () => {
+    const leftButton = document.querySelector('.left-button');
+    const rightButton = document.querySelector('.right-button');
+    const row = document.querySelector('.thumbnails .row');
+    const thumbnailContainers = row.querySelectorAll('.col-lg-4');
+
+    let scrollAmount = 0;
+    const scrollStep = 200; // Adjust this value for how much the thumbnails move
+    const visibleWidth = row.parentElement.offsetWidth; // The width of the visible area
+    const totalWidth = Array.from(thumbnailContainers).reduce((sum, item) => sum + item.offsetWidth, 0); // Total width of thumbnails
+    const maxScroll = Math.max(0, totalWidth - visibleWidth); // Calculate the maximum scroll position
+
+    // Event Listener for the Left Button
+    leftButton.addEventListener('click', () => {
+        if (scrollAmount > 0) {
+            scrollAmount = Math.max(0, scrollAmount - scrollStep);
+            row.style.transform = `translateX(-${scrollAmount}px)`;
+            row.style.transition = 'transform 0.3s ease-in-out';
+        }
+    });
+
+    // Event Listener for the Right Button
+    rightButton.addEventListener('click', () => {
+        if (scrollAmount < maxScroll) {
+            scrollAmount = Math.min(maxScroll, scrollAmount + scrollStep);
+            row.style.transform = `translateX(-${scrollAmount}px)`;
+            row.style.transition = 'transform 0.3s ease-in-out';
+        }
+    });
+}); #}
+
+
+document.addEventListener('DOMContentLoaded', () => {
+    const leftButton = document.querySelector('.left-button');
+    const rightButton = document.querySelector('.right-button');
+    const row = document.querySelector('.thumbnails .row');
+    const thumbnailContainers = row.querySelectorAll('.col-lg-4');
+
+    if (thumbnailContainers.length === 0) {
+        console.warn("No images found for the slider.");
+        return; // Exit if no images are present
+    }
+
+    // Variables for tracking the scroll position
+    let scrollAmount = 0;
+    const scrollStep = 150; // Adjust this value for how much the thumbnails move
+    const visibleWidth = row.parentElement.offsetWidth; // The width of the visible area
+    const totalWidth = Array.from(thumbnailContainers).reduce((sum, item) => sum + item.offsetWidth, 0); // Total width of thumbnails
+    const maxScroll = Math.max(0, totalWidth - visibleWidth); // Calculate the maximum scroll position
+
+    // Event Listener for the Left Button
+    leftButton.addEventListener('click', () => {
+        if (scrollAmount > 0) {
+            scrollAmount = Math.max(0, scrollAmount - scrollStep);
+            row.style.transform = `translateX(-${scrollAmount}px)`;
+            row.style.transition = 'transform 0.3s ease-in-out';
+        }
+    });
+
+    // Event Listener for the Right Button
+    rightButton.addEventListener('click', () => {
+        if (scrollAmount < maxScroll) {
+            scrollAmount = Math.min(maxScroll, scrollAmount + scrollStep);
+            row.style.transform = `translateX(-${scrollAmount}px)`;
+            row.style.transition = 'transform 0.3s ease-in-out';
+        }
+    });
+});
+
+
+document.querySelector(".form-review").addEventListener("submit", function(e) {
+    e.preventDefault(); // Prevent the default form submission behavior
+
+    let fullname = document.getElementById("fullname").value;
+    let review = document.getElementById("review").value;
+    let carId = document.getElementById("carid").value;
+
+    fetch("/review", {
+        method: "POST",
+        headers: {
+            "Content-Type": "application/json",
+        },
+        body: JSON.stringify({ fullname, review, carId })
+    })
+    .then(resp => {
+        if(resp.status === 200){
+            let container = document.querySelector(".add-review");
+            let p = document.createElement("p");
+            p.textContent = "Thank you for your review !";
+            container.innerHTML = "";
+            container.appendChild(p);
+
+        }
+        return;
+    });
+});
+
 
 </script>
 {% endblock %}

@@ -4,6 +4,7 @@ namespace App\Controller;
 
 use App\Entity\Car;
 use App\Entity\Favorite;
+use App\Entity\Review;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Attribute\Route;
@@ -19,6 +20,9 @@ class CarController extends AbstractController
     public function index($id, EntityManagerInterface $em, Request $request, SessionInterface $session): Response
     {
         $visitorId = $request->cookies->get('visitor_id');
+
+        $carReviews = $em->getRepository(Review::class)->findBy(['car' => $id]);
+
         $favCar = $em->getRepository(Favorite::class)->findOneBy(["car" => $id, "visitor_id" => $visitorId]);
         $car = $em->getRepository(Car::class)->find($id);
         $form = $this->createFormBuilder()
@@ -53,14 +57,17 @@ class CarController extends AbstractController
                 'id' => $id,
             ]);
         }
+
         $recentCars = $em->getRepository(Car::class)->findBy([], null, 4);
         $recommandationCars = $em->getRepository(Car::class)->findBy([], null, 8);
+
         return $this->render('car/index.html.twig', [
             'car' => $car,
             'recentCars' => $recentCars,
             'recommandationCars' => $recommandationCars,
             'form' => $form->createView(),
             'isFav' => $favCar !== null ? true : false,
+            'reviews' => $carReviews,
         ]);
     }
 }

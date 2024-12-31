@@ -4,25 +4,94 @@
   .car-images {
     .main-img {
       margin-bottom: 10px;
+      background-color: #fff;
+      border-radius: 8px;
+      max-width: 100%;
+      overflow: hidden;
+      position: relative;
+      height: 400px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
 
       img {
-        width: 100%;
+        max-width: 500px;
+        max-height: 300px;
       }
 
     }
 
     .thumbnails {
-      img {
-        width: 100%;
-        padding: 5px;
+      position: relative;
+      overflow: hidden;
+
+      .left-button {
+        background-color: #fff;
+        position: absolute;
+        left: 10px;
+        top: 50%;
+        transform: translateY(-50%);
+        border-radius: 50%;
+        border: 1px solid #90A3B9;
+        background-color: #fff;
+        width: 30px;
+        height: 30px;
+        line-height: 30px;
+        text-align: center;
+        cursor: pointer;
+        z-index: 9;
+
+        i {
+          font-size: 14px;
+        }
+      }
+
+      .right-button {
+        i {
+          font-size: 14px;
+        }
+
+        z-index:9;
+        cursor: pointer;
+        width: 30px;
+        height: 30px;
+        line-height: 30px;
+        text-align: center;
+        background-color: #fff;
+        border: 1px solid #90A3B9;
+        border-radius: 50%;
+        position: absolute;
+        right: 10px;
+        top: 50%;
+        transform: translateY(-50%);
+      }
+
+      .row {
+        flex-wrap: nowrap;
+        transform: translateX(0);
+      }
+
+      .thumbnail-container {
+        background-color: #fff;
         border-radius: 10px;
         cursor: pointer;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        height: 150px;
+        overflow: hidden;
+
+        img {
+          width: 150px;
+          padding: 5px;
+        }
 
         &.active {
           border: 2px solid #2A60B7;
           border-radius: 10px;
         }
       }
+
     }
   }
 
@@ -35,6 +104,7 @@
       h3 {
         font-weight: 700;
         font-size: 20px;
+        margin-bottom: 20px;
       }
 
       i {
@@ -63,7 +133,7 @@
 
     .desc {
       p {
-        margin: 20px 0;
+        margin-bottom: 30px;
         color: #596780;
       }
     }
@@ -72,6 +142,18 @@
       margin-bottom: 20px;
 
       .option {
+        margin-bottom: 20px;
+
+        .form-select {
+
+          border: 1px solid#90A3BF;
+          border-radius: 0px;
+
+          &:focus {
+            box-shadow: none;
+            border: 1px solid#90A3BF;
+          }
+        }
 
         h3 {
           font-size: 14px;
@@ -144,6 +226,12 @@
     .review-item {
       margin: 30px 0;
 
+      .reviewer-img {
+        img {
+          width: 60px;
+        }
+      }
+
       .reviewer-name {
         margin-bottom: 10px;
 
@@ -182,7 +270,24 @@
     }
 
   }
+}
 
+.add-review {
+  margin: 30px 0;
+  background-color: #fff;
+  padding: 30px;
+  border-radius: 8px;
+
+  h3 {
+    font-size: 18px;
+    font-weight: 700;
+    margin-bottom: 20px;
+  }
+
+  textarea {
+    height: 100px;
+    resize: none;
+  }
 }
 
 .recent-cars {

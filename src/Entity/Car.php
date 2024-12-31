@@ -5,6 +5,7 @@ namespace App\Entity;
 use App\Repository\CarRepository;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
+use Doctrine\DBAL\Types\Types;
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\Serializer\Annotation\Groups;
 
@@ -68,10 +69,20 @@ class Car
     #[ORM\OneToMany(targetEntity: Transaction::class, mappedBy: 'car')]
     private Collection $transactions;
 
+    #[Groups(['car_details'])]
+    #[ORM\Column(type: Types::JSON, nullable: true)]
+    private ?array $other_img = null;
+
+    /**
+     * @var Collection<int, Review>
+     */
+    #[ORM\OneToMany(targetEntity: Review::class, mappedBy: 'car', orphanRemoval: true)]
+    private Collection $reviews;
     public function __construct()
     {
         $this->favorites = new ArrayCollection();
         $this->transactions = new ArrayCollection();
+        $this->reviews = new ArrayCollection();
     }
 
     public function getId(): ?int
@@ -241,6 +252,48 @@ class Car
             // set the owning side to null (unless already changed)
             if ($transaction->getCar() === $this) {
                 $transaction->setCar(null);
+            }
+        }
+
+        return $this;
+    }
+
+    public function getOtherImg(): ?array
+    {
+        return $this->other_img;
+    }
+
+    public function setOtherImg(?array $other_img): static
+    {
+        $this->other_img = $other_img;
+
+        return $this;
+    }
+
+    /**
+     * @return Collection<int, Review>
+     */
+    public function getReviews(): Collection
+    {
+        return $this->reviews;
+    }
+
+    public function addReview(Review $review): static
+    {
+        if (!$this->reviews->contains($review)) {
+            $this->reviews->add($review);
+            $review->setCar($this);
+        }
+
+        return $this;
+    }
+
+    public function removeReview(Review $review): static
+    {
+        if ($this->reviews->removeElement($review)) {
+            // set the owning side to null (unless already changed)
+            if ($review->getCar() === $this) {
+                $review->setCar(null);
             }
         }
 
