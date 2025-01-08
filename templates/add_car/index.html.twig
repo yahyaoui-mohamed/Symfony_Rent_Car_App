@@ -1,0 +1,60 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Add car{% endblock %}
+
+{% block body %}
+	{% include 'navbar.html.twig' %}
+	<div class="admin">
+		{% include "admin_sidebar.html.twig" %}
+		<div class="app">
+            <div class="container">
+			{{ form_start(form) }}
+                <div class="row">
+                    <div class="col-lg-6 mb-3">
+                        {{form_label(form.name)}}
+                        {{ form_widget(form.name) }}
+                    </div>
+                    <div class="col-lg-6 mb-3">
+                        {{form_label(form.description)}}
+                        {{ form_widget(form.description) }}
+                    </div>
+                    <div class="col-lg-6 mb-3">
+                        {{form_label(form.type)}}
+                        {{ form_widget(form.type) }}
+                    </div>
+                    <div class="col-lg-6 mb-3">
+                        {{form_label(form.capacity)}}
+                        {{ form_widget(form.capacity) }}
+                    </div>
+                    <div class="col-lg-6 mb-3">
+                        {{form_label(form.steering)}}
+                        {{ form_widget(form.steering) }}
+                    </div>
+                    <div class="col-lg-6 mb-3">
+                        {{form_label(form.gasoline)}}
+                        {{ form_widget(form.gasoline) }}
+                    </div>
+                    <div class="col-lg-6 mb-3">
+                        {{form_label(form.price)}}
+                        {{ form_widget(form.price) }}
+                    </div>
+                    <div class="col-lg-6 mb-3">
+                        {{form_label(form.img)}}
+                        {{ form_widget(form.img) }}
+                    </div>
+                    <div class="col-lg-6 mb-3">
+                        {{form_label(form.other_img)}}
+                        {{ form_widget(form.other_img) }}
+                    </div>
+                    <div class="mb-3">
+                        {{ form_widget(form.save) }}
+                    </div>
+                </div>
+            {{ form_end(form) }}
+            </div>
+		</div>
+	</div>
+
+
+
+{% endblock %}

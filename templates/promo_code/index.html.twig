@@ -1,7 +1,6 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Morent | Promo Codes
-{% endblock %}
+{% block title %}Promo Codes{% endblock %}
 
 {% block body %}
 	{% include "navbar.html.twig" %}
@@ -30,7 +29,7 @@
 								<tr>
 										<th scope="row">{{code.id}}</th>
 										<td>{{code.value}}</td>
-										<td>{{code.discountRate}}</td>
+										<td>{{code.discountRate * 100 }}%</td>
 										<td>{{code.expirationDate|date("d m y")}}</td>
 										<td>{{code.used ? "Expired" : "Available"}}</td>
 								</tr>

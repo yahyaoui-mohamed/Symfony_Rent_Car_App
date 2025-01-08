@@ -8,6 +8,8 @@ parameters:
     social_instagram: "%env(SOCIAL_INSTAGRAM)%"
     social_twitter: "%env(SOCIAL_TWITTER)%"
     social_facebook: "%env(SOCIAL_FACEBOOK)%"
+    car_directory: "%kernel.project_dir%/public/images/cars/"
+    car_path: "/images/cars/"
 
 services:
     # default configuration for services in *this* file

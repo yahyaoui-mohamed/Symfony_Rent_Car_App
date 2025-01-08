@@ -1,6 +1,6 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Morent | Car Rent{% endblock %}
+{% block title %}Car Rent{% endblock %}
 
 {% block body %}
 {% include 'navbar.html.twig' %}
@@ -8,6 +8,7 @@
     {% include "admin_sidebar.html.twig" %}
     <div class="app">
         <div class="container-fluid">
+            <a href="{{path("app_add_car")}}">Add car</a>
             {% if transactions %}
                 <table class="table table-hover all-transactions">
                     <thead>
