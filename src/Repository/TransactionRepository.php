@@ -15,4 +15,12 @@ class TransactionRepository extends ServiceEntityRepository
     {
         parent::__construct($registry, Transaction::class);
     }
+
+    public function getTotalRevenue(): float
+    {
+        $qb = $this->createQueryBuilder('c')
+            ->select('SUM(c.total)');
+
+        return $qb->getQuery()->getSingleScalarResult();
+    }
 }

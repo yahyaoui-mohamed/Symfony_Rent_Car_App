@@ -1,0 +1,22 @@
+.user-navbar {
+  .tab {
+    background: #fff;
+    padding: 10px 30px;
+    border-radius: 5px;
+    margin: 15px 0;
+
+    &.active {
+      background-color: #3563E9;
+
+      a {
+        color: #fff;
+      }
+
+    }
+
+    a {
+      text-decoration: none;
+      color: #000;
+    }
+  }
+}

@@ -6,7 +6,33 @@
 {% include 'navbar.html.twig' %}
 	<div class="admin">
 		{% include "admin_sidebar.html.twig" %}
-		<div class="app"></div>
+		<div class="app">
+			<div class="container-fluid">
+				<div class="stats">
+					<div class="row">
+						<div class="col-lg-4">
+							<div class="stat-item">
+								<h3>Total Revenue</h3>
+								<span>${{revenue}}</span>
+							</div>
+						</div>
+						<div class="col-lg-4">
+							<div class="stat-item">
+								<h3>Total Rents</h3>
+								<span>{{rents}}</span>
+							</div>
+						</div>
+
+						<div class="col-lg-4">
+							<div class="stat-item">
+								<h3>Total Cars</h3>
+								<span>{{cars}}</span>
+							</div>
+						</div>
+					</div>	
+				</div>
+			</div>
+		</div>
 	</div>
 
 

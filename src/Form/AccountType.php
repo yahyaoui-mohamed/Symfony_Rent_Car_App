@@ -39,7 +39,8 @@ class AccountType extends AbstractType
                 'attr' => [
                     'class' => 'form-control',
                     'placeholder' => 'Password'
-                ]
+                ],
+                'required' => false
             ])
             ->add('save', SubmitType::class)
         ;
