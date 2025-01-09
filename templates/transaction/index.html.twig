@@ -1,0 +1,46 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Transaction{% endblock %}
+
+{% block body %}
+	{% include 'navbar.html.twig' %}
+	<div class="admin">
+		{% include "admin_sidebar.html.twig" %}
+		<div class="app">
+			<div class="container-fluid">
+				{% if transactions %}
+					<table class="table table-hover all-transactions">
+						<thead>
+							<tr>
+								<th scope="col">#</th>
+								<th scope="col">Car Img</th>
+								<th scope="col">Car Name</th>
+								<th scope="col">Days</th>
+								<th scope="col">Total</th>
+								<th scope="col">Date</th>
+							</tr>
+						</thead>
+						<tbody>
+							{% for transaction in transactions %}
+
+								<tr>
+									<th scope="row">{{transaction.id}}</th>
+									<td><img src="{{transaction.car.img}}"/></td>
+									<td>{{transaction.car.name}}</td>
+									<td>{{transaction.days}}</td>
+									<td>{{transaction.total| format_currency('USD', {decimal_always_shown:true}, 'en')}}</td>
+									<td>{{transaction.creationDate|date("d M Y")}}</td>
+								</tr>
+							{% endfor %}
+						</tbody>
+					</table>
+				{% else %}
+					<p>No transaction.</p>
+				{% endif %}
+
+			</div>
+		</div>
+	</div>
+
+{% endblock %}
+

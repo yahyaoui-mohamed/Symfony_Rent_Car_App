@@ -7,14 +7,19 @@
 					<i class="fi fi-rr-house-blank"></i>Dashboard
 				</a>
 			</li>
-			<li class="{{ app.request.attributes.get('_route') == 'app_rents' ? 'active' : '' }}">
-				<a href="{{ path('app_rents') }}">
-					<i class="fi fi-rr-car-side"></i>Car Rent
+			<li class="{{ app.request.attributes.get('_route') == 'app_car_list' ? 'active' : '' }}">
+				<a href="{{ path('app_car_list') }}">
+					<i class="fi fi-rr-car-side"></i>Car
 				</a>
 			</li>
 			<li class="{{ app.request.attributes.get('_route') == 'app_insight' ? 'active' : '' }}">
 				<a href="{{ path('app_insight') }}">
 					<i class="fi fi-rr-stats"></i>Insight
+				</a>
+			</li>
+			<li class="{{ app.request.attributes.get('_route') == 'app_transaction' ? 'active' : '' }}">
+				<a href="{{ path('app_transaction') }}">
+					<i class="fi fi-rr-transaction-euro"></i>Transaction
 				</a>
 			</li>
 			<li class="{{ app.request.attributes.get('_route') == 'app_admin_promo_code' ? 'active' : '' }}">

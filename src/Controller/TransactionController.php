@@ -8,14 +8,13 @@ use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Attribute\Route;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 
-class RentsController extends AbstractController
+class TransactionController extends AbstractController
 {
-    #[Route('/admin/rents', name: 'app_rents')]
+    #[Route('/admin/transaction', name: 'app_transaction')]
     public function index(EntityManagerInterface $em): Response
     {
         $transactions = $em->getRepository(Transaction::class)->findBy([], ['creation_date' => 'DESC'], 4);
-
-        return $this->render('rents/index.html.twig', [
+        return $this->render('transaction/index.html.twig', [
             'transactions' => $transactions,
         ]);
     }

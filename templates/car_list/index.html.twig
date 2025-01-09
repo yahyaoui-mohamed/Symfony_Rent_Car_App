@@ -1,0 +1,88 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Car Rent{% endblock %}
+
+{% block body %}
+{% include 'navbar.html.twig' %}
+<div class="admin">
+    {% include "admin_sidebar.html.twig" %}
+    <div class="app">
+        <div class="container-fluid">
+            <a href="{{path("app_add_car")}}" class="car-add">+ Add car</a>
+            {% if cars %}
+                <table class="table table-hover all-transactions">
+                    <thead>
+                        <tr>
+                            <th scope="col">#</th>
+                            <th scope="col">Img</th>
+                            <th scope="col">Name</th>
+                            <th scope="col">Type</th>
+                            <th scope="col">Capacity</th>
+                            <th scope="col">Steering</th>
+                            <th scope="col">Gasoline</th>
+                            <th scope="col">Price</th>
+                            <th scope="col"></th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                    {% for car in cars %}
+                        
+                        <tr>
+                            <th scope="row">{{car.id}}</th>
+                            <td><img src="{{car.img}}" /></td>
+                            <td>{{car.name}}</td>
+                            <td>{{car.type}}</td>
+                            <td>{{car.capacity}}</td>
+                            <td>{{car.steering}}</td>
+                            <td>{{car.gasoline}}</td>
+                            <td>{{car.price}}</td>
+                            <td class="option-menu">
+                                <div class="menu-collapse">
+                                    <i class="fi fi-rr-menu-dots-vertical"></i>
+                                </div>
+                                <div class="menu-dropdown">
+                                    <div class="edit">
+                                        <a href="{{ path('app_car_edit', { 'id': car.id }) }}">
+                                            <i class="fi fi-rr-pencil"></i>Edit
+                                        </a>
+                                    </div>
+                                    <div class="delete">
+                                        <a href="{{ path('app_car_delete', { 'id': car.id }) }}">
+                                            <i class="fi fi-rr-trash"></i>Delete
+                                        </a>
+                                    </div>
+                                </div>
+                            </td>
+
+                        </tr>
+                    {% endfor %}
+                    </tbody>
+                </table>
+            {% else %}
+                <p>No car.</p>
+            {% endif %}
+
+        </div>
+    </div>
+</div>
+
+<script>
+
+    document.querySelectorAll(".menu-collapse").forEach(function(menu){
+        menu.addEventListener("click", function(e){
+            e.stopPropagation();
+            let dropdown = this.nextElementSibling;
+            document.querySelectorAll(".menu-dropdown.active").forEach(function(activeDropdown) {
+                if (activeDropdown !== dropdown) {
+                    activeDropdown.classList.remove("active");
+                }
+            });
+            dropdown.classList.toggle("active");
+        });
+    });
+    
+    
+    
+    
+</script>
+{% endblock %}

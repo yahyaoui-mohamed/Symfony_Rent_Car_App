@@ -9,6 +9,7 @@ use Symfony\Component\Form\Extension\Core\Type\FileType;
 use Symfony\Component\Form\Extension\Core\Type\NumberType;
 use Symfony\Component\Form\Extension\Core\Type\SubmitType;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
+use Symfony\Component\Form\Extension\Core\Type\TextareaType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 use Symfony\Component\Validator\Constraints as Assert;
@@ -25,7 +26,7 @@ class CarType extends AbstractType
                     'placeholder' => 'Name'
                 ]
             ])
-            ->add('description', TextType::class, [
+            ->add('description', TextAreaType::class, [
                 'attr' => [
                     'class' => 'form-control',
                     'placeholder' => 'Description'
@@ -93,18 +94,22 @@ class CarType extends AbstractType
                     'class' => 'form-control',
                     'accept' => 'image/*'
                 ],
+                'label' => 'Image',
                 'constraints' => [
                     new Assert\Image([
                         'mimeTypesMessage' => 'Please upload a valid image file.',
                     ])
                 ],
-                'multiple' => false
+                'multiple' => false,
+                'data_class' => null,
+                'required' => false
             ])
             ->add('other_img', FileType::class, [
                 'attr' => [
                     'class' => 'form-control',
                     'accept' => 'image/*'
                 ],
+                'label' => 'Other images',
                 'constraints' => [
                     new Assert\All([
                         'constraints' => [
@@ -115,7 +120,8 @@ class CarType extends AbstractType
                     ])
                 ],
                 'multiple' => true,
-                'required' => false
+                'required' => false,
+                'data_class' => null
             ])
             ->add('save', SubmitType::class)
         ;
