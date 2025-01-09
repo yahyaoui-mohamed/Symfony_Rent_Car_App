@@ -4,6 +4,21 @@ This project is a full-featured car rental application that includes a user-faci
 
 ---
 
+## 🚨 Disclaimer
+
+**This project is created solely for learning and demonstration purposes. It is not intended for commercial use.**  
+Use it as a guide to understand the structure and development of a car rental application, but avoid deploying it in production environments.
+
+
+### 🎨 Design Credits
+
+The design mockups used in this project are credited to Pickolab Studio and can be viewed on their Figma design page:  
+[View Figma Design](https://www.figma.com/community/file/1138316365849534403)  
+
+Please respect the intellectual property of the creator when using or sharing the designs.
+
+
+
 ## Features
 
 - **User Features:**
