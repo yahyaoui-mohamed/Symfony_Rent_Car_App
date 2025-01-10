@@ -21,10 +21,17 @@
         {% endblock %}
     </head>
     <body>
+        <div id="loader">
+            <div class="load">M</div>
+        </div>
         {% block body %}{% endblock %}
         {% block globalscripts %}{% endblock %}
     </body>
 
 
-
+<script>
+    addEventListener("load", function(){
+       document.getElementById("loader").style.display = "none";
+    });
+</script>
 </html>
