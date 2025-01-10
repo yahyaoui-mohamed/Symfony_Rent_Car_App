@@ -49,9 +49,14 @@
                             </div>
 						{% endif %}
 					{% else %}
-						<a href="{{path("app_login")}}" class="navbar-item">
-							<i class="fi fi-sr-user"></i>
-						</a>
+                        <a href="./" class="navbar-item">
+                            <i class="fi fi-sr-user"></i>
+                        </a>
+                        <div class="user-dropdown">
+                            <a href="{{path("app_login")}}" class="navbar-item">
+                                Login
+                            </a>
+                        </div>
 					{% endif %}
 				</div>
 			</div>

@@ -48,7 +48,7 @@ class Car
     private ?int $price = null;
 
     #[Groups(['car_details'])]
-    #[ORM\Column(length: 255)]
+    #[ORM\Column(length: 255, nullable: true)]
     private ?string $img = null;
 
     #[Groups(['car_details'])]

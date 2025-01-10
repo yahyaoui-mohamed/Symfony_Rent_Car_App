@@ -5,10 +5,10 @@ namespace App\Controller;
 use App\Entity\Car;
 use App\Form\CarType;
 use Doctrine\ORM\EntityManagerInterface;
-use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Attribute\Route;
+use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 
 class AddCarController extends AbstractController
 {
@@ -41,7 +41,6 @@ class AddCarController extends AbstractController
             $car->setOtherImg($otherImages);
             $em->persist($car);
             $em->flush();
-            $this->addFlush("success", "Car added.");
             return $this->redirectToRoute("app_add_car");
         }
         return $this->render('add_car/index.html.twig', [
