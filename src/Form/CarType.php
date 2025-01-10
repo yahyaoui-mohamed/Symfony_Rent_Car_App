@@ -4,7 +4,6 @@ namespace App\Form;
 
 use App\Entity\Car;
 use Symfony\Component\Form\AbstractType;
-use App\Form\DataTransformer\FileTransformer;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 use Symfony\Component\Validator\Constraints as Assert;
@@ -14,20 +13,10 @@ use Symfony\Component\Form\Extension\Core\Type\NumberType;
 use Symfony\Component\Form\Extension\Core\Type\SubmitType;
 use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
 use Symfony\Component\Form\Extension\Core\Type\TextareaType;
-use Symfony\Component\Form\CallbackTransformer;
-use Symfony\Component\HttpFoundation\File\File;
-
 
 
 class CarType extends AbstractType
 {
-
-    private FileTransformer $fileTransformer;
-
-    public function __construct(FileTransformer $fileTransformer)
-    {
-        $this->fileTransformer = $fileTransformer;
-    }
     public function buildForm(FormBuilderInterface $builder, array $options): void
     {
         $builder

@@ -28,9 +28,9 @@ class CarListController extends AbstractController
         $car = $em->getRepository(Car::class)->find($id);
         $form = $this->createForm(CarType::class, $car);
         $form->handleRequest($request);
-        
+
         if ($form->isSubmitted()) {
-            dd($form->getData());
+            $em->flush();
         }
 
         return $this->render('car_list/edit.html.twig', [
