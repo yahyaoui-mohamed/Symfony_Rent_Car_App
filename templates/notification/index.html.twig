@@ -12,5 +12,13 @@
   </div>
 
 {% include "footer.html.twig" %}
+<script>
+  const eventSource = new EventSource("{{ mercure('https://example.com/my-private-topic')|escape('js') }}");
+  
+  eventSource.onmessage = event => {
+    console.log(JSON.parse(event.data));
+  }
+</script>
+
 
 {% endblock %}
