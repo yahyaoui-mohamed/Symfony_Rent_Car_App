@@ -287,22 +287,6 @@ document.querySelector(".user .navbar-item").addEventListener("click", function(
     }
 });
 
-
-    const url = new URL('http://localhost/.well-known/mercure');
-    url.searchParams.append('topic', '/my-topic'); // MUST match the topic in the controller
-
-    const eventSource = new EventSource(url);
-
-    eventSource.onmessage = event => {
-        const data = JSON.parse(event.data);
-        console.log('Received message:', data.message);
-        alert(data.message); // Or display the notification in a nicer way
-    };
-
-    eventSource.onerror = error => {
-        console.error("EventSource failed:", error);
-    };
-
 </script>
 
 {% endblock %}
