@@ -13,7 +13,8 @@
         {% block stylesheets %}
         {% endblock %}
 
-        {% block javascripts %}
+        {% block javascripts %}
+
             {% block importmap %}{{ importmap('app') }}{% endblock %}
 
 
@@ -28,9 +29,17 @@
     </body>
 
 
-<script>
-    addEventListener("load", function(){
-       document.getElementById("loader").style.display = "none";
-    });
-</script>
+    <script>
+        addEventListener("load", function(){
+        document.getElementById("loader").style.display = "none";
+        });
+    
+        {# const eventSource = new EventSource("{{ mercure('https://example.com/my-private-topic')|escape('js') }}");
+	
+        eventSource.onmessage = event => {
+	        console.log(JSON.parse(event.data));
+    	} #}
+
+    </script>    
+
 </html>

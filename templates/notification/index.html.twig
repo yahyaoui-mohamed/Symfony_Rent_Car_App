@@ -13,12 +13,17 @@
 
 {% include "footer.html.twig" %}
 <script>
+
+	addEventListener("load", function () {
+    document.getElementById("loader").style.display = "none";
+  });
+
   const eventSource = new EventSource("{{ mercure('https://example.com/my-private-topic')|escape('js') }}");
-  
+
   eventSource.onmessage = event => {
     console.log(JSON.parse(event.data));
   }
-</script>
 
+</script>
 
 {% endblock %}
