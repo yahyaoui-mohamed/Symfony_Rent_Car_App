@@ -31,6 +31,9 @@ Please respect the intellectual property of the creator when using or sharing th
   - Manage customer bookings
   - View system analytics and reports
 
+- **Real-Time Notifications:**
+  - Uses the **Mercure Protocol** to deliver real-time updates, ensuring customers and administrators receive live updates on booking statuses and system events.
+
 ---
 
 ## Screenshots
@@ -80,6 +83,7 @@ To run this project, ensure you have the following installed:
 - Node.js and npm/yarn
 - MySQL Server
 - A web server like Apache or Nginx
+- Mercure (for real-time notifications)
 
 ---
 
@@ -122,7 +126,14 @@ Follow these steps to install and run the application:
    npm run build
    ```
 
-6. **Run the Application**
+6. **Set Up Mercure**
+  - Start Mercure using the following command:
+  ```bash
+  $env:MERCURE_PUBLISHER_JWT_KEY='!ChangeThisMercureHubJWTSecretKey!' $env:MERCURE_SUBSCRIBER_JWT_KEY='!ChangeThisMercureHubJWTSecretKey!';
+  .\mercure.exe run --config dev.Caddyfile
+  ```
+
+7. **Run the Application**
    - Start the Symfony server:
      ```bash
      symfony server:start
@@ -132,7 +143,7 @@ Follow these steps to install and run the application:
      php -S 127.0.0.1:8000 -t public
      ```
 
-7. **Access the Application**
+8. **Access the Application**
    - Open your browser and navigate to `http://127.0.0.1:8000` for the user interface.
    - To access the admin dashboard, navigate to `http://127.0.0.1:8000/admin`.
 
