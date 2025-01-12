@@ -128,10 +128,10 @@ Follow these steps to install and run the application:
 
 6. **Set Up Mercure**
   - Start Mercure using the following command:
-  ```bash
-  $env:MERCURE_PUBLISHER_JWT_KEY='!ChangeThisMercureHubJWTSecretKey!' $env:MERCURE_SUBSCRIBER_JWT_KEY='!ChangeThisMercureHubJWTSecretKey!';
-  .\mercure.exe run --config dev.Caddyfile
-  ```
+    ```bash
+    $env:MERCURE_PUBLISHER_JWT_KEY='!ChangeThisMercureHubJWTSecretKey!' $env:MERCURE_SUBSCRIBER_JWT_KEY='!ChangeThisMercureHubJWTSecretKey!';
+    .\mercure.exe run --config dev.Caddyfile
+    ```
 
 7. **Run the Application**
    - Start the Symfony server:
