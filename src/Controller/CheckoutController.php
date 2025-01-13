@@ -15,11 +15,15 @@ use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Session\SessionInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
+use App\Service\NotificationService;
+use App\Event\PaymentCompletedEvent;
+use Symfony\Component\EventDispatcher\EventDispatcherInterface;
+
 
 class CheckoutController extends AbstractController
 {
     #[Route('/checkout/{id}', name: 'app_checkout')]
-    public function index($id, Request $request, EntityManagerInterface $em, SessionInterface $session): Response
+    public function index($id, Request $request, EntityManagerInterface $em, SessionInterface $session, NotificationService $notification, EventDispatcherInterface $eventDispatcher): Response
     {
         $form = $this->createForm(CheckoutType::class);
         $form->handleRequest($request);
@@ -28,7 +32,7 @@ class CheckoutController extends AbstractController
         $days = $session->get('days');
         $total = $days * $car->getPrice();
         $updatedTotal = $request->request->get('newTotal', $total);
-
+        $data = "";
 
         if ($request->isMethod("POST")) {
             Stripe::setApiKey('sk_test_51QZHxGFVL9wIFzsNS5qhf1xmfAIKMakSAztK18P27FQWkIoqJGy0kzsCUdEwMwYfb2znp8BSe1YNVsYhfYAP5S9W00y8aRXGz0');
@@ -41,6 +45,7 @@ class CheckoutController extends AbstractController
                     'payment_method_types' => ['card'],
                 ]);
                 if ($form->isSubmitted() && $form->isValid()) {
+                    $data = $form->getData();
                     $transaction = new Transaction();
                     $transaction->setCar($car)
                         ->setTotal($updatedTotal)
@@ -50,13 +55,22 @@ class CheckoutController extends AbstractController
                     $em->persist($transaction);
                     $em->flush();
                 }
+                $paymentData = [
+                    'name' => $data["name"],
+                    'amount' => $updatedTotal,
+                    'car' => $car,
+                    'days' => $days,
+                ];
+                $event = new PaymentCompletedEvent($paymentData);
+                $eventDispatcher->dispatch($event, PaymentCompletedEvent::NAME);
+                $notification->notify();
                 return new JsonResponse([
                     'clientSecret' => $paymentIntent->client_secret,
                 ]);
+                return $this->redirectToRoute("app_success_payment", []);
             } catch (\Exception $e) {
                 return new JsonResponse(['error' => $e->getMessage(),], 500);
             }
-            return $this->redirectToRoute("app_success_payment");
         }
 
 

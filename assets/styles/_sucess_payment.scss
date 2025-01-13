@@ -1,0 +1,36 @@
+.success-payment {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  background-color: #fff;
+  padding: 60px;
+  border-radius: 5px;
+  text-align: center;
+
+  h1 {
+    font-size: 30px;
+    margin-bottom: 50px;
+  }
+
+  a {
+    text-decoration: none;
+    color: #fff;
+    background-color: #3563E9;
+    border-radius: 8px;
+    padding: 10px 20px;
+    margin-top: 50px;
+    display: inline-block;
+  }
+}
+
+.notification-alert {
+  position: fixed;
+  right: -300px;
+  bottom: 30px;
+  background-color: #fff;
+  padding: 10px 30px;
+  border-radius: 8px;
+  box-shadow: rgba(100, 100, 111, 0.2) 0px 7px 29px 0px;
+  transition: .6s;
+}

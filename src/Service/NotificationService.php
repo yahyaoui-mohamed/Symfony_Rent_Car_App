@@ -21,6 +21,7 @@ class NotificationService
     $data = [
       'message' => 'A new payment has been sent!',
       'time' => date('Y-m-d H:i:s'),
+      'private' => true
     ];
 
     $update = new Update($topic, json_encode($data));

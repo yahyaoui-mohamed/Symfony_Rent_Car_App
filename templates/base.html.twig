@@ -26,19 +26,32 @@
         </div>
         {% block body %}{% endblock %}
         {% block globalscripts %}{% endblock %}
+        <div class="notification-alert">
+            
+        </div>
     </body>
 
 
     <script>
         addEventListener("load", function(){
-        document.getElementById("loader").style.display = "none";
+            document.getElementById("loader").style.display = "none";
         });
     
-        {# const eventSource = new EventSource("{{ mercure('https://example.com/my-private-topic')|escape('js') }}");
+        const eventSource = new EventSource("{{ mercure('https://example.com/my-private-topic')|escape('js') }}");
 	
         eventSource.onmessage = event => {
-	        console.log(JSON.parse(event.data));
-    	} #}
+	        let data = JSON.parse(event.data);
+            let div = document.createElement("div");
+            let notifAlert = document.querySelector(".notification-alert");
+            div.innerText = data.message;
+            div.classList.add("notification-message");
+            notifAlert.appendChild(div);
+            notifAlert.style.right = "30px";
+            setTimeout(function(){
+                div.remove();
+                notifAlert.style.right = "-300px";
+            }, 5000);
+    	}
 
     </script>    
 

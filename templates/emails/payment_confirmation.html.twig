@@ -1,22 +1,13 @@
 <h1>Payment Confirmation</h1>
 
-<p>Dear
-	{# {{ user.firstName }} #}
-	{# {{ user.lastName }}, #}
-	User
-	</p>
-
-<p>Thank you for your payment. Your payment has been successfully processed on
-	{{ date|date('Y-m-d H:i:s') }}.</p>
-
-{# {% if paymentDetails %} #}
-	<h2>Payment Details</h2>
-	<ul>
-		{# {% for key, value in paymentDetails %}
-			<li>{{ key }}:
-				{{ value }}</li>
-		{% endfor %} #}
-	</ul>
-{# {% endif %} #}
+<p>Dear {{name}}</p>
+<p>Thank you for your payment. Your payment has been successfully processed on {{ date|date('Y-m-d H:i:s') }}.</p>
+	
+<h2>Payment Details</h2>
+	<div class="details">
+		<p>Car name : {{car.name}}</p>
+		<p>Days : {{days}}</p>
+		<p>Total : {{amount}}</p>
+	</div>
 
 <p>Thank you for your business!</p>

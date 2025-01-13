@@ -2,11 +2,10 @@
 
 namespace App\EventListener;
 
-use App\Event\PaymentCompletedEvent;
 use Psr\Log\LoggerInterface;
+use App\Event\PaymentCompletedEvent;
 use Symfony\Bridge\Twig\Mime\TemplatedEmail;
 use Symfony\Component\Mailer\MailerInterface;
-use Symfony\Component\Mime\Email;
 use Symfony\Component\EventDispatcher\Attribute\AsEventListener;
 
 #[AsEventListener(event: PaymentCompletedEvent::NAME, method: 'onPaymentCompleted')]
@@ -21,9 +20,9 @@ class PaymentCompletedListener
     $this->logger = $logger;
   }
 
-  public function onPaymentCompleted(): void
+  public function onPaymentCompleted(PaymentCompletedEvent $event): void
   {
-
+    $data = $event->getData();
     $email = (new TemplatedEmail())
       ->from('hamayah4@gmail.com')
       ->to("yahyaouimohamedalaa99@gmail.com")
@@ -31,6 +30,10 @@ class PaymentCompletedListener
       ->htmlTemplate('emails/payment_confirmation.html.twig')
       ->context([
         'date' => new \DateTime(),
+        'name' => $data["name"],
+        'car' => $data["car"],
+        'amount' => $data["amount"],
+        'days' => $data['days'],
       ]);
 
     try {
