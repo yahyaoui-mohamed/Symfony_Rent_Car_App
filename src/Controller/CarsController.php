@@ -37,7 +37,6 @@ class CarsController extends AbstractController
 
         $carDataCapacity = $queryCapacity->getResult();
         $carDataType = $queryType->getResult();
-
         return $this->render('cars/index.html.twig', [
             'cars' => $cars,
             'carDataType' => $carDataType,
