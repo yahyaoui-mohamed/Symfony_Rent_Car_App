@@ -24,7 +24,7 @@ class TransactionFixture extends Fixture
             $car = $this->em->getRepository(Car::class)->find($i + 1);
             $transaction
                 ->setCar($car)
-                ->setTotal($car->getPrice() * ($i + 1))
+                ->setTotal($i + 1)
                 ->setVisitorId(uniqid())
                 ->setDays($i + 1)
                 ->setCreationDate(new DateTime());

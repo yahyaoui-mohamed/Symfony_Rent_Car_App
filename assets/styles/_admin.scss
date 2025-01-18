@@ -180,7 +180,7 @@
     flex-direction: column;
     z-index: 555;
     top: 40px;
-    left: -100px;
+    left: -120px;
     display: none;
     box-shadow: rgba(100, 100, 111, 0.2) 0px 7px 29px 0px;
     background-color: #fff;
@@ -190,6 +190,8 @@
       text-decoration: none;
       color: #000;
       font-size: 14px;
+      display: block;
+      padding: 10px 50px 10px 10px;
 
       i {
         margin-right: 10px;
@@ -203,7 +205,6 @@
     .edit,
     .delete {
       cursor: pointer;
-      padding: 10px 50px 10px 10px;
       transition: .3s;
 
       &:hover {

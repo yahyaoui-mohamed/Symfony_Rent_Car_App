@@ -1,6 +1,6 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Morent | Insight {% endblock %}
+{% block title %}Insight {% endblock %}
 
 {% block body %}
 {% include 'navbar.html.twig' %}
@@ -30,6 +30,13 @@
 							</div>
 						</div>
 					</div>	
+					<div class="row">
+						<div class="col-lg-6">
+							<div class="chart">
+								{{ render_chart(chart) }}
+							</div>
+						</div>
+					</div>
 				</div>
 			</div>
 		</div>

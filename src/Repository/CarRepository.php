@@ -58,7 +58,7 @@ class CarRepository extends ServiceEntityRepository
         return $qb->getQuery()->getResult();
     }
 
-    public function getMaxCarPrice(): float
+    public function getMaxCarPrice(): ?float
     {
         $qb = $this->createQueryBuilder('c')
             ->select('MAX(c.price)');
