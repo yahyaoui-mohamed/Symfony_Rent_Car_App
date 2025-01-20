@@ -20,38 +20,72 @@ class InsightController extends AbstractController
         $rents = $em->getRepository(Transaction::class)->findAll();
         $cars = $em->getRepository(Car::class)->findAll();
 
-        $lastDays = $em->getRepository(Transaction::class)->getTransactionsLastDays(7);
+        $lastDays = $em->getRepository(Transaction::class)->getTransactionsLastDays(60);
         $chart = $chartBuilder->createChart(Chart::TYPE_LINE);
 
         $chart->setData([
             'labels' => $lastDays[0],
             'datasets' => [
                 [
-                    'backgroundColor' => '#3563E9',
                     'borderColor' => '#3563E9',
+                    'backgroundColor' => 'rgba(53, 99, 233, 0.2)',
                     'data' => $lastDays[1],
+                    'fill' => true,
+                    'tension' => 0.4
                 ],
             ],
         ]);
 
         $chart->setOptions([
-            'scales' => [
-                'y' => [
-                    'grid' => [
-                        'display' => false,
-                    ],
-                    'ticks' => [
-                        'stepSize' => 1,
-                        'beginAtZero' => true
-                    ]
+            'responsive' => true,
+            'plugins' => [
+                'legend' => [
+                    'display' => false,
                 ],
+            ],
+            'scales' => [
                 'x' => [
                     'grid' => [
-                        'display' => false,
+                        'drawBorder' => false,
+                        'drawTicks' => false,
+                        'display' => false
+                    ],
+                    'ticks' => [
+                        'display' => true,
+                        'lineHeight' => 1.2,
+                        'padding' => 10,
+                        'labelOffset' => 0,
+                        'align' => 'inner',
+                        'font' => [
+                            'family' => 'Plus Jakarta Sans',
+                            'size' => 10,
+                        ],
+                    ],
+                ],
+                'y' => [
+                    'grid' => [
+                        'drawBorder' => false,
+                        'drawTicks' => false,
+                        'color' => "#f9f5fa",
+                    ],
+                    'ticks' => [
+                        'beginAtZero' => true,
+                        'display' => true,
+                        'stepSize' => 1000,
+                        'max' => 5000,
+                        'font' => [
+                            'family' => 'Plus Jakarta Sans',
+                            'size' => 10,
+                        ],
+                        'padding' => 10,
+                        'labelOffset' => 0,
+                        'align' => 'inner',
                     ],
                 ],
             ],
         ]);
+
+
 
 
         return $this->render('insight/index.html.twig', [
