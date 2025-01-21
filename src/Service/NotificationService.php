@@ -16,10 +16,10 @@ class NotificationService
 
   public function notify()
   {
-    $topic = 'https://example.com/my-private-topic';
+    $topic = 'https://localhost:8000/notify';
 
     $data = [
-      'message' => 'A new payment has been sent!',
+      'message' => 'A new car is rented !',
       'time' => date('Y-m-d H:i:s'),
       'private' => true
     ];

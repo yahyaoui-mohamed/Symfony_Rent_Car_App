@@ -30,7 +30,7 @@
 										<th scope="row">{{code.id}}</th>
 										<td>{{code.value}}</td>
 										<td>{{code.discountRate * 100 }}%</td>
-										<td>{{code.expirationDate|date("d m y")}}</td>
+										<td>{{code.expirationDate|date("d M y")}}</td>
 										<td>{{code.used ? "Expired" : "Available"}}</td>
 								</tr>
 						{% endfor %}

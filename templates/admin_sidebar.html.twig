@@ -56,8 +56,30 @@
 
 	<div class="side-item">
 		<ul>
-			<li><a href="{{path("app_logout")}}"><i class="fi fi-tr-sign-out-alt"></i>Log Out</a></li>
+			<li><a href="{{path("app_logout")}}"><i class="fi fi-rr-sign-out-alt"></i>Log Out</a></li>
 		</ul>
 	</div>
 
 </div>
+
+
+
+<script>
+
+const eventSource = new EventSource("{{ mercure('https://localhost:8000/notify')|escape('js') }}");
+
+        eventSource.onmessage = event => {
+	        let data = JSON.parse(event.data);
+            let div = document.createElement("div");
+            let notifAlert = document.querySelector(".notification-alert");
+            div.innerText = data.message;
+            div.classList.add("notification-message");
+            notifAlert.appendChild(div);
+            notifAlert.style.right = "30px";
+            setTimeout(function(){
+                div.remove();
+                notifAlert.style.right = "-300px";
+            }, 10000);
+    	}
+
+</script>

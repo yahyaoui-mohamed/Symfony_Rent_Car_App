@@ -72,4 +72,15 @@ class TransactionRepository extends ServiceEntityRepository
 
         return [$dates, $counts];
     }
+
+    public function getRentedCars(): array
+    {
+        $qb = $this->createQueryBuilder('t')
+            ->select('c.name AS car_name, COUNT(t.id) AS rental_count')
+            ->innerJoin('t.car', 'c') // Assuming `Transaction` has a relationship to `Car` named `car`
+            ->groupBy('c.name')
+            ->orderBy('rental_count', 'DESC');
+
+        return $qb->getQuery()->getResult();
+    }
 }

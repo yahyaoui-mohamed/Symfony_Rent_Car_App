@@ -21,7 +21,7 @@ class AdminController extends AbstractController
         $cars = $carRepository->findNumbeOfCars();
         $types = array_map(fn($car) => $car['type'], $cars);
         $totals = array_map(fn($car) => $car[1], $cars);
-        
+
         $chart->setData([
             'labels' => $types,
             'datasets' => [

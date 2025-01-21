@@ -4,6 +4,8 @@ namespace App\Controller;
 
 use App\Entity\Car;
 use App\Entity\Transaction;
+use App\Repository\CarRepository;
+use App\Repository\TransactionRepository;
 use Symfony\UX\Chartjs\Model\Chart;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Component\HttpFoundation\Response;
@@ -14,14 +16,20 @@ use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 class InsightController extends AbstractController
 {
     #[Route('/admin/insight', name: 'app_insight')]
-    public function index(ChartBuilderInterface $chartBuilder, EntityManagerInterface $em): Response
+    public function index(ChartBuilderInterface $chartBuilder, EntityManagerInterface $em, TransactionRepository $transactionRepository): Response
     {
         $revenue = $em->getRepository(Transaction::class)->getTotalRevenue();
         $rents = $em->getRepository(Transaction::class)->findAll();
         $cars = $em->getRepository(Car::class)->findAll();
 
+        $topRendterCars = $transactionRepository->getRentedCars();
+        $types = array_map(fn($car) => $car['car_name'], $topRendterCars);
+        $totals = array_map(fn($car) => $car['rental_count'], $topRendterCars);
+
         $lastDays = $em->getRepository(Transaction::class)->getTransactionsLastDays(60);
+
         $chart = $chartBuilder->createChart(Chart::TYPE_LINE);
+        $chart1 = $chartBuilder->createChart(Chart::TYPE_DOUGHNUT);
 
         $chart->setData([
             'labels' => $lastDays[0],
@@ -85,6 +93,55 @@ class InsightController extends AbstractController
             ],
         ]);
 
+        $chart1->setData([
+            'labels' => $types,
+            'datasets' => [
+                [
+                    'backgroundColor' => [
+                        '#102E7A',
+                        '#1A4393',
+                        '#3D81DB',
+                        '#54A6FF',
+                        '#98D3FF',
+                    ],
+                    'data' => $totals,
+                ],
+            ],
+        ]);
+
+        $chart1->setOptions([
+            'layout' => [
+                'padding' => [ // More granular control
+                    'top' => 0,
+                    'bottom' => 0,
+                    'left' => 0,
+                    'right' => 0,
+                ],
+            ],
+            'scales' => [
+                'y' => [
+                    'display' => false
+                ],
+                'x' => [
+                    'display' => false
+                ],
+            ],
+            'cutout' => '80%',
+            'radius' => '60%',
+            'plugins' => [
+                'legend' => [
+                    'display' => true,
+                    'position' => 'bottom',
+                    'labels' => [
+                        'usePointStyle' => true,
+                        'pointStyle' => 'circle',
+                        'padding' => 20,
+                    ],
+                ],
+            ],
+            'spacing' => 10,
+        ]);
+
 
 
 
@@ -93,6 +150,7 @@ class InsightController extends AbstractController
             'rents' => count($rents),
             'cars' => count($cars),
             'chart' => $chart,
+            'chart1' => $chart1,
         ]);
     }
 }
