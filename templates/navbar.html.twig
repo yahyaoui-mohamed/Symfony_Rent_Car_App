@@ -13,19 +13,19 @@
 			<div class="settings">
 				<div class="favorite">
 					<a href="{{path("app_favorite")}}" class="navbar-item">
-						<i class="fi fi-sr-heart"></i>
+						<i class="fi fi-rr-heart"></i>
 					</a>
 				</div>
 				<div class="notification">
 					<a href="{{path("app_notification")}}" class="navbar-item">
-						<i class="fi fi-sr-bell"></i>
+						<i class="fi fi-rr-bell"></i>
 					</a>
 				</div>
 				<div class="user">
 					{% if app.user %}
 						{% if "ROLE_ADMIN" in app.user.roles  %}
 							<a href="./" class="navbar-item">
-								<i class="fi fi-sr-user"></i>
+								<i class="fi fi-rr-user"></i>
 							</a>
                             <div class="user-dropdown">
                                 <a href="{{path("app_admin")}}">
@@ -37,7 +37,7 @@
                             </div>
 						{% elseif "ROLE_USER" in app.user.roles %}
                             <a href="./" class="navbar-item">
-                                <i class="fi fi-sr-user"></i>
+                                <i class="fi fi-rr-user"></i>
                             </a>
                             <div class="user-dropdown">
                                 <a href="{{path("app_account")}}">
@@ -50,7 +50,7 @@
 						{% endif %}
 					{% else %}
                         <a href="./" class="navbar-item">
-                            <i class="fi fi-sr-user"></i>
+                            <i class="fi fi-rr-user"></i>
                         </a>
                         <div class="user-dropdown">
                             <a href="{{path("app_login")}}" class="navbar-item">

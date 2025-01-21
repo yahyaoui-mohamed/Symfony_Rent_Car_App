@@ -14,19 +14,19 @@ class NotificationController extends AbstractController
     public function index(HubInterface $hub): Response
     {
 
-        $topic = 'https://example.com/my-private-topic';
+        // $topic = 'https://example.com/my-private-topic';
 
-        $data = [
-            'message' => 'A new notification has been sent!',
-            'time' => date('Y-m-d H:i:s'),
-        ];
+        // $data = [
+        //     'message' => 'A new notification has been sent!',
+        //     'time' => date('Y-m-d H:i:s'),
+        // ];
 
-        $update = new Update($topic, json_encode($data));
+        // $update = new Update($topic, json_encode($data));
 
-        $hub->publish($update);
+        // $hub->publish($update);
 
         return $this->render('notification/index.html.twig', [
-            'notification' => $data,
+            // 'notification' => $data,
         ]);
     }
 }

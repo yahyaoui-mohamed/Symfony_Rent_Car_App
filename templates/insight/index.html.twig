@@ -12,27 +12,49 @@
 					<div class="row">
 						<div class="col-lg-4">
 							<div class="stat-item">
-								<h3>Total Revenue</h3>
-								<span>${{revenue}}</span>
+								<div class="d-flex align-items-center">
+									<div class="icon">
+										<i class="fi fi-rr-sack-dollar"></i>
+									</div>
+									<div class="stat">
+										<h3>${{revenue}}</h3>
+										<span>Total Revenue</span>
+									</div>
+								</div>
 							</div>
 						</div>
 						<div class="col-lg-4">
 							<div class="stat-item">
-								<h3>Total Rents</h3>
-								<span>{{rents}}</span>
+								<div class="d-flex align-items-center">
+									<div class="icon">
+										<i class="fi fi-rr-rent"></i>
+									</div>
+									<div class="stat">
+										<h3>{{rents}}</h3>
+										<span>Total Rents</span>
+									</div>
+								</div>
 							</div>
 						</div>
 
 						<div class="col-lg-4">
 							<div class="stat-item">
-								<h3>Total Cars</h3>
-								<span>{{cars}}</span>
+								<div class="d-flex align-items-center">
+									<div class="icon">
+										<i class="fi fi-rr-car"></i>
+									</div>
+									<div class="stat">
+										<h3>{{cars}}</h3>
+										<span>Total Cars</span>
+									</div>
+								</div>
 							</div>
 						</div>
 					</div>	
 					<div class="row">
 						<div class="col-lg-8">
 							<div class="chart">
+								<h3>Last 7 Days</h3>
 								{{ render_chart(chart) }}
 							</div>
 						</div>
