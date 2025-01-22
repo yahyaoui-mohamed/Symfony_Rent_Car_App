@@ -26,22 +26,6 @@ class TransactionRepository extends ServiceEntityRepository
         return $qb->getQuery()->getSingleScalarResult();
     }
 
-    // public function getTransactionsLastDays(int $days): array
-    // {
-    //     $qb = $this->createQueryBuilder('t');
-
-    //     $lastDays = new \DateTime('-' . $days . ' days');
-
-    //     $qb->select('COUNT(t.id) as transaction_count, DATE(t.created_date')
-    //         ->addSelect('t.creation_date')
-    //         ->where('t.creation_date >= :lastDays')
-    //         ->setParameter('lastDays', $lastDays)
-    //         ->groupBy('t.creation_date')
-    //         ->orderBy('t.creation_date', 'ASC');
-
-    //     return $qb->getQuery()->getResult();
-    // }
-
     public function getTransactionsLastDays(int $days): array
     {
         $lastDays = new \DateTime('-' . $days . ' days');
@@ -51,11 +35,12 @@ class TransactionRepository extends ServiceEntityRepository
         $rsm->addScalarResult('date', 'date');
         $rsm->addScalarResult('total', 'total');
 
-        $sql = "SELECT DATE(creation_date) AS date, SUM(total) AS total " .
+        // Modified SQL query
+        $sql = "SELECT DATE_FORMAT(creation_date, '%m/%d') AS date, SUM(total) AS total " .
             "FROM transaction " .
             "WHERE creation_date >= :lastDays " .
-            "GROUP BY DATE(creation_date) " .
-            "ORDER BY DATE(creation_date) ASC";
+            "GROUP BY DATE(creation_date) " . // Group by month/day
+            "ORDER BY DATE(creation_date) ASC"; // Order by month/day
 
         $query = $this->getEntityManager()->createNativeQuery($sql, $rsm);
         $query->setParameter('lastDays', $lastDays);

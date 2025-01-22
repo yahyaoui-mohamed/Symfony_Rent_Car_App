@@ -27,7 +27,6 @@ class InsightController extends AbstractController
         $totals = array_map(fn($car) => $car['rental_count'], $topRendterCars);
 
         $lastDays = $em->getRepository(Transaction::class)->getTransactionsLastDays(60);
-
         $chart = $chartBuilder->createChart(Chart::TYPE_LINE);
         $chart1 = $chartBuilder->createChart(Chart::TYPE_DOUGHNUT);
 
@@ -111,7 +110,7 @@ class InsightController extends AbstractController
 
         $chart1->setOptions([
             'layout' => [
-                'padding' => [ // More granular control
+                'padding' => [
                     'top' => 0,
                     'bottom' => 0,
                     'left' => 0,

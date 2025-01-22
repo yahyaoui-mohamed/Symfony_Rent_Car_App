@@ -276,16 +276,34 @@ document.getElementById("search").addEventListener("input", function () {
     });
 }); #}
 
+
+{# document.addEventListener("click", function(e){
+   let userIcon = document.querySelector(".user");
+    if(e.target !== userIcon){
+        let userDropdown = document.querySelector(".user-dropdown");
+        if(userDropdown.classList.contains("active")){
+            userDropdown.classList.remove("active");
+        }
+    }
+}); #}
+
 document.querySelector(".user .navbar-item").addEventListener("click", function(e){
     e.preventDefault();
     let dropdown = document.querySelector(".user-dropdown");
-    if(dropdown.classList.contains("active")){
-        dropdown.classList.remove("active");
-    }
-    else{
-        dropdown.classList.add("active");
+    dropdown.classList.toggle("active");
+});
+
+document.addEventListener("click", function(e) {
+    let user = document.querySelector(".user");
+    let userDropdown = document.querySelector(".user-dropdown");
+
+    if (!user.contains(e.target)) { // Check if the click is NOT inside .user
+        if (userDropdown.classList.contains("active")) {
+            userDropdown.classList.remove("active");
+        }
     }
 });
+
 
 </script>
 

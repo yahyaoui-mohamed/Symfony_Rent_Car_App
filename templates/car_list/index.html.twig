@@ -81,6 +81,15 @@
         });
     });
     
+    document.addEventListener("click", function(e){
+        document.querySelectorAll(".menu-dropdown").forEach(function(menu){
+            if(e.target !== menu && menu.classList.contains("active")){
+                menu.classList.remove("active");
+            }
+        });
+    });
+
+ 
     
     
     
