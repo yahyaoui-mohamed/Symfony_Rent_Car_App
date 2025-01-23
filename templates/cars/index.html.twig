@@ -73,7 +73,7 @@ favoriteCar.forEach(function(car){
 		let carId = this.parentNode.nextElementSibling.value;
 		if(this.classList.contains("active")){
 			this.classList.add("fi-rr-heart");
-			this.classList.remove("fi-sr-heart");
+			this.classList.remove("fi-ss-heart");
 			this.classList.remove("active");
 			fetch("/favorite", {
 						method: "DELETE",
@@ -91,7 +91,7 @@ favoriteCar.forEach(function(car){
 		}
 		else{
 			this.classList.remove("fi-rr-heart");
-			this.classList.add("fi-sr-heart");
+			this.classList.add("fi-ss-heart");
 			this.classList.add("active");
 			fetch("/favorite", {
 					method: "POST",
@@ -142,7 +142,7 @@ document.addEventListener("DOMContentLoaded", function () {
                     let carId = this.parentNode.nextElementSibling.value;
                     if(this.classList.contains("active")){
                         this.classList.add("fi-rr-heart");
-                        this.classList.remove("fi-sr-heart");
+                        this.classList.remove("fi-ss-heart");
                         this.classList.remove("active");
 												fetch("/favorite", {
 													method: "DELETE",
@@ -160,7 +160,7 @@ document.addEventListener("DOMContentLoaded", function () {
 										}
                     else{
                         this.classList.remove("fi-rr-heart");
-                        this.classList.add("fi-sr-heart");
+                        this.classList.add("fi-ss-heart");
                         this.classList.add("active");
 												fetch("/favorite", {
 													method: "POST",

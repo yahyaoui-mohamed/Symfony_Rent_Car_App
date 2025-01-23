@@ -50,7 +50,7 @@
                         <h3>{{car.name}}</h3>
                         <div class="favorite">
                             {% if isFav %}
-                                <i class="fi fi-sr-heart active"></i>
+                                <i class="fi fi-ss-heart active"></i>
                             {% else %}
                                 <i class="fi fi-rr-heart"></i>
                             {% endif %}
@@ -198,7 +198,7 @@
                                         {% endif %}
                                     {% endfor %}
                                     {% if found %}
-                                        <i class="fi fi-sr-heart active"></i>
+                                        <i class="fi fi-ss-heart active"></i>
                                     {% else %}
                                         <i class="fi fi-rr-heart"></i>
                                     {% endif %}
@@ -263,7 +263,7 @@
                                         {% endif %}
                                     {% endfor %}
                                     {% if found %}
-                                        <i class="fi fi-sr-heart active"></i>
+                                        <i class="fi fi-ss-heart active"></i>
                                     {% else %}
                                         <i class="fi fi-rr-heart"></i>
                                     {% endif %}
@@ -372,7 +372,7 @@ car.addEventListener("click", function(){
 
     if(this.classList.contains("active")){
         this.classList.add("fi-rr-heart");
-        this.classList.remove("fi-sr-heart");
+        this.classList.remove("fi-ss-heart");
         this.classList.remove("active");
         fetch("/favorite", {
                 method: "DELETE",
@@ -390,7 +390,7 @@ car.addEventListener("click", function(){
     }
     else{
         this.classList.remove("fi-rr-heart");
-        this.classList.add("fi-sr-heart");
+        this.classList.add("fi-ss-heart");
         this.classList.add("active");
 
         fetch("/favorite", {
