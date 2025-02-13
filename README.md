@@ -38,22 +38,25 @@ Please respect the intellectual property of the creator when using or sharing th
 
 ## Screenshots
 
-![Home Page](https://i.imgur.com/dhRrC4q.png "Home Page")
-![](https://i.imgur.com/jsIBE5O.png "Home Page")
+![Home Page](https://i.ibb.co/YTy8gktT/Capture-d-cran-2025-02-13-231921.png "Home Page")
 
 
 ![Login Page](https://i.imgur.com/uU4ke8o.png "Login")
-![Sign Up Page](https://i.imgur.com/6ZcngUL.png "Register")
 
 
-![Car details Page](https://i.imgur.com/os8JXIZ.png "Car Details")
+![Car details Page](https://i.ibb.co/4RpH22jQ/Capture-d-cran-2025-02-13-231952.png "Car Details")
 
 
-![All Cars Page](https://i.imgur.com/W7irOrD.png "All Cars")
+![All Cars Page](https://i.ibb.co/Z63XMwkd/Capture-d-cran-2025-02-13-231940.png "All Cars")
 
 
-![Checkout Page](https://i.imgur.com/OAQ2Ugx.png "Checkout")
-![Checkout Page](https://i.imgur.com/cCEE71x.png "Checkout")
+![Checkout Page](https://i.ibb.co/spHZdzbL/Capture-d-cran-2025-02-13-232431.png "Checkout")
+
+![Admin Page](https://i.ibb.co/mkgw5X4/Capture-d-cran-2025-02-13-232020.png "Admin")
+
+![Admin Page](https://i.ibb.co/d089CvzY/Capture-d-cran-2025-02-13-232029.png "Admin")
+
+![Admin Page](https://i.ibb.co/FkxRM2Xk/Capture-d-cran-2025-02-13-232043.png "Admin")
 
 
 ## Technologies Used
